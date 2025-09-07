@@ -1,0 +1,216 @@
+\section{Модели комплексных чисел}
+
+\par 
+Введем стандартные понятия нужным образом:\\
+$\mathbb{R}$ - множество точек на прямой. \\
+$\mathbb{C}$ - расширение $\mathbb{R}$ с помощью одного из корней уравнения $z^2 = -1$: $\mathbb{C} = \mathbb{R} \cup  \{0\}$, с замыканием относительно сложения и умножения.
+
+\begin{theorem}[Основная теорема алгебры]
+    Множество комплексных чисел ($\mathbb{C}$) алгебраически замкнуто 
+    (любой многочлен степени $n$, коэффициенты которого лежат в $\mathbb{C}$),
+     имеет корни в $\mathbb{C}$ (с учетом кратности).
+\end{theorem}
+
+\begin{note}
+    Теорема верна и в частном случае многочлена, определенного над $\mathbb{R}$.
+\end{note}
+
+\medskip
+\subsection{Стандартная модель комплексных чисел}
+
+Комплексное число $z$ представляется парой $(x, y) \in \mathbb{R}^2$ с операциями:
+\begin{itemize}
+    \item $"+": \quad (x_1, y_1) + (x_2, y_2) = (x_1+x_2, y_1 + y_2)$
+    \item $"\cdot": (x_1, y_1) \cdot (x_2, y_2) = (x_1x_2-y_1y_2, x_2y_1+x_1y_2)$
+\end{itemize}
+
+\begin{note}
+    Операции согласованы с операциями на $\mathbb{R}.$
+\end{note}
+\begin{note}
+    $\mathbb{R} \subset \mathbb{C}, \quad \mathbb{R} = \{(x, 0) \quad x \in \mathbb{R}\}$
+\end{note}
+В станд. модели 
+$\begin{cases}
+    0 = (0, 0)\\
+    1 = (1, 0)
+\end{cases}$
+
+\begin{definition}
+    Мнимая единица определена как пара $(0, 1)$.
+\end{definition}
+\begin{note}
+    Некорректно определять мнимую единицу как корень уравнения $z^2 = -1$, т.к. $-i$ так же является корнем.
+    \[i^2 = (0, 1) \cdot (0,1) = (0\cdot0 - 1\cdot1, 0\cdot1 + 1\cdot0) = (-1, 0) = -1\]
+    \[(-i^2) = (0, -1)\cdot(0, -1) = (-(-1)\cdot(-1), 0) = (-1, 0) = -1\]
+\end{note}
+\begin{note}
+    Запись $\sqrt{-1}$ тоже некорректна.
+\end{note}
+
+\begin{statement}
+    На $\mathbb{C}$ нельзя ввести линейный порядок.
+    \begin{proof}
+        Пусть $x \in \mathbb{C}$, и существует некий линейный порядок <.
+        \[\forall x \neq 0
+        \begin{cases}
+            \text{либо} -\frac{x}{2} < \frac{x}{2} \text{ и } 0 = -\frac{x}{2} + \frac{x}{2} < \frac{x}{2} + \frac{x}{2} = x\\
+            \text{либо} \frac{x}{2} < -\frac{x}{2} \text{ и } 0 > x
+        \end{cases}
+        \]
+        Тогда $\forall x \neq 0$ либо $x > 0$, либо $-x > 0$. Т.е. $\forall x \neq 0 \quad x^2 > 0$.
+        Но $-1 = i^2 < 0$ - противоречие.
+    \end{proof}
+\end{statement}
+
+\bigskip
+
+\subsection{Матричная модель}
+Комплексное число $z = \begin{pmatrix}
+    x & y\\
+    -y & x
+\end{pmatrix}$, где $x, y \in \mathbb{R}$.
+
+\["+": 
+    \begin{pmatrix}
+        x_1 & y_1 \\
+        -y_1 & x_1
+    \end{pmatrix} 
+    + 
+    \begin{pmatrix}
+        x_2 & y_2 \\
+        -y_2 & x_2 \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        x_1 + x_2 & y_1 + y_2 \\
+        -y_1 - y_2 & x_1 + x_2
+    \end{pmatrix}
+\]
+\["\cdot": 
+    \begin{pmatrix}
+        x_1 & y_1 \\
+        -y_1 & x_1
+    \end{pmatrix} 
+    \cdot
+    \begin{pmatrix}
+        x_2 & y_2 \\
+        -y_2 & x_2 \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        x_1x_2 - y_1y_2 & x_1y_2 + x_2y_1 \\
+        -x_1y_2 - x_2y_1 & x_1x_2 - y_1y_2
+    \end{pmatrix}
+\]
+
+В матричной модели ноль (нейтральный элемент по сложению) представлен матрицей
+$0 =\begin{pmatrix}
+    0 & 0 \\
+    0 & 0
+\end{pmatrix}$, единица (нейтральный по умножению)
+$1 = \begin{pmatrix}
+    1 & 0 \\
+    0 & 1
+\end{pmatrix}$, мнимая единица  
+$i = \begin{pmatrix}
+    0 & 1 \\
+    -1 & 0
+\end{pmatrix}$.
+
+В стандартной модели произвольное комплексное число $z = (x, y)$ 
+имеет стандартную запись \\$z = x + iy$, где $\begin{cases}
+    x - \text{вещественная часть}\\
+    y = \text{мнимая часть}
+\end{cases}$
+
+Действия с комплексными числами:
+\begin{enumerate}
+    \item Сравнение (проверка равенства):
+        \[a + ib = c + id \iff a = c \text{ и } b = d\].
+    \item Сложение:
+        \[(a+ib) + (c+id) = (a+c) + i(b+d)\]
+    \item Умножение:
+        \[(a+ib)\cdot(c+id) = (ac - bd) + i (ad + bc)\]
+    \item Деление:
+        \[\frac{a+ib}{c+id} = \frac{(a+ib)\cdot(c-id)}{c^2+d^2} = \frac{(ac - bd) + i(bc - ad)}{c^2 + d^2}\]
+\end{enumerate}
+
+
+\subsection{Геометрическая модель}
+
+Комплексное число представлено точкой с координатами $(x, y)$ на плоскости.\\
+Операции:
+\begin{itemize}
+    \item $"+"$: действует как сложение векторов (покоординатно).
+    \item $"\cdot": z_3 = z_1z_2 \iff \begin{cases}
+        |z_3| = |z_1|\cdot|z_2| \\
+        arg(z_3) = arg(z_1) + arg(z_2)
+    \end{cases}$
+    \\ где $|z| = \sqrt{x^2 + y^2}, \quad arg(z)$ задает угол между $\vec{z}$ и Ox 
+    (определяется с точностью до периода).
+\end{itemize}
+
+\textbf{Аргумент комплексного числа} $Arg(z)$ - угол $\varphi$ c точностью до периода $2\pi$.
+\textbf{Главное значение аргумента} $arg(z)$ - $\varphi$  в промежутке $[0; 2\pi]$.
+
+\textbf{Комплексно сопряженное к} $z = x+iy$ это $\overline{z} = x - iy$.
+\[|z| = |\overline{z}|, \quad arg(z) = -arg(\overline{z}), \quad 
+Re(z) = Re(\overline{z}), \quad Im(z) = -Im(\overline{z})\] 
+\[\overline{z} \cdot z = (x+iy)\cdot(x-iy) = x^2 + y^2 = |z|^2\] 
+
+\textbf{Законы де Моргана:}
+\begin{itemize}
+    \item $\overline{(\overline{z})} = z$
+    \item $\overline{z_1 + z_2} = \overline{z_1} + \overline{z_2}$
+    \item $\overline{z_1z_2} = \overline{z_1} \cdot \overline{z_2}$
+\end{itemize}
+
+\textbf{Неравенство треугольника:}
+\[\begin{cases}
+    |z_1 + z_2| \leq |z_1| + |z_2|\\
+    |z_1 - z_2| \geq \lvert \lvert z_1\rvert - \lvert z_2\rvert \rvert
+\end{cases} \implies \lvert \lvert z_1 \rvert - \lvert z_2 \rvert \rvert \leq 
+\lvert z_1 + z_2 \rvert \leq \lvert z_1 \rvert + \lvert z_2 \rvert \]
+
+\subsection{Стереографическая проекция}
+На комплексную плоскость положили сферу $S$ радиуса $\frac{1}{2}$. Северный полюс сферы - вершина $N(0; 0; 1)$.
+Комплексному числу $c$, лежащему в плоскости комплексных чисел и имеющему координаты $(x, y, 0)$ ставится в соответствие точка, которая является точкой пересечения прямой $Nc$ со сферой $S$. 
+Зададим систему координат $O\xi \eta \zeta$ аналогично $Oxyz$, 
+но $O$ имеет координаты $(0, 0, \frac{1}{2})$.\\
+Уравнение сферы S:
+\begin{equation} 
+    \label{RimanSphereEq}
+    \xi^2 + \eta^2 + (\xi - \frac{1}{2})^2 = (\frac{1}{2})^2
+\end{equation}
+Уравнение прямой $Nc$ по двум точкам:
+\begin{equation}
+    \label{NcEq}
+    \frac{\xi}{x} = \frac{\eta}{y}=\frac{\zeta-1}{-1} 
+    \iff
+    \xi^2 + \eta^2 + \zeta^2 - \zeta = 0
+\end{equation}
+
+Получаем набор \textbf{обратных формул стереографической проекции:}
+$x = \frac{\xi}{1 - \zeta}, y = \frac{\eta}{1-\zeta}, z = \frac{\xi + i\eta}{\zeta - 1}$.
+Отсюда найдем
+\begin{equation}
+    \label{zsphere}
+    \left| z \right|^2 = z \cdot \overline{z} = \frac{\xi^2 + \eta^2}{(1-\zeta)^2}
+    \underset{\text{из } \ref{NcEq}}{=} \frac{\zeta}{1-\zeta} 
+    \implies \zeta = \frac{\left| z \right|^2}{1 - \left| z\right|^2}
+\end{equation}
+Подставим \ref{zsphere} в уравнение \ref{RimanSphereEq} и получим прямые формулы стереографической проекции:
+\begin{equation}
+    \xi = \frac{x}{1 + \left|z\right|^2}, \quad
+    \eta = \frac{y}{1 + \left|z\right|^2}, \quad
+    \zeta = \frac{\left|z\right|^2}{1 - \left|z\right|^2}
+\end{equation}
+
+Из геометр. постреония стереографическая проекция взаимно однозначно 
+отображает комплексную плокость на сферу $S \setminus \{N\}$.
+Дополним стер. проекцию по непрерывности:
+\begin{equation}
+    P: \overline{\mathbb{C}} \overset{\text{на}}{\to}S \quad
+    \text{где } \overline{\mathbb{C}} = \mathbb{C} \cup \{\infty\}, \text{а $S$ называют сферой Римана.}
+\end{equation}

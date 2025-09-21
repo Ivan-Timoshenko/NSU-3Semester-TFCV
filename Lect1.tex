@@ -198,13 +198,13 @@ $x = \frac{\xi}{1 - \zeta}, y = \frac{\eta}{1-\zeta}, z = \frac{\xi + i\eta}{\ze
     \label{zsphere}
     \left| z \right|^2 = z \cdot \overline{z} = \frac{\xi^2 + \eta^2}{(1-\zeta)^2}
     \underset{\text{из } \ref{NcEq}}{=} \frac{\zeta}{1-\zeta} 
-    \implies \zeta = \frac{\left| z \right|^2}{1 - \left| z\right|^2}
+    \implies \zeta = \frac{\left| z \right|^2}{1 + \left| z\right|^2}
 \end{equation}
 Подставим \ref{zsphere} в уравнение \ref{RimanSphereEq} и получим прямые формулы стереографической проекции:
 \begin{equation}
     \xi = \frac{x}{1 + \left|z\right|^2}, \quad
     \eta = \frac{y}{1 + \left|z\right|^2}, \quad
-    \zeta = \frac{\left|z\right|^2}{1 - \left|z\right|^2}
+    \zeta = \frac{\left|z\right|^2}{1 + \left|z\right|^2}
 \end{equation}
 
 Из геометр. постреония стереографическая проекция взаимно однозначно 
@@ -214,3 +214,81 @@ $x = \frac{\xi}{1 - \zeta}, y = \frac{\eta}{1-\zeta}, z = \frac{\xi + i\eta}{\ze
     P: \overline{\mathbb{C}} \overset{\text{на}}{\to}S \quad
     \text{где } \overline{\mathbb{C}} = \mathbb{C} \cup \{\infty\}, \text{а $S$ называют сферой Римана.}
 \end{equation}
+
+\begin{definition}
+    Обобщенная окрестность на комплексной плоскости - это любая окружность (или прямая, рассмотренная как окружность бесконечного радиуса).
+\end{definition}
+
+Свойства стереографической проекции:
+\begin{enumerate}
+    \item Для любой обобщенной окружности $l \subset \overline{\mathbb{C}}$ ее образ $P(l) \subset S^2$ - это окружность.
+    \begin{proof}
+        Пусть $l$ - некая обобщ. окрестность на $\overline{\mathbb{C}}$, тогда ее уравнение:
+        \[l: A(x^2+y^2) + Bx + Cy + D = 0 \text{ - окружность при $A \neq 0$, прямая при $A = 0$}\]
+        Подставим в него обратные формулы стереогр. проекции:
+        \begin{equation}
+            A\frac{\zeta}{1 - \zeta} + B\frac{\xi}{1 - \zeta} + C\frac{\eta}{1 - \zeta} + D = 0
+        \end{equation}
+        Поделим на $1 - \zeta$ и получим:
+        \begin{equation}
+            \label{FlatEq}
+            \text{П: }B\xi + C\eta + (A-D)\zeta + D = 0
+        \end{equation}
+        Но это уравнение некоторой плоскости П в $\mathbb{R}^3$, кроме того, $P(l) \subset S^2$,
+        значит для $l$ выполнено уравнение сферы Римана $\xi^2 + \eta^2 + \zeta^2 - \zeta = 0$.
+        Тогда $P(l) = S^2 \cap \text{П}$ - пересечение сферы с плоскосью окружность.
+    \end{proof}
+
+    \item $\forall$ окружности $L \subset S^2 \ P^{-1}(L)$ является обобщенной окружностью на $\overline{\mathbb{C}}$.
+    \begin{proof}
+        Плоскость $\Pi \subset \mathbb{R}^3$ такая, что $\Pi \cap S^2 = L$,
+        а значит ее уравнение имеет \\ вид (\ref{FlatEq}). Разделим (\ref{FlatEq}) на $1-\zeta$, получим обобщенное уравнение прямой,
+        подставим туда прямые формулы проекции и получим уравнение вида $A(x^2+y^2)+Bx +Cy + D = 0$, а это - уравнение обобщенной окружности в $\overline{\mathbb{C}}$.
+    \end{proof}
+
+    \item Стереографическая проекция сохраняет углы. То есть $\forall l_1, l_2 \in \overline{\mathbb{C}} \text{ таких, что } l_1 \cap l_2 \neq \empty$
+    и $\alpha$ - угол между ними, верно, что угол между $P(l_1)$ и $P(l_2)$ тоже равен $\alpha$ (угол между окружностями это угол
+    между касательными в точке пересечения).
+\end{enumerate}
+
+\begin{definition}
+    Кривая - это функция (или ее образ) $g: [a, b] \to \mathbb{R}^2$. Параметром кривой $g$ называют $t \in [a, b]$. 
+    \[\overrightarrow{v} = \frac{\frac{\partial \overrightarrow{g}}{\partial t}}{\left| \frac{\partial g}{\partial t}\right|} = \left( \frac{\frac{\partial x}{\partial t}}{\left| \frac{\partial g}{\partial t}\right|}, \ \frac{\frac{\partial y}{\partial t}}{\left| \frac{\partial g}{\partial t}\right|} \right) \quad \overrightarrow{n} = \frac{\frac{\partial^2 g}{\partial t^2}}{\left| \frac{\partial^2 g}{\partial t^2} \right|}\]
+    Натуральный параметр на кривой $g$ это $l \subset [0, L]$ ($L$ - длина $g$), такой, что $\forall l$ выполнено $\frac{\partial g}{\partial l} = 1$.
+    Набор $\{v, n\}$ называется базис Френе, для него выполена теорема Френе. 
+    Уравнения Френе:
+    \[
+    \frac{d}{dl} \begin{pmatrix} v \\ n \end{pmatrix} = 
+    \begin{pmatrix}
+        0 & k(l) \\
+        -k(l) & 0
+    \end{pmatrix}
+    \begin{pmatrix} v \\ n \end{pmatrix}, \quad k(l) \text{ называется кривизной } g \subset \mathbb{R}^2
+    \]
+\end{definition}
+
+\subsection{Виды записи}
+Стандартная запись $z = x + iy$. \\
+Пусть $r = \left| z \right|, \ \varphi = arg(z)$.
+\begin{definition}
+    Тригонометрическая запись комплексного числа:
+    \[\begin{cases}
+        Re(z) = x = r\cdot \cos(\varphi) \\ 
+        Im(z) = y = r\cdot \sin(\varphi)
+    \end{cases} \implies z = x +iy = r(\cos(\varphi) + i\sin(\varphi))\]
+\end{definition}
+    
+\begin{definition}
+    Формула Эйлера:
+    \[e^{i\varphi} = \cos(\varphi) + i\sin(\varphi) \implies z = re^{i\varphi}\]
+    Тогда для натурального $n$:
+    \[z^n = r^n e^{in\varphi} = r^n (\cos(n\varphi) + i\sin(n\varphi))\]
+    Пусть $z \neq 0 \implies r = \left| z \right| > 0$. тогда $z^{\frac{1}{n}} = r^{\frac{1}{n}}\cdot e^{\frac{i(\varphi + 2\pi k)}{n}}$, где $k = 0 \hdots n-1$.
+    Отсюда же получается формула Муавра для корней степени $n$ из $z \neq 0$:
+    \[z^{\frac{1}{n}} = r^{\frac{1}{n}}(\cos(\frac{\varphi + 2\pi k}{n})+ i\sin(\frac{\varphi + 2\pi k}{n}))\]
+\end{definition}
+
+\begin{note}
+    $\exists n$ различных корней степени $n$ из комплексного числа $z \neq 0$.
+    \[z_0, z_1, \hdots z_{n-1} \in \text{ окружности радиуса } r^{\frac{1}{n}} \text{ c центром в } (0,0)\]
+\end{note}

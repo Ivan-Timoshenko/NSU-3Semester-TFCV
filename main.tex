@@ -20,11 +20,13 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Опр.}
 
-\newtheoremstyle{statement}{3pt}{3pt}{\upshape}{}{\bfseries}{.}{.5em}{}
+\newtheoremstyle{statement}{3pt}{3pt}{\upshape}{}{\bfseries}{}{.5em}{}
 \theoremstyle{statement}
 \newtheorem{statement}{Утв.}
+\newtheorem*{statement*}{Утв.}
 
 \newtheorem{theorem}{Теорема}
+\newtheorem*{theorem*}{Теорема}
 
 \newtheoremstyle{note}{3pt}{3pt}{\upshape}{}{\bfseries}{:}{.5em}{}
 \theoremstyle{note}
@@ -39,4 +41,5 @@
 \begin{document}
     \maketitle
     \include{Lect1}
+    \include{Lect2}
 \end{document}

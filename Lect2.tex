@@ -1,0 +1,145 @@
+\section{Множества на $\overline{\mathbb{C}}$}
+
+\begin{definition}
+    \begin{itemize}
+        \item $\delta$ - окрестность точки $z_0 \in \mathbb{C}$ - это множество $C(\delta, z_0) = \{z \in \mathbb{C} \ | \ \left| z - z_0\right| < \delta\}, \delta > 0$.
+        \item Проколотая окрестность точки $z_0 \in \mathbb{C}$ - это множество $C^*(\delta, z_0) = C(\delta, z_0) \backslash \{z_0\}$
+        \item Окрестность точки \{$\infty$\} - множество $\{z \in \mathbb{C} \ | \ \left| z \right| > \delta\}$
+        \item Точка $z$ - изолированная точка множества $E \subset \overline{\mathbb{C}}$, если $\exists \delta > 0: C(\delta, z_0) \cap E = \{z_0\}$
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    Точка $z$ называется предельной точкой множества $E \subset \overline{\mathbb{C}}$, если $\forall \delta > 0 \ C^*(\delta, z) \cap E \neq \varnothing$
+\end{definition}
+
+\begin{definition}
+    Точка $z$ называется внутренней точкой множества $E \subset \overline{\mathbb{C}}$, если $\exists \delta > 0 \ C(\delta, z) \subset E$
+\end{definition}
+
+\begin{definition}
+    Точка $z$ называется внешней точкой множества $E \subset \overline{\mathbb{C}}$, если $\exists \delta > 0 \ C(\delta, z) \cap E = \varnothing$
+\end{definition}
+
+\begin{definition}
+    Точка $z$ называется граничной точкой $E$, если 
+    \[\forall \delta > 0 \begin{cases}
+        C(\delta, z) \cap E \neq \varnothing \\
+        C(\delta, z) \backslash E \neq \varnothing
+    \end{cases}\]
+\end{definition}
+
+\begin{note}
+    Если граничная точка $z \notin E$, то она является предельной для $E$.
+\end{note}
+
+\begin{definition}
+    Граница $E$ - это совокупность всех граничных точек, обозначается $\partial E$.
+\end{definition}
+
+\begin{definition}
+    Множестов называется ограниченным, если $\exists M \ (0 < M < \infty)$ - число, такое, что\\
+    $\forall z \in E \ \left| z \right| < M$
+\end{definition}
+
+\begin{definition}
+    Множество $E$ называется замкнутым, если оно содержит все свои граничные точки (или их нет).
+\end{definition}
+
+\begin{definition}
+    Множество $E$ называется открытым, если $\forall z \in E$ $z$ является внутренней точкой для $E$, то есть 
+    $\forall z \in E \ \exists \delta > 0: \ C(\delta, z) \subset E$
+\end{definition}
+
+\begin{definition}
+    Замыкание множества $E$ это $\overline{E} = E \cup \partial E$.
+\end{definition}
+
+\begin{definition}
+    Диаметр множества $d(E) = \underset{z, \xi \in E}{\sup} \left| z - \xi\right|$
+\end{definition}
+
+\begin{definition}
+    Расстоянием между множествами $E$ и $G$ называется $D(E, G) = \underset{z \in E, \zeta \in G}{\inf} \left|z - \zeta\right|$
+\end{definition}
+
+\begin{definition}
+    Множество $E$ называется связным, если его нельзя представить как $E = A \cup B, \ A, B \subset E$, таких, что 
+    \begin{enumerate}
+        \item $A, B \neq \varnothing$
+        \item $A \cap B = \varnothing$
+        \item $A$ и $B$ не содержат предельных точек друг друга.
+    \end{enumerate}  
+\end{definition}
+
+\begin{definition}
+    Множество $E$ называется линейно связным, если $\forall z_1, z_2 \in E \ \exists$ непрерывная функция $\varphi: [0, 1] \to E$ такая, что $\varphi(0) = z_1, \ \varphi(1) = z_2$
+\end{definition}
+
+\begin{definition}
+    Областью называется открытое связное множество.
+\end{definition}
+
+\begin{definition}
+    Компонента множества $E$ - $\forall$ максимальное по включению связное подмножество $E$.\\
+    Область $E \neq \overline{\mathbb{C}}$ $n$-связная, если граница $\partial E$ состоит из $n$ компонент ($\overline{\mathbb{C}}$ считаем 1-связным).
+\end{definition}
+
+\begin{statement}
+    $\forall$ множества $E \subset \overline{\mathbb{C}}$ граница $\partial E$ является замкнутым множеством.
+    \begin{proof}
+        Доказывается от противного: \\
+        Допустим, $\exists$ предельная точка $z_0$ для $\partial E$: $z_0 \notin \partial E$.
+    \end{proof}
+\end{statement}
+
+\begin{theorem}[Принцип Больцано-Вейерштрасса]
+    У любого бесконечного множества $E \subset \overline{\mathbb{C}} \ \exists$ хотя бы одна предельная точка.
+\end{theorem}
+
+\begin{theorem}[Лемма Гейне-Бореля]
+    Из бесконечного открытого покрытия замкнутого множества точек на $\overline{\mathbb{C}}$ можно выделить конечное подпокрытие.
+
+    \textbf{Следствие:} На $\overline{\mathbb{C}}$ любое замкнутое и ограниченное множество является компактом.
+\end{theorem}
+
+\section{Предельные ряды комплексных чисел}
+
+\begin{definition}
+    Последовательность $\{z_n\}$ комплексных чисел $z_n = x_n + i y_n, \ n \in \mathbb{N}$ называется сходящейся к пределу $\alpha = a + ib$, если
+    \[\forall \varepsilon > 0 \exists N: \left| z_n - \alpha \right| < \varepsilon \ \forall n > N\]
+    Обозначается $\lim_{n \to \infty} z_n = \alpha$
+
+    
+\end{definition}
+    
+\textbf{Следствие:} $\lim_{n \to \infty} z_n = 0 \iff \lim_{n \to \infty} \left| z_n \right| = 0$
+        
+    
+Попробуем перенести теорию последовательностей вещественных числе на комплексные числа:
+\[\exists \lim_{n \to \infty} z_n = \alpha \implies \begin{cases}
+    \exists \lim_{n \to \infty} x_n = a \\
+    \exists \lim_{n \to \infty} y_n = b
+\end{cases} \implies \] 
+\[ \implies \begin{cases}
+    \forall \varepsilon > 0 \ \exists N_1 \in \mathbb{N} \ \left| x_n - a \right| < \frac{\varepsilon}{2} \ \forall n > N_1 \\
+    \forall \varepsilon > 0 \ \exists N_2 \in \mathbb{N} \ \left| y_n - b \right| < \frac{\varepsilon}{2} \ \forall n > N_2 
+\end{cases} \implies \left| z_n - \alpha\right| \leq \left| x_n - a \right| + \left| y_n - b\right| < \varepsilon\]
+Значит $\forall \varepsilon > 0 \ \exists N = \max(N_1, N_2) \ \left|z_n - \alpha\right| < \varepsilon \ \forall n > N$
+
+Таким образом $\begin{cases}
+    \exists \lim_{n \to \infty} x_n = a \\
+    \exists \lim_{n \to \infty} y_n = b
+\end{cases}  \implies \exists \lim_{n \to \infty} z_n = \alpha$
+Это позволяет свести теорию последовательностей $\{z_n\}$ комплексных чисел к $\mathbb{R}$, 
+то есть все теоремы о сходимости вещественных последовательностей переносятся на комплексные числа.
+
+\begin{theorem*}[Критерий Коши]
+    \[\text{Последовательность } \{z_n\} \text{ сходится} \iff \ \forall\varepsilon > 0 \ \exists N \in \mathbb{N}: \left| z_{n+m} - z_n \right|< \varepsilon  \text{ выполнено } \forall n, m > N\].
+\end{theorem*}
+
+\begin{definition}
+    Последовательность $\{z_n\}$ сходится к $\infty$ ($\lim_{n \to \infty} z_n = \infty$) если
+    \[\forall R > 0 \ \exists N \ \left| z_n \right| > R \text{ выполнено для } \forall n > N\]
+    \[\text{При } z_n \neq 0 \ \lim_{n \to \infty}z_n = \infty \iff \lim_{n \to \infty} \frac{1}{z_n} = 0\]
+\end{definition}

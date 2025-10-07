@@ -1,0 +1,162 @@
+\section{Основы гладкого анализа}
+Символ $\open$ обозначает "открыто в". Контекст:
+\[U \open \mathbb{R}^m, \ f:U \to \mathbb{R}^k, \ f \in C^r(U), \ r \geq 0\]
+
+\begin{definition}
+    Отображение $f$ называется $r$-гладким, если все ее частные производные до порядка $r$ непрерывны на $U$.
+\end{definition}
+
+Пусть $X$ - не обязательно открыто в $\mathbb{R}^m$.
+\begin{definition}
+    $f \in C^r(X)$, если $f = \tilde{f}$ - сужение на $\tilde{X}$, $\tilde{f}: \tilde{X} \open \mathbb{R}^m \to \mathbb{R}^k$ - $C^r$-гладкая на $tilde{X}$. \textbf{НАДО УТОЧНИТЬ:} $X \subset \tilde{X}$ или наоборот.
+\end{definition}
+
+\begin{statement}
+    Пусть $f:X \subset \mathbb{R}^m \to \mathbb{R}^k, \ g:X \to \mathbb{R}^k$ - $C^r$ отображения. Тогда $f+g \in C^r(X)$
+    \begin{proof}
+        Пусть $f = \tilde{f}, \ g = \tilde{g}$ и т.д. по определению $r$-гладкости:
+        \[\tilde{f}:U \to \mathbb{R}^m, \tilde{g}: V \to \mathbb{R}^m, \ U, V \open \mathbb{R}^m, \ X \subset U, X \subset V\]
+        Введем $U \cap V = W \open \mathbb{R}^m$. На $W$ заданы оба отображения и ясно, что $f+g = \tilde{f} + \tilde{g}$.
+    \end{proof}
+\end{statement}
+
+\begin{statement}
+    Композиция:
+    \[X \overset{f}{\to} \mathbb{R}^k \supset Y \overset{g}{\to} \mathbb{R}^m\]
+    Если $f \in C^r$ и $g \in C^r$, то $g \circ f \in C^r$.
+    \begin{proof}
+        Область определения $\mathrm{dom}(g \circ f) = \{x \in X | \ f(x) \in Y\} = X \cap f^{-1}(\mathrm{dom}(g))$
+        \[\begin{cases}
+            f \in C^r \implies f = \tilde{f}, \ \tilde{f}:\mathbb{R}^m \underset{op}{\supset}\tilde{X} \to \mathbb{R}^k -  C^r\text{-гладкое.} \\
+            g \in C^r \implies g = \tilde{g}, \ \tilde{g}:\mathbb{R}^k \underset{op}{\supset}\tilde{Y} \to \mathbb{R}^m -  C^r\text{-гладкое.} \\
+        \end{cases}\]
+        \[\mathrm{dom(\tilde{g}\circ \tilde{f})} = \mathrm{dom}(\tilde{f}) \cap \tilde{f}^{-1}(\mathrm{dom}(\tilde{g})) = \tilde{X} \cap \tilde{f}^{-1}(\tilde{Y})\]
+        $\tilde{X}$ - открытое, $\tilde{f}^{-1}(\tilde{Y})$ - открытое, как прообраз открытого множества $\tilde{Y}$ при непрерывном отображении.
+        \newline
+        Ясно, что $g \circ f = \tilde{g} \circ \tilde{f}$ - сужение $\mathrm{dom}(g \circ f)$.
+    \end{proof}
+\end{statement}
+
+\begin{theorem}[Лемма о классе гладкости обратного отображения]
+    Пусть $U, V \open \mathbb{R}^m$. \\
+    $U \overunderset{f}{g}{\rightleftarrows} V$, $f, g$ - непрерывны и взаимно обратны. Если $f \in C^r(U)$ и $\forall x \in U \ df(x)$ - невырожден: $\det(Df(x)) \neq 0$, то $g \in C^r(U)$.
+    \begin{proof}
+        При $r > 0$  $g$ дифференциируема в $\forall y \in V$ по правилу дифференциирования обратного отображения. В матрицах Якоби:
+        \[Dg(f(x)) = (Df(x))^{-1}, \forall x \in U \text{, причем } f(x) = y, \ x = g(y)\]
+        \[Dg(y) = (Df(g(y)))^{-1}, \quad \text{цепочка преобразований } y \to g(y) \to Df(g(y)) \to (Df(g(y)))^{-1}\]
+        \[Dg(y) = w \circ Df \circ g(y), \ w \text{ - отображение обращения матрицы.}\]
+        \[Dg(y) = w \circ Df \circ g(y), \text{ причем } w - C^{\infty}, Df - C^{r-1}, g(y) - \text{дифференциируема}\]
+        $g$ дифференциируема $\implies Dg$ тоже дифференциируема как композиция $\implies$ все производные $g$ дифференциируемы $\implies Dg \in C^1 \implies g \in C^2 \implies \hdots \implies g \in C^{r-1} \implies Dg \in C^{r-1} \implies g \in C^r$.
+    \end{proof} 
+\end{theorem}
+
+\begin{lemma*}
+    Пусть $U \open \mathbb{R}^m$, а $f:U \to \mathbb{R}^m$ такое, что отображение $f(x) - x = \lambda(x)$
+    сжимающее, то есть $\forall x_1, x_2 \in U \left| \lambda(x_1) - \lambda(x_2) \right| \leq \lambda < 1$. Тогда:
+    \begin{enumerate}
+        \item $f(U) \open \mathbb{R}^m$
+        \item Сужение $f: U \to f(U)$ обратимо и обратное отображение - липшицево с константой $\frac{1}{1- \lambda}$.        
+    \end{enumerate}
+
+    \begin{proof}
+        Докажем пункт 2:
+        \newline
+        $f$ инъективно: $x_1 \neq x_2 \implies f(x_1) \neq f(x_2)$
+        \[\begin{cases}
+            f(x_1) - x_1 = \lambda(x_1) \\
+            f(x_2) - x_2 = \lambda(x_2) 
+        \end{cases} \implies
+        \begin{cases}
+            f(x_1) = \lambda(x_1) + x_1 \\
+            f(x_2) = \lambda(x_2) + x_2
+        \end{cases}\]
+
+        Тогда
+        \[
+            \left| f(x_1) - f(x_2) \right| = \left| \lambda(x_1) - \lambda(x_2) +  (x_1 - x_2) \right|
+            \leq \left| \lambda(x_1) -\lambda(x_2) \right| + \left| x_1 - x_2 \right| 
+            \lambda \cdot \left|x_1 - x_2 \right| + \left| x_1 - x_2 \right| = (\lambda + 1) \left| x_1 - x_2\right|
+        \]
+
+        В силу неравенства треугольника:
+        \[(1 - \lambda) \left| x_1 - x_2 \right| \leq \left| f(x_1) - f(x_2) \right| \leq (1 + \lambda)\left| x_1 - x_2\right|\]
+        Инъективность есть, а сужение $f: U \to f(U)$ - биективно, значит обратимо. Поймем, что обратное отображение будет $\frac{1}{1 - \lambda}$ липшицево.
+        Пусть $\begin{cases}
+            y_1 = f(x_1) \\ \ y_2 = f(x_2) 
+        \end{cases} \in f(U) \quad \begin{cases}
+            x_1 = g(y_1) \\ 
+            x_2 = g(y_2)
+        \end{cases}$
+        \[\left| y_1 - y_2 \right| \geq (1 - \lambda)\left|g(y_1) - g(y_2) \right| \quad \implies \quad \frac{1}{1 - \lambda}\left| y_1 - y_2 \right| \geq g(y_1) - g(y_2)\] 
+        Пункт 2 доказан.
+        \newline
+        Пусть теперь $q \in f(U)$. Рассмотрим $p \in U \mid q = f(p)$. $U$ открыто, а значит $\exists \varepsilon > 0 \mid B_\varepsilon(p) \subset U$, \newline 
+        где $B_\varepsilon(p)$ - открытый шар радиуса $\varepsilon$ с центром в точке $p$. Мы покажем, что множество $f(U)$ содержит шар с центром в $q$ радиуса $(1- \lambda)\varepsilon$. \newline
+        Пусть $y \in B_{\varepsilon(1-\lambda)}(q)$, т.е. $\left| q - y \right| < (1 - \lambda)\varepsilon$. 
+        Надо показать, что $\exists x \text{ такой, что } \left| p - x \right| < \varepsilon, \ f(x) = y$.
+        Воспользуемся теоремой о неподвижной точке сжимающего отображения. Перепишем условие:
+        \[f(x) = y \implies y - f(x) = 0 \implies y-f(x) + x = x\]
+        Положим
+        \[\varphi(x) = y - f(x) + x = y - \lambda(x)\]
+        Заметим, что $\varphi(x)$ является сжимающим и покажем, что $\varphi$ переводит $B_\varepsilon(p)$ в себя. 
+        \[x \in B_\varepsilon(p) \implies \left| x - p \right| \leq \varepsilon \implies \left| \varphi(x) - \varphi(p) \right| \leq \lambda\varepsilon\]
+        \[\left| \varphi(x) - p \right| = \left| (\varphi(x) - \varphi(p)) + (\varphi(p) - p)\right| \leq \left| \varphi(x) - \varphi(p) \right| + \left|\varphi(p) - p\right|\]
+        Первое слагаемое, как мы уже доказали, не превышает $\lambda \varepsilon$. Преобразуем второе:
+        \[\left| \varphi(p) - p \right| = \left| y - f(p) + p - p \right| = \left| y - f(p) \right| = \left| y - q\right| \leq (1- \lambda)\varepsilon\]
+        Тогда:
+        \[\left| \varphi(x) - \varphi(p) \right| + \left|\varphi(p) - p\right| \leq \lambda\varepsilon + (1 - \lambda) \varepsilon = \varepsilon\]
+        Значит $\left|\varphi(x) - p\right| \leq \varepsilon$ и $\varphi(x) \in B_\varepsilon(p) \mid x \in B_\varepsilon(p).$
+    \end{proof}
+\end{lemma*}
+\newpage
+\begin{theorem}
+    \textbf{о локальной обратимости}
+    \newline
+    Пусть $U \open \mathbb{R}^m, \ f:U \to \mathbb{R}^m - C^r$-гладкое отображение, $r \geq 1$.
+    Пусть $p \in U$. Если $df(p): \mathbb{R}^m \to \mathbb{R}^m$ - невырожден, то у точки $p$ имеется окрестность $U_1$ такая, что 
+    $f(U_1) \open \mathbb{R}^m$ и сужение $f|_{U_1}: U_1 \to f(U_1)$ является $C^r$-изоморфизмом (т.е. обратное отображение тоже принадлижети классу $C^r$).
+    \begin{proof}
+        Считаем сначала, что $\forall v \ df(p)\langle v \rangle = v$, т.е. $df(p):\mathbb{R}^m \to \mathbb{R}^m$ - тождественное отображение, $Df(p) = E$.
+        Рассмотрим отображение $h(x) = f(x) - x$:
+        \[dh(x) = df(x) - dx, \text{ при x = p: } dh(p) = dx - dx = 0 (Dh(x) = E - E = 0)\]
+        Все частные производные отображения $h$ в точке $p$ равны 0. Значит, в силу их непрерывности в $p$,
+        у точки $p$ имеется некоторый шарик $U$ с центром в $p$ такой, что $\forall x \in U$ все эти производные ограничены, например, $\frac{1}{2} < 1$.
+        \[\forall x_1, x_2 \in U_1 \ \left|h(x_1) - h(x_2) \right| \leq \frac{1}{2} \]
+        По предыдущей лемме $f(U_1)$ открыто в $\mathbb{R}^m$ и $f|_{U_1} \to f(U_1)$ обратимо, обратное отображение непрерывно.
+        По теореме о классе гладкости обратного отображения оно ($f^{-1}$) имеет нужный класс. Заметим, что в той лемме необходимо, чтобы $\forall x \in U_1 \ \det(Df(x)) \neq 0$, 
+        поэтому когда мы выбираем окрестность $U_1$ надо это тоже потребовать:
+        \[Df(p) = E, \ \det(E) = 1 \neq 0 \text{ и в некоторой окрестности  точки $p$ } \det(Df(x)) = 0\]
+        \newline
+        Мы доказали теорему для $Df(p) = E$. Пусть теперь $Df(p) = A, \ \det(A) \neq 0 \implies$ значит существует обратная матрица $A^{-1}$, тоже невырожденная. Пусть $\tilde{f} = A^{-1}f(x)$ - композиция линейного отображения и отображения $f$.
+        Для $\tilde{f}$ выполнена теорема, ведь $D\tilde{f}(p) = A^{-1}Df(p) = A^{-1}A = E$.
+        Значит $\exists \tilde{U} \ni p \mid \tilde{f}:\tilde{U} \to \tilde{f}(\tilde{U})$ - $C^r$-изоморфизм и $\tilde{f}(\tilde{U}) \open \mathbb{R}^k$.
+        \newline
+        $f(x) = A \tilde{f}(x)$ - композиция двух "хороших" отображений и $f(\tilde{U}) = A\cdot\tilde{f}(\tilde{U})$ - образ открытого множества под действием линейного изоморфизма $A$ - тоже открыт в $\mathbb{R}^k$.
+    \end{proof}
+\end{theorem}
+
+
+\begin{theorem}[о неявной функции]
+    Пусть $U \open \mathbb{R}^{k+l} = \mathbb{R}^k \times \mathbb{R}^l$ и $f: U \to \mathbb{R}^l$ - $C^r$-отображение, $r \geq 1$.
+
+    Функция $f$ представляет собой набор:
+    \[f = \begin{pmatrix}{}
+        f_1(x_1, \hdots, x_k, y_1, \hdots, y_l) \\
+        \vdots \\
+        f_l(x_1, \hdots, x_k, y_1, \hdots, y_l)
+    \end{pmatrix}\]
+    Пусть некоторая точка $(\overrightarrow{x_0}, \overrightarrow{y_0}) \in U$ и $\det(\frac{\partial f}{\partial y}(\overrightarrow{x_o}, \overrightarrow{y_0})) \neq 0, \ f(\overrightarrow{x_0}, \overrightarrow{y_0}) = 0$.
+    \[\frac{\partial f}{\partial y} = \begin{pmatrix}
+        \frac{\partial f_1}{\partial y_1} & \hdots & \frac{\partial f_1}{\partial y_l} \\
+        \vdots & & \vdots \\
+        \frac{\partial f_l}{\partial y_1} & \hdots & \frac{\partial f_l}{\partial y_l}
+    \end{pmatrix}\]
+    Множество $M = \{(\overrightarrow{x},\overrightarrow{y}) \in \Omega \mid f(\overrightarrow{x}, \overrightarrow{y}) = 0\}$, где $\Omega$ - окрестность точки $(\overrightarrow{x_0}, \overrightarrow{y_0})$.
+    Точка $(\overrightarrow{x_0}, \overrightarrow{y_0}) \in M, \ \det(\frac{\partial f}{\partial y}(\overrightarrow{x_0}, \overrightarrow{y_0})) \neq 0$
+    \newline
+    Тогда у $(\overrightarrow{x_0}, \overrightarrow{y_0})$ имеется такая окрестность $\Omega$, что $\Omega \cap M$ - график некоторой $C^r$-функции $\alpha$, такой, что $\alpha: \Omega_x \to \mathbb{R}^l$ и 
+    \[D\alpha(x) = (\frac{\partial f}{\partial y}(x, \alpha(x)))^{-1} \cdot \frac{\partial f}{\partial x}(x, \alpha(x))\]
+    \begin{proof}
+        \textbf{А ПРУФ БУДЕТ ПОТОМ ПОКА НА СЛОВО ВЕРЬТЕ}
+    \end{proof}
+\end{theorem}

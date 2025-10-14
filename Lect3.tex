@@ -1,159 +1,225 @@
-\textbf{Правило дифференциирования монома:\\}
-\bigskip
-Пусть $f(x)  = x_1^{i_1} \cdot x_2^{i_2} \cdot \dots \cdot x_m^{i_m}, \ x = (x_1, \dots, x_m)$. Тогда 
-\[\frac{\partial^{i_1+i_2+ \dots + i_m} f}{\partial x_1^{i_1} \dots \partial x_m^{i_m}}(0) = i_1! \cdot \hdots \cdot i_m!\]
-Любая другая производная любого порядка в точке $0$ равна $0$.
+\section{Функции комплексного переменного}
+Пусть $E \subset \mathbb{C}$ и $f: E \to \mathbb{C}$ (т.е. $z \to f(z)$).
+Если $f$ - инъекция, т.е. $z_1 \neq z_2 \implies f(z_1) \neq f(z_2)$, то говорят, что $f$ - однослойна.
+Если $f$ действует из $E$ в $f(E)$ (то есть еще и сюръективна, а значит - биекция), то $\exists f^{-1}: f(E) \to E$.
 
-\subsection{Мульти-индексы}
-Придумаем $\mu = (i_1, \hdots, i_m)$ - численный вектор, в котором $\forall j = \overline{1 \hdots m} \ i_j \geq 0$ и назовем его \textbf{мультииндексом}.
-\par
-Для мультииндексов определены операции:
-\[\mu! := i_1! \cdot \hdots \cdot  i_m! \qquad \left| \mu \right| = \sum_{j = 1}^{m} i_j \text{ - порядок мультииндекса}\]
-\[x \in \mathbb{R}^m, x = (x_1, \hdots, x_m), \quad x^{\mu} = x_1^{i_1} \cdot \hdots \cdot x_m^{i_m}\]
-\[C^{\mu}_k = \frac{k!}{\mu!} = \frac{k!}{i_1!\cdot \hdots \cdot i_m!} \text{, где } k = \left|\mu\right|\]
+\begin{definition}
+    Если $z_0$ - предельная точка множества $E$ и $\lim_{z \to z_0}f(x) = f(z_0)$, то $f(z)$ непрерывна в $z_0$.
+    \[\lim_{z \to z_0}f(z) = f(z_0) \iff \forall \varepsilon > 0 \ \exists \delta: \left| z - z_0 \right| < \delta \implies \left| f(z) - f(z_0)\right| < \varepsilon\]
+    Функция $f(z)$ представима в виде $u(z) + iv(z)$ (мнимая и комплексная части), а значит $f$ непрерывна на $E \iff u(z), v(z), \left| f(z) \right| $ - непрерывны на $E$.
+\end{definition}
 
-\bigskip
+Если $E$ - компактно, а $f$ - непрерывно, то:
+\begin{enumerate}
+    \item $\left| f(z) \right|$ достигает $\max$ и $\min$ на $E$
+    \item $f(z)$ равномерно непрерывна на $E$ по т. Кантора
+\end{enumerate}
 
-Зададим контекст:
-\[f:\mathbb{R}^m \to E, \ f \in D^k(p), \ \mu = (i_1, \hdots, i_m)\]
-Тогда:
-\[\frac{\partial^{\mu}f}{\partial x^{\mu}} = D^{\mu}f = \frac{\partial^{i_1}}{\partial x_1^{i_1}}(\frac{\partial^{i_2}}{\partial x_2^{i_2}}( \hdots (\frac{\partial^{i_m}}{\partial x_m^{i_m}}f)))\]
+\begin{definition}
+Функция $\gamma(t) = x(t) + iy(t), \ t\in [\alpha, \beta]$ - задает кривую на комплексной плоскости, если $x(t), y(t)$ - непрерывны.
+    
+\begin{itemize}
+    \item Если $\gamma(t)$ инъективна (за исключением $\gamma(\alpha) = \gamma(\beta)$), то $\gamma$ - жорданова кривая.
+    \item $\gamma(t)$ называется гладкой, если $x(t), y(t)$ непрерывно дифферециируемы и $\forall t \ \gamma'(t) = x'(t) + iy'(t) \neq 0$
+\end{itemize}
+\end{definition}
 
-\begin{theorem*}[разложение Тейлора]
-    $\exists!$ многочлен $A(x)$ степени $\leq k$ такой, что $f(x) - A(x) \underset{x \to p}{=} o(x-p)^k$    
-    \[A(x) = f(p) + f'(p)(x-p) + \frac{f''(p)}{2!}(x-p)^2 + \hdots + \frac{f^{(k)}(p)}{k!}(x-p)^k\]
-\end{theorem*}
-
-\begin{theorem*}[разложение Тейлора для нескольких переменных]
-    Пусть $f: \mathbb{R}^m \to E, \ f \in D^k(p)$, тогда $\exists!$ многочлен $A(x) \ deg(A) \leq k$,
-    такой, что $f(x) - A(x) \underset{x \to p}{=} o(\left| x - p\right|^k)$:
-    \[A(x) = f(p) + \frac{df(p) \langle x-p \rangle}{1!} + \frac{d^f(p)\langle x-p \rangle}{2!} + \hdots + \frac{d^kf(p)\langle x-p \rangle}{k!}\]
-    \begin{proof}
-        \textbf{Единственность:} Пусть есть два таких многочлена $A(x), B(x)$. Введем $C(x) := A(x) - B(x) = o(\left| x - p\right|^k)$. И докажем вспомогательное утверждение:
-        \begin{statement*}
-            $degC \leq k \ C(x) \underset{x \to p}{=} o(\left|x-p\right|^k)$, тогда $C \equiv 0$.
-            \begin{proof}
-                \begin{enumerate}
-                    \item Фиксируем $v \in \mathbb{R}^m$ и рассмотрим $h(t) = C(p+tv)$ - многочлен одной переменной.
-                    По условию $h(t) = o(t^k)$ для одной переменной (доказывали это в первом семестре), т.е. $h(t) \equiv 0$. В частности, при $t = 1 \ h(t) = C(p+v) = 0$.
-                    \item Поскольку 1. выполняется $\forall v$, то $C(p+v) = 0 \  \forall v$.
-                \end{enumerate}
-            \end{proof}
-            Тогда в силу доказанного утверждения получаем единственность.
-        \end{statement*}
-        \par
-        \textbf{Существование:}
-        Введем $g(x) = f(x) - A(x), \ f:\mathbb{R}^m \to E$. $g(p) = 0$ и все производные до порядка $k$
-        включительно равны $0$ в $p$, $g \in D^K(p)$. Необходимо доказать, что из этого следует, что $g(x) = o(\left| x - p\right|^k)$.
-        \\
-        Пусть $\varepsilon > 0$, надо показать, что $\left| g(x) \right| < \varepsilon\cdot \left| x - p\right|^k$ в некоторой $U$ - окрестности точки $p$.
-        Пусть $\varepsilon_{k-1}(x)$ - какая-то производная порядка $k-1$ функции $g$, $\varepsilon_{k-1}$ определена в некотором шаре $V_p$ с центром в $p$.
-        \begin{equation}
-            \label{eq1}
-            \varepsilon_{k-1}(p) = 0, \ \frac{\partial \varepsilon_{k-1}}{\partial x_i}(p) = 0 \ \forall i = 1 \hdots m
-        \end{equation}
-        Поэтому имеется маленький шар $U \subset V_p$ в котором выполнено:
-        \begin{equation}
-            \label{eq2}
-            \forall x \in U \ \left| \varepsilon_{k-1}\right|(x) \leq \varepsilon\cdot \left| x - p \right|
-        \end{equation}
-        В самом деле, $\varepsilon_{k-1}(x) = \varepsilon_{k-1}(p) + d\varepsilon_{k-1}(p)\langle x - p \rangle + o(\left| x - p \right|)$, причем первое слагаемое равно нулю из того, что "все производные до порядка $k$ включительно равны $0$ в $p$", а второе - из уравнения (\ref{eq}).
-        Значит $\varepsilon_{k-1}(x) = o(\left| x - p\right|) \implies \varepsilon_{k-1}(x) \leq \varepsilon\left| x - p \right|$
-        Итак, ясно, что существует шарик $U$, в котором все производные $k-1$ порядка 
-        имеют оценку (\ref{eq2})
-        Пусть $\varepsilon_{k-2}$ - какая-то производная функции $g$ порядка $k-2$. Все ее первые частные производные по доказанному в шаре $U$ оцениваются в $\varepsilon\cdot \left| x - p\right|$.
-        По лемме о степенной оценке приращения для $\varepsilon_{k-2}$ выполнено в шаре $U$:
-        \[\left| \varepsilon_{k-2}(x)\right| \leq \left| \frac{\varepsilon \left| x - p\right|^2}{2}\right|\]
-        Для $k-3, k-4, \hdots$ аналогично. 
-        \[\left| g(x) \right| = \left| g^{(k-k)}(x) \right| \leq \varepsilon \cdot \frac{\left| x- p \right| ^ k}{k!} \leq \varepsilon\cdot \left| x - p\right|^k
-        \]
-    \end{proof}
-\end{theorem*}
-
-\begin{theorem}[Достаточное условие локального экстремума функции многих переменных]    
-    Пусть $f \in D^2(p), \ f:\mathbb{R}^m \to R$ и $df(p) > 0$. Тогда:
+\begin{theorem*}[о стандартном радиусе]
+    Пусть $\Gamma(t), t \in [\alpha, \beta]$ - гладкая замкнутая жорданова кривая. Тогда
+    \[\forall \theta_0 \in (0, \frac{\pi}{2}) \ \exists \delta_0 \text{ такаая, что}\]
     \begin{enumerate}
-        \item $d^2f(p) > 0$ - строгий локальный минимум
-        \item $d^2f(p) < 0$ - строгий локальный максимум
-        \item Если $d^2f(p)$ знаконеопределен, т.е. $\exists u \in \mathbb{R}^m \ d^2f(p)\langle u \rangle > 0$ и $\exists v \in \mathbb{R}^m \ d^2f(p)\langle v \rangle < 0$, то $p$ - седловая точка.
+        \item Окружность $\left| z - z_0 \right| = \underset{z_0 \in \Gamma}{R} \leq \delta_0$ пересекает $\Gamma$ строго в двух точках
+        \item При переходе от $z_1 \in \Gamma$ к $z_2 \in \Gamma$, где $\left| z_2 - z_1 \right| < \delta_0$ угол наклона касательной меняется меньше, чем $\theta_0$
+        \item Если $\left| z - z_0 \right| < \delta_0$ то $dS(s) < \frac{dr}{d\cos(\theta_0)}$
     \end{enumerate}
-    \begin{proof}
-        
-        Докажем пункт 3:
-        \begin{proof}
-            Пусть $df(p) = 0$ и существуют вектора $u$ и $v$, такие, что $d^2f(p)\langle u \rangle > 0, \ d^2f(p)\langle v \rangle < 0$.
-            
-            Введем функцию $h(t) = f(p + tu)$. Тогда $h'(0) = df(p)\langle u \rangle = 0, \  h''(0) = d^2f(p)\langle u \rangle > 0$. Значит у функции $h$ в точке $0$ строгий минимум 
-            (по достаточному условию экстремума для одной переменной). Аналогично вдоль $p + tv$ функция имеет строгий максимум, значит $p$ - седловая точка.
-        \end{proof}
-        
-        Докажем пункт 1:
-        \begin{proof}
-            Пусть $d^2f(p) > 0$, то есть $\forall v \neq 0 \ d^f(p)\langle v \rangle > 0$. Сфера $S^{m-1} = \{v \in \mathbb{R}^m \quad \left| v \right| = 1\}$ - компактна (замкнута и ограничена). $d^2f(p):S^{m-1} \to \mathbb{R}$ - однородный многочлен второго порядка.
-            Так как $d^2f$ - непрерывная функция на компакте, то у нее $\exists \min = C > 0$, т.е.\\ $\forall v \in S^{m-1} \quad d^2f(p)\langle v \rangle \geq C$.
-            \begin{statement*}
-                Тогда $\forall v \neq 0 \ d^2f(p)\langle v \rangle \geq C\cdot \left| v \right|^2$
-                \begin{proof}
-                    \[\forall v \neq 0 \quad d^2f(p)\langle v \rangle = d^f(p)\langle \left| v \right| \cdot \frac{v}{\left| v \right|} \rangle = 
-                    \left| v \right|^2\cdot d^2f(p)\langle \frac{v}{\left| v \right|} \rangle \geq C\cdot \left| v \right|^2\]
-                \end{proof}
-            \end{statement*}
+\end{theorem*}
 
-            Значит 
-            \[
-                f(x) = f(p) + df(p)\langle x -p \rangle + \frac{d^2f(p)\langle x - p \rangle}{2!} + \alpha(x)\left| x - p\right|^2, \ \alpha(x) \underset{x \to p }{\to} O(1)
-            \]
-            \[f(x) \geq f(p) + 0 + \frac{C}{2!}\cdot \left| x - p \right|^2 + \alpha(x)\left| x - p\right|^2\]
-            Существует окрестность $U$ точки $p$, такая, что $\left| \alpha(x) \right| \leq \frac{C}{3} \ \forall x \in U$. Тогда для $\forall x \in U$:
-            \[f(x) \geq f(p) + \frac{C}{2!}\left| x - p \right|^2 - \frac{C}{3}\left| x - p \right|^2 = f(p) + \frac{C}{6}\left| x - p\right| ^2\]
-            То есть $f(x) - f(p) \geq \frac{C}{6}\left| x - p \right|^2 > 0 \implies$ в $U \ f(p) < f(x) \ \forall x \in U$. Пункт 1 доказан. 
-        \end{proof}
-        Пункт 2 доказывается аналогично пункту 1.
+\subsection{Функциональные ряды}
+
+\begin{definition}
+    Ряд $\sum f_n(z)$ сходится на $E \subset \mathbb{C}$, если он сходится $\forall z \in E$. Сходится равномерно на $E$, если:
+    \[\forall \varepsilon > 0 \ \exists N \mid \forall n > N \ \forall z \ \left|S_n(z) - S(z)\right| < \varepsilon\]
+    Или ряд $\sum f_n(z)$ сходится равномерно, если 
+    \[\forall  \varepsilon >0 \ \exists N \ \forall n > N \  \forall m \forall z \left| \sum_{k = 0}^{m} f_{n+k}(z)\right| < \varepsilon\]
+\end{definition}
+
+\begin{theorem*}[Признак равномерной сходимости Вейерштрасса]
+    Если $\forall z \in E$ каждый элемент ряда, начиная с некоторого номера $n_0$ удовлетворяет неравенству
+    \begin{equation}
+        \label{VeierEq}
+        \left| f_k(z)\right| \leq \alpha_k, \ k \geq n_0
+    \end{equation}
+    и числовой ряд $\sum_{k = n_0}^{\infty}\alpha_k$ сходится, то Функциональный ряд $\sum f_k(z)$ сходится равномерно и абсолютно на $E$.
+\newpage
+    \begin{proof}
+        Так как ряд $\sum_{k=n_0}^{\infty}\alpha_k$ сходится, то по критерию Коши:
+        \[\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \mid \sum_{k=1}^{m}\alpha_{n+k} < \varepsilon \quad \forall n > N, \ \forall m \in \mathbb{N}\]
+
+        \[\left| \sum_{k=1}^{m} f_{n+k}(z)\right| \leq \sum_{k=1}^{m}\left| f_{n+k}(z)\right| \overset{\text{по нер-ву \ref{VeierEq}}}{\leq} \sum_{k=1}^{m}\alpha_{n+k} < \varepsilon\]
+        Следовательно, по критерию Коши $\sum f_k(z)$ сходится равномерно и абсолютно.
+    \end{proof}
+\end{theorem*}
+
+\begin{theorem*}
+    Сумма $S(z) = \sum f_k(z)$ равномерно сходящегося ряда непрерывных на $E$ функций $f_k(z)$ сама непрерывна на $E$.
+
+    \begin{proof}
+        Пусть $z_0 \in E$ - произвольная точка. Тогда для $z \in E$:
+        \[\left| S(z) - S(z_0) \right| \leq \left|S(z) - S_N(z)\right| + \left| S_N(z) - S_N(z_0)\right| + \left|S_N(z_0) - S(z_0)\right|\]
+        По определению равномерной сходимости ряда $\sum f_k(z)$:
+        \[\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \left| S(z) - S_N(z)\right| < \frac{\varepsilon}{3} \text{ и } \left| S_N(z_0) - S(z_0)\right| < \frac{\varepsilon}{3}\]
+        Конечная сумма $S_N(z) = \sum_{k=1}^{N}f_k(z)$ непрерывных на $E$ функций $f_k(z)$ - сама непрерывна на $E$. Тогда по определению непрерывности функции:
+        \[\forall \varepsilon > 0 \ \exists \delta > 0: \ \left|z - z_0\right| < \delta \implies \left|S_N(z) - S_N(z_0)\right| < \frac{\varepsilon}{3}\]
+        А значит $\left|S(z) - S(z_0) \right|< \varepsilon \implies$ функция $S(z)$ непрерывна в $z_0$. В силу произвольности выбора $z_0 \in E \ S(z)$ непрерывна на $E$. 
+    \end{proof}
+\end{theorem*}
+
+\begin{definition}
+    Бесконечная сумма вида $\sum_{k=0}^{\infty}C_k\cdot(z-z_0)^k$ называется степенным рядом, в котором $C_k$ - коэффициенты степенного ряда. 
+    \newline
+    Поскольку линейная замена $t = z - z_0$ превращает этот ряд в более удобную форму $\sum C_k t^k$ - то будем рассматривать ряды именно такого вида.
+\end{definition}
+
+\begin{theorem*}[Коши-Адамара]
+    Пусть дан ряд $\sum C_k z^k$ и $l = \overline{\lim}_{k \to \infty} \sqrt[k]{\left| C_k \right|}$. Тогда:
+    \begin{enumerate}
+        \item Если $l = 0$, то данный ряд сходится на всей комплексной плоскости ($\forall z \in \mathbb{C}$).
+        \item Если $l = \infty$, то ряд сходится при $z = 0$ и расходится $\forall z \neq 0$.
+        \item Если $0 < l < \infty$, то ряд абсолютно сходится в круге $\left| z \right| < \frac{1}{l}$ и расходится при $\left| z \right| > \frac{1}{l}$.
+    \end{enumerate}
+
+    Число $R = \frac{1}{\overline{\lim_{k \to \infty}} \sqrt[k]{\left| C_k \right|}}$ называется радиусом сходимости степенного ряда, а круг $\left| z - z_0 \right| < R$ называется кругом сходимости.
+
+    \begin{proof}
+        В точке $z = 0$ утверждение верно при $\forall C_k \implies \forall l$ ряд сходится, так как ряд сходится в $z = 0$. Пусть теперь $z \neq 0$.
+        \par Случай 1: $l = 0$. \\
+        То есть $l = \overline{\lim}_{k \to \infty} \sqrt[k]{\left| C_k \right|} = \lim_{k \to \infty} \sqrt[k]{\left| C_k \right|} = 0$. Значит:
+        \[\forall z \neq \infty \ \lim_{k \to \infty} \sqrt[k]{\left| C_k z^k\right|} = \left| z \right| \cdot \lim_{k \to \infty}\sqrt[k]{\left| C_k \right|} = 0 \text{ так как $\left| z\right|  \neq \infty$, а предел равен 0}\]
+        Тогда по радикальному признаку Коши для рядов с положительными членами ряд $\sum_{k=0}^{\infty}\left| C_k z^k \right|$ сходится $\forall z \neq \infty$, т.е. ряд $\sum C_k z^k$ сходится на $\mathbb{C}$.
+        \newpage
+        Случай 2: $l = \infty$. \par
+        Если бы ряд сходился в точке $z \neq 0$, то в силу необходимого условия сходимости $\exists M > 1 \ \left| C_k z^k\right| < M$ или $\sqrt[k]{\left| C_k \right|} < \frac{M}{\left| z \right|}$, что противоречит условию $\overline{\lim}_{k \to \infty} \sqrt[k]{\left| C_k \right|} = \infty$. \par
+
+        Случай 3: $0 < l < \infty$ \par
+        Пусть $0 < \left| z \right| < \frac{1}{l}$. По определению верхнего предела:
+        \[\forall \varepsilon > 0 \ \exists N \in \mathbb{N} \ \sqrt[k]{\left| C_k \right|} < \varepsilon \ \forall k > N\]
+        Пусть $\varepsilon = \frac{1-  l\left| z \right|}{2 \left| z \right|} \implies \sqrt[k]{\left| C_k \right|} < l + \frac{1 - l\left| z \right|}{2 \left| z \right|} = \frac{1 + l\left| z \right|}{2 \left| z \right|}$. Тогда:
+        \[\left| z \right|\sqrt[k]{\left| C_k\right|} < \frac{1 + l\left| z \right|}{2} = q < 1\]
+        \[\left| C_k z^k \right| < q^k, \ k > N\]
+        Значит ряд сходится абсолютно при $\left| z \right| < \frac{1}{l}$. \\
+        Пусть $\left| z \right| > \frac{1}{l}$. По определению верхнего предела:
+        \[ \forall \varepsilon > 0 \ \exists \text{ бесконечное множество индексов } k_n, \ n = 1 \hdots \infty \text{ таких, что } \sqrt[k_n]{\left| C_{k_n}\right|} > l - \varepsilon\]
+        Пусть $\varepsilon = \frac{l\left| z \right| - 1}{\left| z \right|}$. Тогда $\sqrt[k_n]{C_{k_n}} > \frac{l\left| z \right| - l \left| z \right| + 1}{\left| z \right|} \implies \left| z \right|\sqrt[k_n]{\left| C_{k_n} \right|} > 1$. Значит ряд расходится по радикальному признаку Коши при $\left| z \right| > \frac{1}{l}$.
+    \end{proof}
+\end{theorem*}
+
+\begin{theorem}[Первая теорема Абеля]
+    Если степенной ряд $\sum C_k z^k$ сходится в некоторой $z_0 \in \mathbb{C}$ такой, что $z_0 \neq 0$, 
+    то он сходится абсолютно в круге $\left| z \right| < \left| z_0 \right|$.
+
+    \begin{proof}
+        По теореме Коши-Адамара ряд сходится абсолютно в круге $\left| z \right| < R$ и расходится при $\left| z \right| > R$. 
+        Значит $\left| z_0 \right| \leq R \implies $ ряд сходится абсолютно при $\left| z \right| < \left| z_0 \right|$.
     \end{proof}
 \end{theorem}
 
-\begin{theorem}[Полиномиальное разложение композиции]
-    Пусть $k \geq 0, f, g$ - функции, $A(x), B(y)$ - полиномы. Предположим, что $f$ и $A$ в точке $p$ имеют порядок касания $\geq k$, $g$ и $B$ в точке $p$ имеют порядок касания $\geq k$. То есть:
-    \[f(x) - A(x) = \alpha(x) \underset{x \to p}{=} o(\left| x - p\right|^k), \ \alpha(p) = 0\] 
-    \[g(y) - B(y) = \beta(y) \underset{y \to q}{=} o(\left| y - q \right|^k), \ \beta(q) = 0\]
-    Тогда $g\circ f$ имеет с $B \circ A$ порядок касания $\geq k$. 
+
+Напомню контекст: ряд (1)$\sum C_k z^k, \ R = \frac{1}{\overline{lim}_{k \to \infty}} \sqrt[k]{\left| C_k\right|}$. 
+
+\begin{note}
+    Степенной ряд не обязательно сходится равномерно в круге $\left| z \right| < R$. 
+
+    Определение равномерной сходимости: 
+    \[\forall \varepsilon > 0 \ \exists N \left| S_n(z) - S(z) \right| < \varepsilon \ \forall n > N, \forall z \in E\]
+
     \begin{proof}
-        При $k = 0$:
-        \[\alpha(x) = o(1) \implies f(x) - A(x) \underset{x \to p}{=} 0 \implies f(x) \underset{x \to p}{\to} f(p)\]
-        Для функции $g$ аналогично, после чего применяем теорему о непрерывности композиции. Для $ k = 0$ доказано.
-\newline
-        Пусть $k \geq 0$. Тогда:
-        \[\begin{cases}
-            f(x) = \alpha(x) + A(x) \\
-            g(y) = \beta(x) + B(x)
-        \end{cases} \implies
-        \begin{cases}
-            \alpha(x) = o(\left| x - p \right|) \\
-            \beta(x) = o(\left| y - q \right|)
-        \end{cases} \implies 
-        \begin{cases}
-            \alpha \in D^1(p) \\
-            \beta \in D^1(q)
-        \end{cases} \implies 
-        \begin{cases}
-            f \in D^1(p) \\
-            g \in D^1(q)
-        \end{cases}\]
-        \[g(f(x)) - B(A(x)) = 
-        g(f(x)) - B(f(x)) + B(f(x)) - B(A(x)) = 
-        \beta(f(x)) +B(f(x)) + B(A(x))\]
-        Заметим, что $\beta(f(x)) = o(\left| f(x) - q\right|^k) \underset{x \to p }{=} o(\left| f(x)  - f(p) \right|^k)$. 
-        При этом $f(x) - f(p) = O(\left| x - p \right|^1)$, так как $f \in D^1(p)$. А значит:
-        \[\beta(f(x)) = o(O(\left| x - p \right|^k)) = o(\left| x - p \right|^k)\]
-        \newline
-        Пусть теперь $V$ - шар конечного радиуса с центром в $q$. Все частные производные многочлена 
-        $B$ в шаре $V$ ограничены некоторой константой $C$. Тогда по лемме об оценке приращения:
-        \[\forall y_1, y_2 \in V \quad \left| B(y_1) - B(y_2) \right| = O(\left| y_1 - y_2 \right|)\]
-        При $x \to p \begin{cases}
-            f(x) \to q \\
-            A(x) \to q
-        \end{cases}$ и поэтому $f(x) , B(x) \in V$.
-        В таком случае \[
-        B(f(x)) - B(A(x)) \underset{x \to p}{=} O(f(x) - A(x) ) = O(o(\left| x - p \right|^k))\]
+        Для доказательства этого замечания сначала докажем формулы геометрической прогрессии:
+        \begin{statement*}
+            \[S_n(q) = \sum_{k = 0}^{n}q^k = \frac{1 - q^{n+1}}{1-q}\]
+            \begin{proof}
+                \[S_n + q^{n+1} = 1 + q + q^2 + \hdots + q^n + q^{n+1} = 1 + q*S_n\]
+                Значит $S_n = \frac{1-q^n+1}{1-q}$
+            \end{proof}
+        \end{statement*}
+        \begin{statement*}
+            \[\left|q \right| < 1 \implies S = \lim_{n \to \infty} S_n = \sum_{k=0}^{\infty} q^k = \frac{1}{1-q}\]
+            \begin{proof}
+                \[\lim_{n \to \infty} \sum_{k=0}^{n}q^k = \lim_{n \to \infty}\frac{1 - q^{n+1}}{1-q} = \lim_{n \to \infty}\frac{1}{1-q}(1-q^{n+1}) = \frac{1}{1-q}\lim_{n \to \infty}1-q^{n+1} = \frac{1}{1-q}\]
+            \end{proof}
+        \end{statement*}
+
+        По первому утверждению: 
+        \[S_n(z) = \sum_{k=0}^{n}\frac{1-z^{n+1}}{1-z} \implies \forall \in \mathbb{N} S(z) - S_n(z) = \frac{z^{n+1}}{1-z} \implies \underset{\left| z \right| < 1}{\sup}\left| S(z) - S_n(z) \right| = \underset{\left| z \right| < 1}{\sup} \frac{\left| z \right|^{n+1}}{\left| 1 - z\right|} = \infty\]
     \end{proof}
+\end{note}
+
+
+\begin{note}
+    Степенной ряд равномерно сходится в любом замкнутом круге $\left| z \right| < r, \forall r < R$ (может быть 0).
+
+    \begin{proof}
+        Из условия теоремы ряд мажорируется рядом $\sum \left| C_k\right| r^k$, который сходится по радикальному признаку Коши. Значит степенной ряд равномерно сходится по признаку Вейерштрасса.
+    \end{proof}
+\end{note}
+
+\begin{note}
+    На границе круга сходимости (при $\left| z \right| = R$) степенной ряд может:
+    \begin{itemize}
+        \item расходится во всех точках (пример $\sum z^k)$
+        \item сходится в некоторых точках границы и расходится в других (например, $\sum \frac{z^k}{k}$)
+        \item сходиться во всех точках границы (например, $\sum \frac{z^k}{k^2}$)
+    \end{itemize}
+\end{note}
+
+
+\begin{theorem}[Вторая теорема Абеля]
+    Если степенной ряд с радиусом сходимости $R \in (0, \infty)$ сходится в точке $z_0$, такой, что $\left| z_0 \right| = R$, то сумма $S(z) \to S(z_0)$ при $z \to z_0$ изнутри круга по любой некасательной траектории.
 \end{theorem}
+
+Возвращаясь к формуле Эйлера:
+\[e^{iz} = \cos(z) + i\sin(z)\]
+Степенные ряды для $e^z, \cos(z), \sin(z)$ сходятся равномерно в $\forall $ круге $\left| z \right| < R$, где $0 < R < \infty \implies$ эти функции непрерывны на $\mathbb{C}$.
+
+\begin{statement*}
+    $e^z$ - периодичная функция с периодом $2\pi ki$
+    \begin{proof}
+        \[e^z\cdot e^t = e^{z+t} \implies e^{z + 2\pi ki} = e^z\cdot e^{2\pi ki} = e^z(\cos(2\pi ki) + i\sin(2\pi ki)), k \in \mathbb{Z}\]
+    \end{proof}
+\end{statement*}
+По формуле Эйлера:
+\begin{equation}
+    \label{euleriz}
+    e^{iz} = \cos(z) + i\sin(z)
+\end{equation}
+\begin{equation}
+    \label{euler-iz}
+    e^{-iz} = \cos(z) - i\sin(z)
+\end{equation}
+
+\begin{equation}
+    \label{expcos}
+    (\ref{euleriz})+(\ref{euler-iz}): e^{iz} + e^{-iz} = 2\cos(z) \implies \cos(z) = \frac{e^{iz} + e^{iz}}{2}
+\end{equation}
+\begin{equation}
+    \label{expsin} 
+    (\ref{euleriz})-(\ref{euler-iz}): e^{iz} - e^{-iz} = 2i\sin(z) \implies \sin(z) = \frac{e^{iz} - e^{-iz}}{2i}
+\end{equation}
+То есть формулы тригонометрии остаются в силе.
+
+Нули функции $\sin(z)$:
+Из $(\ref{expsin})$:
+\[\sin(z) = 0 \implies e^{iz} - e^{-iz} = 0 \implies e^{2iz} - 1 = 0 \implies e^{2iz} = e^{2\pi ki}, k \in \mathbb{Z}\]
+Значит нули функции $\sin(z)$ имеют вид $z = \pi k, \ k \in \mathbb{Z}$ Аналогично нули функции $\cos(z)$ имеют вид $z = \frac{\pi}{2} + \pi k, k \in \mathbb{Z}$
+
+\begin{note}
+    Функции $\sin(z)$ и $\cos(z)$ не ограничены на $\mathbb{C}$
+    \begin{proof}
+        $z$ представимо в виде $x + iy$. Из $(\ref{expcos})$:$2\cos(z) = e^{iz} + e^{-iz}$. Мы знаем, что $\left| z \right|^2 = z \cdot \overline{z}$, значит:
+        \[\left| 2 \cos(z)\right|^2 = (e^{iz} + e^{-iz})\cdot(e^{i\overline{z}} + e^{-i\overline{z}}) = e^{-2y}+e^{2y} + 2\cos(2x) \underset{y \to \infty}{\to} \infty\]
+    \end{proof}
+\end{note}
+
+\begin{definition}
+    \[\cosh(z) = \frac{e^z + e^{-z}}{2}, \ \cosh(iz) = \cos(iz)\]
+    \[\sinh(z) = \frac{e^z - e^{-z}}{2}, \ \sinh(iz) = i\sin(iz)\] 
+\end{definition}

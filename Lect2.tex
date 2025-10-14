@@ -1,205 +1,191 @@
+\section{Множества на $\overline{\mathbb{C}}$}
+
 \begin{definition}
-    Функция дифференциируема в точке, если 
     \begin{itemize}
-        \item $f:U \to \mathbb{R}^k$ и $p \in Int(U)$
-        \item $f(x) = f(p) + df(p)\langle x-p \rangle + \alpha(x),$ где $\alpha(x) = o(x-p).$
+        \item $\delta$ - окрестность точки $z_0 \in \mathbb{C}$ - это множество $C(\delta, z_0) = \{z \in \mathbb{C} \ | \ \left| z - z_0\right| < \delta\}, \delta > 0$.
+        \item Проколотая окрестность точки $z_0 \in \mathbb{C}$ - это множество $C^*(\delta, z_0) = C(\delta, z_0) \backslash \{z_0\}$
+        \item Окрестность точки \{$\infty$\} - множество $\{z \in \mathbb{C} \ | \ \left| z \right| > \delta\}$
+        \item Точка $z$ - изолированная точка множества $E \subset \overline{\mathbb{C}}$, если $\exists \delta > 0: C(\delta, z_0) \cap E = \{z_0\}$
     \end{itemize}
 \end{definition}
-Если $k = 1$, то лин. отображение $df(p):\mathbb{R}^n \to \mathbb{R}$
-можно задатьа как $df(p)\langle v \rangle = \langle \nabla f(p);  v \rangle$
- - скалярное произведение градиента функции на вектор, причем 
- $\nabla f(p) = \left(\frac{\partial f}{\partial x_1}(p), \dots, \frac{\partial f}{\partial x_n}(p)\right)$ - вектор частных производных в точке $p$.
-
-\begin{statement}
-    Градиент функции задает направление, при движении в котором функция растет быстрее всего.
-    \begin{proof}
-        Рассмотрим функцию $f$ в точке $p$, вектор $v$ единичной длины будет задавать произвольное направление.
-        \begin{equation*}\frac{f(p+tv) - f(p)}{t} \underset{t \to 0}{\to}
-            \frac{\partial f}{\partial v} = df(p)\langle v \rangle = \langle \nabla f(p); v \rangle 
-            = |\nabla f(p)| \cdot |v| \cdot cos(\varphi), \text{где $\varphi $ - угол между $\nabla f$ и $v$.}
-        \end{equation*}
-        Поскольку $|\nabla f(p) = const, |v| = 1$, то для максимизации надо выбрать такое $\varphi$, 
-        чтобы $cos(varphi)$ был максимален, т.е. вектора $v$ и $\nabla f$ параллельны и $\nabla f$ задает наибольшую скорость роста.
-    \end{proof}
-\end{statement}
-
-\begin{statement}
-    $\nabla f(p)$ ортогонален поверхности уровня $\Omega = \{x | f(x) = c\}$.
-    \begin{proof}
-        Пусть $f(p) = c \ (p \in \Omega)$. Пусть $x_n \in \Omega$, покажем, что $cos(\nabla f(p), \overrightarrow{x_n-p}) \underset{n \to \infty}{\to} 0:$
-        \begin{eqnarray*}
-            f(x_n) = f(p) = c \implies 0 = f(x_n) - f(p) = df(p)\langle x_n-p \rangle + o(x_n - p) = 
-            \langle \nabla f(p); x_n - p \rangle + o(x_n - p).
-        \end{eqnarray*}
-        Значит $0 \underset{n \to \infty}{=} \langle \nabla f(p); \frac{x_n - p}{|x_n - p|} \rangle + o(1)$, т.е.
-        $\langle \nabla f(p); \frac{x_n - p}{|x_n - p|} \rangle \to 0 $. Тогда:
-        \begin{equation*}
-            \langle \nabla f(p); \frac{x_n - p}{|x_n - p|} \rangle = |\nabla f(p)|\cdot \left|\frac{x_n-p}{|x_n-p|}\right|\cdot cos(\alpha) \to 0, 
-            \ \text{т.е.} \alpha \underset{n \to \infty}{\to} \frac{\pi}{2}. 
-        \end{equation*}
-        
-    \end{proof}
-\end{statement}
 
 \begin{definition}
-    Функция $f:\mathbb{R}^n \to \mathbb{R}^n$ называется векторным полем.
-\end{definition}
-\begin{definition}
-    Потенциалом векторного поля $F$ (если он есть) называется \textbf{скалярная} функция $U:W \to \mathbb{R}$, 
-    такая, что $\nabla U = F$. Если потенциал существует, то F называется потенциальным полем.
-
+    Точка $z$ называется предельной точкой множества $E \subset \overline{\mathbb{C}}$, если $\forall \delta > 0 \ C^*(\delta, z) \cap E \neq \varnothing$
 \end{definition}
 
-\begin{theorem*}
-    Пусть $f:U \subset \mathbb{R}^n \to \mathbb{R}^k, \ g:V \subset \mathbb{R}^k \to \mathbb{R}^m, \ f \in C^1(p), \ g \in C^1(q), \ q = f(p)$.\\
-    Тогда $g \circ f \in C^1(p), \, dg \circ f = dg(f(p)) \cdot df(p).$ В матрицах Якоби: $D_{g \circ f}(p) = D_g(f(p)) \cdot D_f(p).$
-\end{theorem*}
-
-\begin{example}
-    \begin{equation*}
-        \begin{cases}
-            f(x, y, z) = (xy, xz): \mathbb{R}^3 \to \mathbb{R}^2\\
-            g(a, b) = \cosh(ab): \mathbb{R}^2 \to \mathbb{R}
-        \end{cases} \quad
-        f =
-        \begin{cases}
-            f_1(x, y, z) = xy\\
-            f_2(x, y, z) = xz.
-        \end{cases}
-    \end{equation*}
-
-    \begin{equation*}
-        h = g(f(x, y, z)) = \cosh(xy \cdot xz): \mbox{R}^3 \to \mathbb{R}, \quad (x, y, z) \in \mathbb{R}^3 \overset{f}{\to} \mathbb{R}^3 \overset{g}{\to} \mathbb{R}
-    \end{equation*}
-    \begin{equation*}
-        \frac{\partial h}{\partial x} = \sinh(x^2yz)\cdot 2xyz \quad
-        \frac{\partial h}{\partial y} = \sinh(x^2yz)\cdot x^2z \quad
-        \frac{\partial h}{\partial z} = \sinh(x^2yz) \cdot x^2y
-    \end{equation*}
-
-    \[D_f(x, y, z) = \begin{pmatrix}
-        \frac{\partial f_1}{\partial x} & \frac{\partial f_1}{\partial y} &  \frac{\partial f_1}{\partial z} \\
-        \frac{\partial f_2}{\partial x} & \frac{\partial f_2}{\partial y} &  \frac{\partial f_2}{\partial z}  
-    \end{pmatrix} =
-    \begin{pmatrix}
-        y & x & 0 \\
-        z & 0 & x
-    \end{pmatrix}
-    \]
-
-    \[D_f = \begin{pmatrix}
-        \sinh(ab)\cdot a & \sinh(ab) \cdot b
-    \end{pmatrix}\]
-
-    \[D_g \cdot D_f = \begin{pmatrix}
-        \sinh(x^2yz)\cdot xz & \sinh(x^2yz)\cdot xy
-    \end{pmatrix} \cdot \begin{pmatrix}
-        y & x & 0 \\
-        z & 0 & x
-    \end{pmatrix}
-    \]
-    Досчитывать я это не буду, поверим Сторожуку на слово.
-\end{example}
-
-\textbf{Правило дифференциирования обратного отображения:}
-Если невырождено и $\exists$ обратное отображение $g:V \to U$, непрерывное в точке $q = f(p)$, тогда:
-\[g \in D(q) \text{ и } dg(q) = (df(p))^{-1}\]
-
-
-\subsection{Многократная дифференциируемость}
+\begin{definition}
+    Точка $z$ называется внутренней точкой множества $E \subset \overline{\mathbb{C}}$, если $\exists \delta > 0 \ C(\delta, z) \subset E$
+\end{definition}
 
 \begin{definition}
-    $f: U \subset \mathbb{R}^n \to \mathbb{R}^m \ k$ раз дифференциируема в точке $p$ ($f \in D^k(p)$), если:
+    Точка $z$ называется внешней точкой множества $E \subset \overline{\mathbb{C}}$, если $\exists \delta > 0 \ C(\delta, z) \cap E = \varnothing$
+\end{definition}
+
+\begin{definition}
+    Точка $z$ называется граничной точкой $E$, если 
+    \[\forall \delta > 0 \begin{cases}
+        C(\delta, z) \cap E \neq \varnothing \\
+        C(\delta, z) \backslash E \neq \varnothing
+    \end{cases}\]
+\end{definition}
+
+\begin{note}
+    Если граничная точка $z \notin E$, то она является предельной для $E$.
+\end{note}
+
+\begin{definition}
+    Граница $E$ - это совокупность всех граничных точек, обозначается $\partial E$.
+\end{definition}
+
+\begin{definition}
+    Множестов называется ограниченным, если $\exists M \ (0 < M < \infty)$ - число, такое, что\\
+    $\forall z \in E \ \left| z \right| < M$
+\end{definition}
+
+\begin{definition}
+    Множество $E$ называется замкнутым, если оно содержит все свои граничные точки (или их нет).
+\end{definition}
+
+\begin{definition}
+    Множество $E$ называется открытым, если $\forall z \in E$ $z$ является внутренней точкой для $E$, то есть 
+    $\forall z \in E \ \exists \delta > 0: \ C(\delta, z) \subset E$
+\end{definition}
+
+\begin{definition}
+    Замыкание множества $E$ это $\overline{E} = E \cup \partial E$.
+\end{definition}
+
+\begin{definition}
+    Диаметр множества $d(E) = \underset{z, \xi \in E}{\sup} \left| z - \xi\right|$
+\end{definition}
+
+\begin{definition}
+    Расстоянием между множествами $E$ и $G$ называется $D(E, G) = \underset{z \in E, \zeta \in G}{\inf} \left|z - \zeta\right|$
+\end{definition}
+
+\begin{definition}
+    Множество $E$ называется связным, если его нельзя представить как $E = A \cup B, \ A, B \subset E$, таких, что 
     \begin{enumerate}
-        \item $f$ дифференциируема во всех точках некоторой окрестности точки $p$;
-        \item Все частные производные $\frac{\partial f}{\partial x_1}, \dots, \frac{\partial f}{\partial x_n}$ дифференциируемы $k-1$ раз в точке $p$.
+        \item $A, B \neq \varnothing$
+        \item $A \cap B = \varnothing$
+        \item $A$ и $B$ не содержат предельных точек друг друга.
     \end{enumerate}  
 \end{definition}
 
-\begin{example}
-    \[f \in D^2(p) \implies f \in D(x) \text{ и } \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \in D(p)  \]
-\end{example}
+\begin{definition}
+    Множество $E$ называется линейно связным, если $\forall z_1, z_2 \in E \ \exists$ непрерывная функция $\varphi: [0, 1] \to E$ такая, что $\varphi(0) = z_1, \ \varphi(1) = z_2$
+\end{definition}
 
-\begin{statement*}
-    Если $\begin{cases}
-        f \in D^k(p): \mathbb{R}^n \to \mathbb{R}^k\\
-        g \in D^k(p): \mathbb{R}^n \to \mathbb{R}^k
-    \end{cases}$ тогда $h(x) = f(x) \cdot g(x) \in D^k(p)$
+\begin{definition}
+    Областью называется открытое связное множество.
+\end{definition}
 
+\begin{definition}
+    Компонента множества $E$ - $\forall$ максимальное по включению связное подмножество $E$.\\
+    Область $E \neq \overline{\mathbb{C}}$ $n$-связная, если граница $\partial E$ состоит из $n$ компонент ($\overline{\mathbb{C}}$ считаем 1-связным).
+\end{definition}
+
+\begin{statement}
+    $\forall$ множества $E \subset \overline{\mathbb{C}}$ граница $\partial E$ является замкнутым множеством.
     \begin{proof}
-        \begin{equation*}
-            \frac{\partial h}{\partial x_i}(x) = \frac{\partial f}{\partial x_i}(x)\cdot g(x) +
-            f(x) \cdot \frac{\partial g}{\partial x_i}
-        \end{equation*}
-        Так как $\frac{\partial f}{\partial x_i}(x) \in D^{k-1}(p), \ g(x) \in D^k(p), \ f(x) \in D^k(p), \ \frac{\partial g}{\partial x_i} \in D^{k-1}(p)$,
-        то $\frac{\partial h}{\partial x_i} \in D^{k-1}(p)$.
+        Доказывается от противного: \\
+        Допустим, $\exists$ предельная точка $z_0$ для $\partial E$: $z_0 \notin \partial E$.
     \end{proof}
-\end{statement*}
+\end{statement}
 
-
-\begin{theorem}[о вторых производных]
-    Пусть $f:U \subset \mathbb{R}^n \to \mathbb{R}, \ f \in D^2(p)$. Тогда $\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 g}{\partial y \partial x}$.
-    \begin{proof}
-        Можно считать, что $n = 2$, так как при заданной функции $f(x_1, x_2, \dots)$ можно в качестве $f$ рассмотреть 
-        сужение $f$ на плоскость $Ox_1x_2$, т.к. при дифференциировании по $x_1$ или $x_2$ остальные переменные не изменются.
-
-        \[f = f(x, y) \in D^2(p), \quad p = (x_0, y_0, \dots)\]
-        Считаем, что $p = 0$ и что $\frac{\partial f}{\partial x}(0) = 0, \ \frac{\partial f}{\partial y}(0) = 0$.
-        Чтобы показать почему так можно считать введем $f_1$:
-        \[f_1(x, y) := f(x,y) - f'_x(0, 0)\cdot x - f'_y(0,0)\cdot y\]
-        \[\frac{\partial f_1}{\partial x}(0, 0) = \frac{\partial f}{\partial x}(0, 0) - f'_x(0,0)\]
-        \[\frac{\partial f_1}{\partial y}(0,0) = \frac{\partial f}{\partial y}(0,0) - f'_y(0,0)\]
-        
-        Дальше считаем, что $f = f_1$ и $f(0,0) = 0$. 
-        \begin{equation*}
-            \frac{\partial f}{\partial x }(x, y) =f(0,0) + a_{11}\cdot x + a_{12}\cdot y + \alpha_1(x, y), \ \text{где }
-            \alpha_1(x, y) = o(x, y), \ (a_{11}, a_{12}) = df(0,0)\langle x, y \rangle
-        \end{equation*}
-        По условию $\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \in D(0)$, поэтому 
-        $a_{11} = f_{xx}(0), \ a_{12} = f_{xy}(0)$.
-        \[\frac{\partial f}{\partial y}(x, y) = f(0,0) + a_{21}\cdot x + a_{22}\cdot y + \alpha_2(x, y), \ 
-        a_{21} = f_{yx}(0), \ a_{22} = f_{yy}(0)\]
-
-        \newpage
-        \begin{minipage}[t]{0.45\textwidth}        
-            \begin{tikzpicture}[remember picture, overlay]
-                \node[anchor=north west, yshift=5pt, xshift=10pt] at (current page.north west) {
-                    \includegraphics{График_для_теоремы_Шварца.png}
-                };
-            \end{tikzpicture}
-        \end{minipage}
-        \begin{minipage}[t]{0.5\textwidth}
-            Рассмотрим точку $(s,s)$ вблизи нуля. Для нее 
-            $f(s,s) - f(0,0) = (f(s,s) - f(s, 0)) + (f(s,0) - f(0,0)) = (II) + (I)$. \newline
-            И в то же время $f(s, s) =  (\text{IV}) + (\text{III})$
-        \end{minipage}
-        \\[100pt]
-        \[\text{II} = f(s,s) - f(s,0) = \int_{y=0}^{s}\frac{\partial f}{\partial y}(s,t)dt
-        = \int_{t=0}^{s}a_{21}s + a_{22}t + \alpha_2(s,t)dt = a_{21}s^2 + \frac{a_{22}s^2}{2} + \varepsilon_1(s),\]
-        причем $\varepsilon_1(s) = \int_{t=0}^{s}\alpha_2(s,t)dt$. Аналогично для I:
-        \[\text{I} = f(s,0) - f(0,0) = \int_{t=0}^{s}\frac{\partial f}{\partial x}(t,0)dt = \int_{t=0}^{s}a_{11}t+a_{12}\cdot0 + \alpha_1(t)dt = 
-        \frac{a_{11}}{2}s^2 + \varepsilon_2(s), \ \varepsilon_2(s) = \int_{t=0}^{s}\alpha_1(t,0)dt\]
-        
-        Итого: $f(s,s) - f(0,0) = \text{I} + \text{II} = s^2 \left( a_{21} + \frac{a_{11}}{2} + \frac{a_{22}}{2}+ \frac{\varepsilon_1(s) + \varepsilon_2(s)}{s^2}\right)$, что на самом деле равно $\text{III} + \text{IV} = 
-        \\ = s^2\left(a_{12} + \frac{a_{11}}{2} + \frac{a_{22}}{2} + \frac{\varepsilon_3(s) + \varepsilon_4(s)}{s^2}\right)$
-        
-        \begin{equation}
-            \label{eq}
-            a_{21} + \frac{a_{11} + a_{22}}{2} + \frac{\varepsilon_1(s) + \varepsilon_2(s)}{s^2} = a_{12} + \frac{a_{22} + a{11}}{2} + \frac{\varepsilon_3(s) + \varepsilon_4(s)}{s^2}
-        \end{equation}
-        При малых $s$:
-        \[\varepsilon_3(s) = \int_{t=0}^{s}\alpha_2(0, t)dt, \quad \varepsilon_3(s) = \int_{t=0}^{s}\alpha_1(t,s)dt\]
-        Осталось показать, что $\varepsilon_{1,2,3,4} \underset{s \to 0}{=} o(s^2)$.
-        Пусть $\varepsilon > 0$. Вспомним, что 
-        \[\varepsilon_1(s) = \int_{t = 0}^{}\alpha_2(s,t)dt, \quad \alpha_2(x,y) \underset{x,y \to 0}{=} o(x,y)\]
-        То есть, в некотором круге $V$ точки $(0,0)$ выполнено $\forall (x,y) \in V \quad \alpha_2(x,y) \leq \varepsilon \cdot \sqrt{x^2 + y^2}$.
-        Для $s$ таких, что $(s,s) \in V \quad \alpha_2(x,y) \leq \varepsilon \cdot \sqrt{2} \cdot s$, при $\left| x \right| \leq s, \ \left| y \right| \leq s$.
-        Тогда 
-        \[\left| \varepsilon_1(s)\right| = \left| \int_{t=0}^{s}\alpha_2(s,t)dt \right| \leq \int_{t=0}^{s} \left|\alpha_2(s,t)\right|dt 
-        \leq \int_{t=0}^{s}\varepsilon\cdot s\sqrt{2}\cdot dt = \varepsilon s^2\sqrt{2}\].
-        Итак, мы доказали, что $\varepsilon_1(s) \underset{s \to 0}{=} o(s^2)$, аналогичным образом показываем для $\varepsilon_{2,3,4}$
-        Тогда в равенстве \ref{eq} $\frac{\varepsilon_1(s) + \varepsilon_2(s)}{s^2} \to 0$ и $\frac{\varepsilon_3(s) + \varepsilon_4(s)}{s^2} \to 0$, а значит $a_{21} = a_{12}$,
-        то есть $f_{xy}(0) = f_{yx}(0)$.
-    \end{proof}
+\begin{theorem}[Принцип Больцано-Вейерштрасса]
+    У любого бесконечного множества $E \subset \overline{\mathbb{C}} \ \exists$ хотя бы одна предельная точка.
 \end{theorem}
 
+\begin{theorem}[Лемма Гейне-Бореля]
+    Из бесконечного открытого покрытия замкнутого множества точек на $\overline{\mathbb{C}}$ можно выделить конечное подпокрытие.
+
+    \textbf{Следствие:} На $\overline{\mathbb{C}}$ любое замкнутое и ограниченное множество является компактом.
+\end{theorem}
+
+\section{Предельные ряды комплексных чисел}
+
+\begin{definition}
+    Последовательность $\{z_n\}$ комплексных чисел $z_n = x_n + i y_n, \ n \in \mathbb{N}$ называется сходящейся к пределу $\alpha = a + ib$, если
+    \[\forall \varepsilon > 0 \exists N: \left| z_n - \alpha \right| < \varepsilon \ \forall n > N\]
+    Обозначается $\lim_{n \to \infty} z_n = \alpha$
+
+    
+\end{definition}
+    
+\textbf{Следствие:} $\lim_{n \to \infty} z_n = 0 \iff \lim_{n \to \infty} \left| z_n \right| = 0$
+        
+    
+Попробуем перенести теорию последовательностей вещественных числе на комплексные числа:
+\[\exists \lim_{n \to \infty} z_n = \alpha \implies \begin{cases}
+    \exists \lim_{n \to \infty} x_n = a \\
+    \exists \lim_{n \to \infty} y_n = b
+\end{cases} \implies \] 
+\[ \implies \begin{cases}
+    \forall \varepsilon > 0 \ \exists N_1 \in \mathbb{N} \ \left| x_n - a \right| < \frac{\varepsilon}{2} \ \forall n > N_1 \\
+    \forall \varepsilon > 0 \ \exists N_2 \in \mathbb{N} \ \left| y_n - b \right| < \frac{\varepsilon}{2} \ \forall n > N_2 
+\end{cases} \implies \left| z_n - \alpha\right| \leq \left| x_n - a \right| + \left| y_n - b\right| < \varepsilon\]
+Значит $\forall \varepsilon > 0 \ \exists N = \max(N_1, N_2) \ \left|z_n - \alpha\right| < \varepsilon \ \forall n > N$
+
+Таким образом $\begin{cases}
+    \exists \lim_{n \to \infty} x_n = a \\
+    \exists \lim_{n \to \infty} y_n = b
+\end{cases}  \implies \exists \lim_{n \to \infty} z_n = \alpha$
+Это позволяет свести теорию последовательностей $\{z_n\}$ комплексных чисел к $\mathbb{R}$, 
+то есть все теоремы о сходимости вещественных последовательностей переносятся на комплексные числа.
+
+\begin{theorem*}[Критерий Коши]
+    \[\text{Последовательность } \{z_n\} \text{ сходится} \iff \ \forall\varepsilon > 0 \ \exists N \in \mathbb{N}: \left| z_{n+m} - z_n \right|< \varepsilon  \text{ выполнено } \forall n, m > N\].
+\end{theorem*}
+
+\begin{definition}
+    Последовательность $\{z_n\}$ сходится к $\infty$ ($\lim_{n \to \infty} z_n = \infty$) если
+    \[\forall R > 0 \ \exists N \ \left| z_n \right| > R \text{ выполнено для } \forall n > N\]
+    \[\text{При } z_n \neq 0 \ \lim_{n \to \infty}z_n = \infty \iff \lim_{n \to \infty} \frac{1}{z_n} = 0\]
+\end{definition}
+
+\newpage
+\subsection{Ряды комплексных чисел}
+Если у знака суммы ряда не указаны границы - считать, что слагаемые суммируются по индексу $k$, $k$ пробегает набор от 1 (иногда 0) до $\infty$
+\begin{definition}
+    Ряд комплексных чисел $\sum_{k=1}^{\infty}\alpha_k$ сходится (расходится), если сходится (расходится) последовательность частичных сумм $S_n = \sum_{k=1}^{n}\alpha_k$, т.е. $\exists \lim_{n \to \infty} S_n = S$.
+\end{definition}
+
+\begin{theorem*}[Критерий Коши сходимости ряда]
+    \[\sum_{k=1}^{\infty} \text{ сходится } \iff \forall \varepsilon>0 \ \exists N \in \mathbb{N} \begin{cases*}
+        \forall n > N \\
+        \forall k \in \mathbb{N}
+    \end{cases*} \left| S_{n+k} - S_n\right| < \varepsilon\]
+\end{theorem*}
+
+\begin{definition}
+    Ряд $\alpha_k$ сходится абсолютно, если сходится ряд $\sum_{k = 1}^{\infty} \left| \alpha_k\right|$. Но поскольку $\left| \sum_{k = 1}^{m} \alpha_{n+k}\right| \leq \sum_{k=1}^{m}\left| \alpha_{n+k} \right|$, то из абсолютной сходимости ряда следует общая сходимость.
+\end{definition}
+
+\begin{statement}
+    Член ряда $\alpha_k$ представим в виде $a_k + ib_k$. Тогда:
+    \[\begin{cases*}
+        \left| a_k \right| \leq \left|\alpha_k\right| \leq \left| a_k \right| + \left| b_k \right| \\
+        \left| b_k \right| \leq \left|\alpha_k\right| \leq \left| a_k \right| + \left| b_k \right|
+    \end{cases*}\]
+    Значит, если $\sum_{k=1}^{\infty}\alpha_k$ абсолютно сходится, то $\sum_{k=1}^{\infty}a_k$ и  $\sum_{k=1}^{\infty}b_k$ тоже абсолютно сходятся. 
+    В свою очередь, из абсолютной сходимости $\sum_{k=1}^{\infty}a_k$ и  $\sum_{k=1}^{\infty}b_k$ следует абсолютная сходимость $\sum_{k=1}^{\infty}\alpha_k$.
+\end{statement}
+
+\begin{definition}
+    Произведение двух сходящихся рядов сходится к произведению их сумм.
+\end{definition}
+
+Стандартные разложения функций от комплексных чисел:
+\begin{enumerate}
+    \item $e^\alpha = 1 + \alpha + \frac{\alpha^2}{2!} + \hdots + \frac{\alpha^n}{n!} + \hdots = \sum_{k=0}^{\infty}\frac{\alpha^k}{k!}$
+    \item $\sin(\alpha) = \alpha - \frac{\alpha^3}{3!} + \frac{\alpha^5}{5!} + \hdots = \sum_{k=0}^{\infty}\frac{(-1)^k\cdot\alpha^{2k+1}}{(2k+1)!}$
+    \item $\cos(\alpha) = \sum_{k=0}^{\infty}\frac{(-1)^k\cdot\alpha^{2k}}{2k!}$
+    \item $e^{i\alpha} = \sum\frac{(i\alpha)^k}{k!} = \sum\frac{(-1)^k\cdot\alpha^{2k}}{2k!} + i\sum\frac{(-1)^k\cdot\alpha^{(2k+1)}}{(2k+1)!} = \cos(\alpha) + i\sin(\alpha)$
+\end{enumerate}
+
+Пусть $\mid \alpha \mid = R, \ \arg(\alpha) = \varphi$. Тогда:
+\[\alpha = R\cdot e^{i\cdot\arg(\alpha)} = R(\cos(\varphi) + i\sin(\varphi))\]
+И поскольку можем представить $\alpha = a + ib$:
+\[e^{\alpha} = e^a\cdot (\cos(b) + i\sin(b)), \quad \left| e^\alpha\right| = e^a, \ \arg(e^\alpha) = b\]
+Поэтому $e^{2\pi k\cdot i} = 1$

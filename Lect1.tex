@@ -1,294 +1,116 @@
-\section{Модели комплексных чисел}
+\section{Дифференциирование функций}
 
-\par 
-Введем стандартные понятия нужным образом:\\
-$\mathbb{R}$ - множество точек на прямой. \\
-$\mathbb{C}$ - расширение $\mathbb{R}$ с помощью одного из корней уравнения $z^2 = -1$: $\mathbb{C} = \mathbb{R} \cup  \{0\}$, с замыканием относительно сложения и умножения.
-
-\begin{theorem}[Основная теорема алгебры]
-    Множество комплексных чисел ($\mathbb{C}$) алгебраически замкнуто 
-    (любой многочлен степени $n$, коэффициенты которого лежат в $\mathbb{C}$),
-     имеет корни в $\mathbb{C}$ (с учетом кратности).
-\end{theorem}
-
-\begin{note}
-    Теорема верна и в частном случае многочлена, определенного над $\mathbb{R}$.
-\end{note}
-
-\medskip
-\subsection{Стандартная модель комплексных чисел}
-
-Комплексное число $z$ представляется парой $(x, y) \in \mathbb{R}^2$ с операциями:
-\begin{itemize}
-    \item $"+": \quad (x_1, y_1) + (x_2, y_2) = (x_1+x_2, y_1 + y_2)$
-    \item $"\cdot": (x_1, y_1) \cdot (x_2, y_2) = (x_1x_2-y_1y_2, x_2y_1+x_1y_2)$
-\end{itemize}
-
-\begin{note}
-    Операции согласованы с операциями на $\mathbb{R}.$
-\end{note}
-\begin{note}
-    $\mathbb{R} \subset \mathbb{C}, \quad \mathbb{R} = \{(x, 0) \quad x \in \mathbb{R}\}$
-\end{note}
-В станд. модели 
-$\begin{cases}
-    0 = (0, 0)\\
-    1 = (1, 0)
-\end{cases}$
-
-\begin{definition}
-    Мнимая единица определена как пара $(0, 1)$.
-\end{definition}
-\begin{note}
-    Некорректно определять мнимую единицу как корень уравнения $z^2 = -1$, т.к. $-i$ так же является корнем.
-    \[i^2 = (0, 1) \cdot (0,1) = (0\cdot0 - 1\cdot1, 0\cdot1 + 1\cdot0) = (-1, 0) = -1\]
-    \[(-i^2) = (0, -1)\cdot(0, -1) = (-(-1)\cdot(-1), 0) = (-1, 0) = -1\]
-\end{note}
-\begin{note}
-    Запись $\sqrt{-1}$ тоже некорректна.
-\end{note}
-
-\begin{statement}
-    На $\mathbb{C}$ нельзя ввести линейный порядок.
-    \begin{proof}
-        Пусть $x \in \mathbb{C}$, и существует некий линейный порядок <.
-        \[\forall x \neq 0
-        \begin{cases}
-            \text{либо} -\frac{x}{2} < \frac{x}{2} \text{ и } 0 = -\frac{x}{2} + \frac{x}{2} < \frac{x}{2} + \frac{x}{2} = x\\
-            \text{либо} \frac{x}{2} < -\frac{x}{2} \text{ и } 0 > x
-        \end{cases}
-        \]
-        Тогда $\forall x \neq 0$ либо $x > 0$, либо $-x > 0$. Т.е. $\forall x \neq 0 \quad x^2 > 0$.
-        Но $-1 = i^2 < 0$ - противоречие.
-    \end{proof}
-\end{statement}
-
-\bigskip
-
-\subsection{Матричная модель}
-Комплексное число $z = \begin{pmatrix}
-    x & y\\
-    -y & x
-\end{pmatrix}$, где $x, y \in \mathbb{R}$.
-
-\["+": 
-    \begin{pmatrix}
-        x_1 & y_1 \\
-        -y_1 & x_1
-    \end{pmatrix} 
-    + 
-    \begin{pmatrix}
-        x_2 & y_2 \\
-        -y_2 & x_2 \\
-    \end{pmatrix}
-    =
-    \begin{pmatrix}
-        x_1 + x_2 & y_1 + y_2 \\
-        -y_1 - y_2 & x_1 + x_2
-    \end{pmatrix}
-\]
-\["\cdot": 
-    \begin{pmatrix}
-        x_1 & y_1 \\
-        -y_1 & x_1
-    \end{pmatrix} 
-    \cdot
-    \begin{pmatrix}
-        x_2 & y_2 \\
-        -y_2 & x_2 \\
-    \end{pmatrix}
-    =
-    \begin{pmatrix}
-        x_1x_2 - y_1y_2 & x_1y_2 + x_2y_1 \\
-        -x_1y_2 - x_2y_1 & x_1x_2 - y_1y_2
-    \end{pmatrix}
-\]
-
-В матричной модели ноль (нейтральный элемент по сложению) представлен матрицей
-$0 =\begin{pmatrix}
-    0 & 0 \\
-    0 & 0
-\end{pmatrix}$, единица (нейтральный по умножению)
-$1 = \begin{pmatrix}
-    1 & 0 \\
-    0 & 1
-\end{pmatrix}$, мнимая единица  
-$i = \begin{pmatrix}
-    0 & 1 \\
-    -1 & 0
-\end{pmatrix}$.
-
-В стандартной модели произвольное комплексное число $z = (x, y)$ 
-имеет стандартную запись \\$z = x + iy$, где $\begin{cases}
-    x - \text{вещественная часть}\\
-    y = \text{мнимая часть}
-\end{cases}$
-
-Действия с комплексными числами:
-\begin{enumerate}
-    \item Сравнение (проверка равенства):
-        \[a + ib = c + id \iff a = c \text{ и } b = d\].
-    \item Сложение:
-        \[(a+ib) + (c+id) = (a+c) + i(b+d)\]
-    \item Умножение:
-        \[(a+ib)\cdot(c+id) = (ac - bd) + i (ad + bc)\]
-    \item Деление:
-        \[\frac{a+ib}{c+id} = \frac{(a+ib)\cdot(c-id)}{c^2+d^2} = \frac{(ac - bd) + i(bc - ad)}{c^2 + d^2}\]
-\end{enumerate}
-
-
-\subsection{Геометрическая модель}
-
-Комплексное число представлено точкой с координатами $(x, y)$ на плоскости.\\
-Операции:
-\begin{itemize}
-    \item $"+"$: действует как сложение векторов (покоординатно).
-    \item $"\cdot": z_3 = z_1z_2 \iff \begin{cases}
-        |z_3| = |z_1|\cdot|z_2| \\
-        arg(z_3) = arg(z_1) + arg(z_2)
-    \end{cases}$
-    \\ где $|z| = \sqrt{x^2 + y^2}, \quad arg(z)$ задает угол между $\vec{z}$ и Ox 
-    (определяется с точностью до периода).
-\end{itemize}
-
-\textbf{Аргумент комплексного числа} $Arg(z)$ - угол $\varphi$ c точностью до периода $2\pi$.
-\textbf{Главное значение аргумента} $arg(z)$ - $\varphi$  в промежутке $[0; 2\pi]$.
-
-\textbf{Комплексно сопряженное к} $z = x+iy$ это $\overline{z} = x - iy$.
-\[|z| = |\overline{z}|, \quad arg(z) = -arg(\overline{z}), \quad 
-Re(z) = Re(\overline{z}), \quad Im(z) = -Im(\overline{z})\] 
-\[\overline{z} \cdot z = (x+iy)\cdot(x-iy) = x^2 + y^2 = |z|^2\] 
-
-\textbf{Законы де Моргана:}
-\begin{itemize}
-    \item $\overline{(\overline{z})} = z$
-    \item $\overline{z_1 + z_2} = \overline{z_1} + \overline{z_2}$
-    \item $\overline{z_1z_2} = \overline{z_1} \cdot \overline{z_2}$
-\end{itemize}
-
-\textbf{Неравенство треугольника:}
-\[\begin{cases}
-    |z_1 + z_2| \leq |z_1| + |z_2|\\
-    |z_1 - z_2| \geq \lvert \lvert z_1\rvert - \lvert z_2\rvert \rvert
-\end{cases} \implies \lvert \lvert z_1 \rvert - \lvert z_2 \rvert \rvert \leq 
-\lvert z_1 + z_2 \rvert \leq \lvert z_1 \rvert + \lvert z_2 \rvert \]
-
-\subsection{Стереографическая проекция}
-На комплексную плоскость положили сферу $S$ радиуса $\frac{1}{2}$. Северный полюс сферы - вершина $N(0; 0; 1)$.
-Комплексному числу $c$, лежащему в плоскости комплексных чисел и имеющему координаты $(x, y, 0)$ ставится в соответствие точка, которая является точкой пересечения прямой $Nc$ со сферой $S$. 
-Зададим систему координат $O\xi \eta \zeta$ аналогично $Oxyz$, 
-но $O$ имеет координаты $(0, 0, \frac{1}{2})$.\\
-Уравнение сферы S:
-\begin{equation} 
-    \label{RimanSphereEq}
-    \xi^2 + \eta^2 + (\xi - \frac{1}{2})^2 = (\frac{1}{2})^2
-\end{equation}
-Уравнение прямой $Nc$ по двум точкам:
-\begin{equation}
-    \label{NcEq}
-    \frac{\xi}{x} = \frac{\eta}{y}=\frac{\zeta-1}{-1} 
-    \iff
-    \xi^2 + \eta^2 + \zeta^2 - \zeta = 0
-\end{equation}
-
-Получаем набор \textbf{обратных формул стереографической проекции:}
-$x = \frac{\xi}{1 - \zeta}, y = \frac{\eta}{1-\zeta}, z = \frac{\xi + i\eta}{\zeta - 1}$.
-Отсюда найдем
-\begin{equation}
-    \label{zsphere}
-    \left| z \right|^2 = z \cdot \overline{z} = \frac{\xi^2 + \eta^2}{(1-\zeta)^2}
-    \underset{\text{из } \ref{NcEq}}{=} \frac{\zeta}{1-\zeta} 
-    \implies \zeta = \frac{\left| z \right|^2}{1 + \left| z\right|^2}
-\end{equation}
-Подставим \ref{zsphere} в уравнение \ref{RimanSphereEq} и получим прямые формулы стереографической проекции:
-\begin{equation}
-    \xi = \frac{x}{1 + \left|z\right|^2}, \quad
-    \eta = \frac{y}{1 + \left|z\right|^2}, \quad
-    \zeta = \frac{\left|z\right|^2}{1 + \left|z\right|^2}
-\end{equation}
-
-Из геометр. постреония стереографическая проекция взаимно однозначно 
-отображает комплексную плокость на сферу $S \setminus \{N\}$.
-Дополним стер. проекцию по непрерывности:
-\begin{equation}
-    P: \overline{\mathbb{C}} \overset{\text{на}}{\to}S \quad
-    \text{где } \overline{\mathbb{C}} = \mathbb{C} \cup \{\infty\}, \text{а $S$ называют сферой Римана.}
-\end{equation}
-
-\begin{definition}
-    Обобщенная окрестность на комплексной плоскости - это любая окружность (или прямая, рассмотренная как окружность бесконечного радиуса).
-\end{definition}
-
-Свойства стереографической проекции:
-\begin{enumerate}
-    \item Для любой обобщенной окружности $l \subset \overline{\mathbb{C}}$ ее образ $P(l) \subset S^2$ - это окружность.
-    \begin{proof}
-        Пусть $l$ - некая обобщ. окрестность на $\overline{\mathbb{C}}$, тогда ее уравнение:
-        \[l: A(x^2+y^2) + Bx + Cy + D = 0 \text{ - окружность при $A \neq 0$, прямая при $A = 0$}\]
-        Подставим в него обратные формулы стереогр. проекции:
-        \begin{equation}
-            A\frac{\zeta}{1 - \zeta} + B\frac{\xi}{1 - \zeta} + C\frac{\eta}{1 - \zeta} + D = 0
-        \end{equation}
-        Поделим на $1 - \zeta$ и получим:
-        \begin{equation}
-            \label{FlatEq}
-            \text{П: }B\xi + C\eta + (A-D)\zeta + D = 0
-        \end{equation}
-        Но это уравнение некоторой плоскости П в $\mathbb{R}^3$, кроме того, $P(l) \subset S^2$,
-        значит для $l$ выполнено уравнение сферы Римана $\xi^2 + \eta^2 + \zeta^2 - \zeta = 0$.
-        Тогда $P(l) = S^2 \cap \text{П}$ - пересечение сферы с плоскосью окружность.
-    \end{proof}
-
-    \item $\forall$ окружности $L \subset S^2 \ P^{-1}(L)$ является обобщенной окружностью на $\overline{\mathbb{C}}$.
-    \begin{proof}
-        Плоскость $\Pi \subset \mathbb{R}^3$ такая, что $\Pi \cap S^2 = L$,
-        а значит ее уравнение имеет \\ вид (\ref{FlatEq}). Разделим (\ref{FlatEq}) на $1-\zeta$, получим обобщенное уравнение прямой,
-        подставим туда прямые формулы проекции и получим уравнение вида $A(x^2+y^2)+Bx +Cy + D = 0$, а это - уравнение обобщенной окружности в $\overline{\mathbb{C}}$.
-    \end{proof}
-
-    \item Стереографическая проекция сохраняет углы. То есть $\forall l_1, l_2 \in \overline{\mathbb{C}} \text{ таких, что } l_1 \cap l_2 \neq \empty$
-    и $\alpha$ - угол между ними, верно, что угол между $P(l_1)$ и $P(l_2)$ тоже равен $\alpha$ (угол между окружностями это угол
-    между касательными в точке пересечения).
-\end{enumerate}
-
-\begin{definition}
-    Кривая - это функция (или ее образ) $g: [a, b] \to \mathbb{R}^2$. Параметром кривой $g$ называют $t \in [a, b]$. 
-    \[\overrightarrow{v} = \frac{\frac{\partial \overrightarrow{g}}{\partial t}}{\left| \frac{\partial g}{\partial t}\right|} = \left( \frac{\frac{\partial x}{\partial t}}{\left| \frac{\partial g}{\partial t}\right|}, \ \frac{\frac{\partial y}{\partial t}}{\left| \frac{\partial g}{\partial t}\right|} \right) \quad \overrightarrow{n} = \frac{\frac{\partial^2 g}{\partial t^2}}{\left| \frac{\partial^2 g}{\partial t^2} \right|}\]
-    Натуральный параметр на кривой $g$ это $l \subset [0, L]$ ($L$ - длина $g$), такой, что $\forall l$ выполнено $\frac{\partial g}{\partial l} = 1$.
-    Набор $\{v, n\}$ называется базис Френе, для него выполена теорема Френе. 
-    Уравнения Френе:
-    \[
-    \frac{d}{dl} \begin{pmatrix} v \\ n \end{pmatrix} = 
-    \begin{pmatrix}
-        0 & k(l) \\
-        -k(l) & 0
-    \end{pmatrix}
-    \begin{pmatrix} v \\ n \end{pmatrix}, \quad k(l) \text{ называется кривизной } g \subset \mathbb{R}^2
-    \]
-\end{definition}
-
-\subsection{Виды записи}
-Стандартная запись $z = x + iy$. \\
-Пусть $r = \left| z \right|, \ \varphi = arg(z)$.
-\begin{definition}
-    Тригонометрическая запись комплексного числа:
-    \[\begin{cases}
-        Re(z) = x = r\cdot \cos(\varphi) \\ 
-        Im(z) = y = r\cdot \sin(\varphi)
-    \end{cases} \implies z = x +iy = r(\cos(\varphi) + i\sin(\varphi))\]
-\end{definition}
     
 \begin{definition}
-    Формула Эйлера:
-    \[e^{i\varphi} = \cos(\varphi) + i\sin(\varphi) \implies z = re^{i\varphi}\]
-    Тогда для натурального $n$:
-    \[z^n = r^n e^{in\varphi} = r^n (\cos(n\varphi) + i\sin(n\varphi))\]
-    Пусть $z \neq 0 \implies r = \left| z \right| > 0$. тогда $z^{\frac{1}{n}} = r^{\frac{1}{n}}\cdot e^{\frac{i(\varphi + 2\pi k)}{n}}$, где $k = 0 \hdots n-1$.
-    Отсюда же получается формула Муавра для корней степени $n$ из $z \neq 0$:
-    \[z^{\frac{1}{n}} = r^{\frac{1}{n}}(\cos(\frac{\varphi + 2\pi k}{n})+ i\sin(\frac{\varphi + 2\pi k}{n}))\]
+    Функция $f(x)$ дифференциируема в точке $p \in U$, если:
+    \begin{enumerate}
+        \item $f$  определена в некоторой окрестности точки $p$ ($p \in Int(U)$)
+        \item $\exists \lim_{\Delta h \to 0} \frac{f(p + \Delta h) - f(p)}{\Delta h} \in \mathbb{R} $ (и этот предел равен $f'(p)$)
+    \end{enumerate}
 \end{definition}
 
+\subsection{Экстремумы}
+\medskip
+\textbf{Необходимое условие экстремума:}\\
+Пусть $f \in D(p)$ (дифференциируема в p). Если p - экстремум, то $f'(p) = 0$.
+
 \begin{note}
-    $\exists n$ различных корней степени $n$ из комплексного числа $z \neq 0$.
-    \[z_0, z_1, \hdots z_{n-1} \in \text{ окружности радиуса } r^{\frac{1}{n}} \text{ c центром в } (0,0)\]
+    НО например для $f(x) = x^{3} \quad f'(0) = 0$, но $f(x)$ не дифференциируема в 0.
 \end{note}
+\begin{note}
+Необходимое условие экстремума выполнено лишь для точек во внутренности области определения,
+точки на границе необходимо проверять отдельно.
+\end{note}
+
+
+\textbf{Достаточное условие экстремума:}\\
+Пусть $f \in D^{2}(p)$ (дважды дифференциируема в $p$) и $f'(p) = 0$.В таком случае если
+\begin{itemize}
+    \item $f''(p) < 0$ - точка $p$ является локальным максимумом и экстремумом.
+    \item $f''(p) > 0$ - точка $p$ является локальным минимумом и экстремумом.
+\end{itemize} 
+
+\medskip
+Пусть $f:U \in \mathbb{R}^{n} \to \mathbb{R}^{k}$, $p \in U$. 
+Функция $f$ дифференциируема в $p$, если:
+\begin{enumerate}
+    \item $p \in Int(U) \quad
+        (\exists \epsilon > 0 \quad B_\epsilon(p) \subset U)$
+    \item $\exists$ дифференциал функции (линейное отображение)
+    $f$ в точке $p$ \quad $df(p): \mathbb{R}^{n} \to \mathbb{R}^{k}$
+    такое, что    \[f(x) = f(p) + df(p)<x-p> + \alpha(x) \quad (\alpha(x) \underset{x \to p}{=} o(x-p)) \]
+    При сдвиге точки $p$ на вектор $h$: \[f(p+h) = f(p) + df(p)<h> + o(|h|)\]
+\end{enumerate}
+
+\subsection{Частные производные}
+\medskip
+Стандартный контекст в котором работаем:
+\[f:U \subset \mathbb{R}^{n} \to \mathbb{R}^{k}, \quad p \in U, \quad p = (p_1, p_2, \dots, p_n) \]
+
+\begin{definition}
+    Частная производная по координате $x_i$ это:
+    \[\frac{\partial f}{\partial x_i}(p) = \lim_{t \to 0} \frac{f(p_1,.., p_i + t,.., p_n) - f(p_1,\ldots,p_n)}{t}\]
+\end{definition}
+
+Пример для $f(x, y) = x^y$:
+\[\frac{\partial f}{\partial x}(x, y) = yx^{y-1}; \quad \frac{\partial f}{\partial y}(x, y) = x^y\ln(x)\]
+
+\begin{definition}
+    Прозводная вдоль вектора $v$:
+    \[\frac{\partial f}{\partial v}(p) := \lim_{t \to 0} \frac{f(p + tv) - f(p)}{t}\]
+    Если $v = e_i = (0, \ldots, 0, \underset{i}{1}, 0, \ldots, 0)$, то $\frac{\partial f}{\partial v} = \frac{\partial f}{\partial x_i} = f'_{x_i}$
+\end{definition}
+
+Пример:
+\[f(x) = \begin{cases}
+    \frac{x^2y}{x^4 + y^2} \quad $при$(x, y) \neq (0, 0) \\
+    0 \quad $при$ (x, y) = (0,0)
+\end{cases}\]
+По любому вектору $v = (v_1, v_2)$ у функции есть производная в $(0, 0)$:
+\[\lim_{t \to 0} \frac{f(tv) - f(0, 0)}{t} = \frac{t^3v_1^2v^2}{t^5v_1^4 + t^3v_2^2} = \frac{v_1^2v_2}{t^2v_1^2 v_2^2} 
+    \underset{t \to 0}{=} 
+    \begin{cases}
+        0 \quad v_2 = 0\\
+        \frac{v_1^2}{v_2} \quad v_2 \neq 0
+    \end{cases}\]
+
+\begin{statement}
+    Если $f$ дифференциируема в $p$, то $f$ - непрерына в $p$.
+\end{statement}
+
+\begin{proof}
+    \[f(p+h) - f(p) \underset{h \to 0}{=} df(p)<h>\] 
+    Линейное отображение df(p)<> непрерывно, $o(h) \underset{h \to 0}{\to} 0$,
+    т.е. $f(p+h) \underset{h \to 0}{\to} f(p)$.
+\end{proof}
+
+\textbf{Достаточный признак дифференциируемости:}\\
+Все частные производные непрерырвны в $p$ ($f \in D(p)$).
+
+Пример:
+$f(x, y) = x^y$ дифференциируема во всех точках $(x_0, y_0)$, где $x_0 > 0$.
+\[\frac{\partial f}{\partial x} = yx^{y-1} \qquad \frac{\partial f}{\partial y} = x^y\ln(x)\]
+Частные производные непрерывны, значит и функция непрерывна.
+
+\subsection{Матрица Якоби и градиент функции}
+Контекст в котором работаем:
+\[f:U \subset \mathbb{R}^{n} \to \mathbb{R}^{k}, \quad p \in U\]
+\begin{definition}
+Матрицей Якоби называют матрицу
+\[D_f(p) = 
+\begin{pmatrix}
+    \frac{\partial f_1}{\partial x_1} & \ldots & \frac{\partial f_1}{\partial x_n}\\
+    \vdots & \ddots & \vdots \\
+    \frac{\partial f_k}{\partial x_1} & \dots & \frac{\partial f_k}{\partial x_n}
+\end{pmatrix}\]
+\end{definition}
+
+В случае, если функция $f$ отображает $\mathbb{R}^n \to \mathbb{R}$, то матрица Якоби принимает вид $1 \times n$ и называется \textbf{градиентом функции}.
+\begin{definition}
+    Градиентом функции называется вектор 
+    \[D_f = 
+    \begin{pmatrix}
+        \frac{\partial f}{\partial x_1}, & \dots, & \frac{\partial f}{\partial x_n}
+    \end{pmatrix}
+    \]
+\end{definition}

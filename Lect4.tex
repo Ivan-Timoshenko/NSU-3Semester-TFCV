@@ -156,7 +156,139 @@
     \newline
     Тогда у $(\overrightarrow{x_0}, \overrightarrow{y_0})$ имеется такая окрестность $\Omega$, что $\Omega \cap M$ - график некоторой $C^r$-функции $\alpha$, такой, что $\alpha: \Omega_x \to \mathbb{R}^l$ и 
     \[D\alpha(x) = (\frac{\partial f}{\partial y}(x, \alpha(x)))^{-1} \cdot \frac{\partial f}{\partial x}(x, \alpha(x))\]
+    \newpage
     \begin{proof}
-        \textbf{А ПРУФ БУДЕТ ПОТОМ ПОКА НА СЛОВО ВЕРЬТЕ}
+        Рассмотрим новое отображение 
+        \[\tilde{f}: (x, y) \to (x, y) \equiv \mathbb{R}^{k+l} \supset \Omega \to \mathbb{R}^{k+l}, \text{ $x, y$ - векторы размера $k$ и $l$ соответственно}\]
+        Определим $\tilde{f}(x, y) = (x, f(x, y))$.
+        В матричном виде:
+        \[\tilde{f}\begin{pmatrix}
+            x_1 \\ \vdots \\ x_k \\
+            y_1 \\ \vdots \\ y_l
+        \end{pmatrix} = 
+        \begin{pmatrix}
+            x_1 \\ \vdots \\ x_k \\
+            f_1(x_1, \hdots, x_k, y_1, \hdots, y_l) \\
+            \vdots \\
+            f_l(x_1, \hdots, x_k, y_1, \hdots, y_l) \\
+        \end{pmatrix}\]
+        Тогда $D\tilde{f}$ - блочная матрица вида:
+        \[D\tilde{f}(x,y) = 
+        \left(\begin{array}{c|c}
+            \frac{\partial x}{\partial x} & \frac{\partial x}{\partial y} \\
+            \hline
+            \frac{\partial f}{\partial y} & \frac{\partial f}{\partial y}
+        \end{array}\right) = 
+        \left(\begin{array}{c|c}
+            E & 0 \\
+            \hline
+            \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y}
+        \end{array}\right)\]
+        Ее определитель в этом случае $1 \cdot \left| \frac{\partial f}{\partial y}\right| \neq 0$.\\
+        По теореме о локальной обратимости у $(x_0, y_0)$ существует окрестность $\Omega \open R^k \times R^l$ такая, 
+        что отображение $\tilde{f} |_\Omega: \Omega \to \tilde{f}(U) \subset \mathbb{R}^{k+l}$ является $C^r$-изоморфизмом.
+        Пусть $g: \tilde{f}(\Omega) \to \Omega$ - обратное отображение.
+        \[\left(\begin{array}{c}
+            x \\ y
+        \end{array}\right)
+        \overset{f}{\underset{g}{\leftrightarrows}}
+        \left(\begin{array}{c}
+            x \\
+            f(x, y)
+        \end{array}
+        \right)\]
+        Функция $g$ задана как $g = \begin{cases}
+            g_1(x, y) \\
+            g_2(x, y)
+        \end{cases}$, причем $g_2(x,y) = x$. \\
+        Положим $\alpha(x) = g_2(x, 0)$. Надо проверить, что $f(x, \alpha(x)) = 0$. 
+        \begin{equation*}
+            (x, f(x, \alpha(x))) = (x, 0) \end{equation*}
+        \[\Updownarrow\]
+        \begin{equation*}
+            \tilde{f}(x, y) = (x, 0) \implies (x, y) = g(x, 0) \implies (x, y) = (x, g_2(x, 0)) \implies y = g_2(x, 0)
+        \end{equation*}
+        Поскольку $\alpha(x) = g_2(x, 0)$ - все выполнено.
     \end{proof}
 \end{theorem}
+
+\begin{definition}
+    Регулярные точки:\\
+    Пусть $f \in D(p), \ f:U \to \mathbb{R}^k, \ U \subset \mathbb{R}^n$. Точка $p$ называется регулярной, если $df(p)$ - сюръективное отображение.
+    Это условие эквивалентно тому, что $\mathrm{rank}(Df(p)) = k$ (т.е. в $Df(p)$ есть $k$ линейно независимых строк).
+\end{definition}
+
+Матрица $Df(p)$ имеет вид 
+\[Df(p) = \left(\begin{array}{ccc}
+    \frac{\partial f_1}{\partial x_1} & \hdots & \frac{\partial f_1}{\partial x_n} \\
+    \vdots & & \vdots \\
+    \frac{\partial f_k}{\partial x_1} & \hdots & \frac{\partial f_k}{x_n}
+\end{array}\right) \text{ если $n < k$ то не существует регулярных точек}\]
+
+
+\begin{theorem}[Лемма о регулярном дополнении]
+    Пусть $f \in C^r, r > 0, f:\Omega \to \mathbb{R}^k, \Omega \open \mathbb{R}^n$ и $f$ регулярна в точке $p$.
+    \newline
+    Тогда $\exists$ функции $(g_1, \hdots, g_{n-k}) = \overline{g} - C^r$-гладкие, отображающе $\Omega \to \mathbb{R}^{n-k}$, такие, что отображение
+    $(f, g): \Omega \to \mathbb{R}^{n = n-k + k}$ регулярно в точке $p$ и, в частности, обратимо в некоторой окрестности точки $p$.
+    \begin{proof}
+        \[\frac{\partial f}{\partial x} = \begin{pmatrix}
+            \frac{\partial f_1}{\partial x_1} & \hdots & \frac{\partial f_1}{\partial x_k} & \frac{\partial f_1}{\partial x_{k+1}} & \hdots & \frac{\partial f_1}{\partial x_n} \\
+            \vdots \\
+            \frac{\partial f_k}{\partial x_1} & \hdots & \frac{\partial f_k}{\partial x_k} & \frac{\partial f_k}{\partial x_{k+1}} & \hdots & \frac{\partial f_k}{\partial x_n} \\
+        \end{pmatrix}_{k \times n}
+        \]
+        Из алгебры знаем: $\exists k$ линейно независимых столбцов (можем считать, что первые $k$ штук). Дополним нижнюю часть матрицы фрагментом
+        \[\begin{pmatrix}
+            \frac{\partial g_1}{\partial x_1} & \hdots & \frac{\partial g_1}{\partial x_k} & \frac{\partial g_1}{\partial x_{k+1}} & \hdots & \frac{\partial g_1}{\partial x_n} \\
+            \vdots \\
+            \frac{\partial g_{n-k}}{\partial x_1} & \hdots & \frac{\partial g_{n-k}}{\partial x_k} & \frac{\partial g_{n-k}}{\partial x_{k+1}} & \hdots & \frac{\partial g_{n-k}}{\partial x_n} \\
+        \end{pmatrix}_{n-k \times n}
+        \]
+        Итоговая матрица будет иметь размеры $n \times n$. \\
+        Пусть теперь $g(x_1, x_2)$ такое, что $\frac{\partial g}{\partial x_1} = 0, \ \frac{\partial g}{\partial x_2} = 0$. И положим:
+        \[\begin{cases}
+            g_1(x_1, \hdots, x_n) = x_{k+1} \\
+            \vdots \\
+            g_{n-k}(x_1, \hdots, x_n) = x_n \\
+        \end{cases}\]
+
+        Тогда матрица $n \times n$ будет иметь вид:
+        \[\left(\begin{array}{c|c}
+            k \times k, det \neq 0 & \text{ неважно что} \\
+            \hline
+            0 & \begin{pmatrix}
+                1 & \hdots & 0 \\
+                \vdots & \ddots & \vdots \\ 
+                0 & \hdots & 1
+            \end{pmatrix}
+        \end{array}\right)\]
+        Ее определитель $\det = \det(\frac{\partial f_{1 \hdots k}}{\partial x_{1 \hdots k}})\cdot \det E \neq 0$
+        А обратимость следует из невырожденности.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}[Лемма о локальном наложении]
+    Пусть $f \in C^r, r > 1, f:U \to \mathbb{R}^k, U \open \mathbb{R}^n$ - регуляна в точке $p$.\newline
+    Тогда $f(p)$ - внутренняя точка множества $f(\Omega) \subset \mathbb{R}^k$. То есть:
+    \[\exists \varepsilon > 0 \mid \varepsilon\text{-шар } \overset{o}{B_\varepsilon}(f(p)) \text{ целиком содержится в }f(\Omega)\]
+    \begin{proof}
+        По предыдущей лемме $\exists \overline{g}:\Omega \to \mbox{R}^{n-k}$ такое, что отображение $\begin{pmatrix}f \\ g\end{pmatrix}: \Omega \to \mathbb{R}^n$ регулярно (и, в частности, локально обратимо в $p$).
+        \newline
+        По теореме о локальной обратимости $\exists$ окрестность $p \in U \open \mathbb{R}^n$ такая, что $\begin{pmatrix} f \\ g \end{pmatrix} \open \mathbb{R}^n$. 
+        \newline
+        Образ множества U, т.е. множество точек вида $(f_1(\overline{x}), \hdots, f_k(\overline{x}), g_1(\overline{x}), \hdots, g_{n-k}(\overline{x})) \in \mathbb{R}^n, \overline{x} \in U$ открыт в $\mathbb{R}^n$.
+
+        \par
+        Тогда пользуясь тем, что при проекции образы открытых множеств открыты, получаем, что 
+        \[\text{Множество точек из проекций на первые $k$ координат монжества $\begin{pmatrix} f\\g\end{pmatrix}(U)$: }\begin{pmatrix}
+            f_1(\overline{x}) \\
+            \hdots \\
+            f_k(\overline{x})
+        \end{pmatrix} \open \mathbb{R}^k\]
+        Проверим теперь, что если $A \open X \times Y$, то $\Pi(A) \open X$, $\Pi$ - проекция. \par
+        Берем точку $x_0 \in \Pi(A)$. Существует точка $(x_0, y_0) \in A$, значит $\exists$ шарик с центром в $(x_0, y_0)$ целиком лежащий в $A$.
+        Ясно, что проекция этого шарика накрывает $\varepsilon$-шарик в $X$ с центром в $x_0$.
+    \end{proof}
+\end{theorem}
+

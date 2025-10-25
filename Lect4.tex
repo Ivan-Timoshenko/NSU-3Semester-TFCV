@@ -1,294 +1,161 @@
-\section{Основы гладкого анализа}
-Символ $\open$ обозначает "открыто в". Контекст:
-\[U \open \mathbb{R}^m, \ f:U \to \mathbb{R}^k, \ f \in C^r(U), \ r \geq 0\]
+\section{Аналитические функции}
+
+Пусть $w = f(z) = u(x, y) + iv(x,y)$, где $z = x + iy$ - функция, определенная в области $D \in \mathbb{C}$.
 
 \begin{definition}
-    Отображение $f$ называется $r$-гладким, если все ее частные производные до порядка $r$ непрерывны на $U$.
+    Функция $f(z)$ называется дифференцируемой (моногенной), в точке $z \in D$, 
+    если 
+    \[\exists! \lim_{\Delta z \to 0} \frac{\Delta f}{\Delta z} = \lim_{\Delta z \to 0} \frac{f(z + \Delta z) - f(z)}{\Delta z}, \text{ где $z+ \Delta z \in D$}\]
+    Этот предел называется производной функции $f$ и обозначается $f'(z)$
 \end{definition}
 
-Пусть $X$ - не обязательно открыто в $\mathbb{R}^m$.
-\begin{definition}
-    $f \in C^r(X)$, если $f = \tilde{f}$ - сужение на $\tilde{X}$, $\tilde{f}: \tilde{X} \open \mathbb{R}^m \to \mathbb{R}^k$ - $C^r$-гладкая на $tilde{X}$. \textbf{НАДО УТОЧНИТЬ:} $X \subset \tilde{X}$ или наоборот.
-\end{definition}
+
+\begin{note}
+    Если этот предел существует, то он не зависит от того, как $\Delta z$ стремится к $0$.
+
+    \begin{proof}
+        \textbf{Шаг 1}\\
+        Рассмотрим $\Delta z = \Delta x \to 0 \ (\Delta y = 0)$:
+        \[f'(z) = \lim_{\Delta x \to 0} \left[\frac{u(x + \Delta x, y) - u(x, y)}{\Delta x} + i \frac{v(x + \Delta x, y) - v(x, y)}{\Delta x}\right] = \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x}\]
+        \textbf{Шаг 2}\\
+        Пусть теперь $\Delta z = i \Delta y \to 0 \ (\Delta x = 0)$:
+        \[f'(z) = \lim_{\Delta y \to 0} \left[\frac{u(x, y+\Delta y) - u(x, y)}{i\Delta y} + i\frac{v(x, y+\Delta y) - v(x, y)}{i\Delta y}\right] = \frac{\partial v}{\partial y} - i \frac{\partial u}{\partial y}\]
+        Для доказательства замечания нам необходимо, чтобы эти производные были равны, тогда:
+        \[\begin{cases*}
+            \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}\\
+            \frac{\partial v}{\partial x} = -\frac{\partial u}{\partial y}
+        \end{cases*} \text{ - условие Коши-Римана}\]
+    \end{proof}
+\end{note}
 
 \begin{statement}
-    Пусть $f:X \subset \mathbb{R}^m \to \mathbb{R}^k, \ g:X \to \mathbb{R}^k$ - $C^r$ отображения. Тогда $f+g \in C^r(X)$
+    Если $\exists f'(z)$ в точке $z \in D$, то выполнено условие Коши-Римана, но обратное утверждение не верно.
     \begin{proof}
-        Пусть $f = \tilde{f}, \ g = \tilde{g}$ и т.д. по определению $r$-гладкости:
-        \[\tilde{f}:U \to \mathbb{R}^m, \tilde{g}: V \to \mathbb{R}^m, \ U, V \open \mathbb{R}^m, \ X \subset U, X \subset V\]
-        Введем $U \cap V = W \open \mathbb{R}^m$. На $W$ заданы оба отображения и ясно, что $f+g = \tilde{f} + \tilde{g}$.
-    \end{proof}
-\end{statement}
-
-\begin{statement}
-    Композиция:
-    \[X \overset{f}{\to} \mathbb{R}^k \supset Y \overset{g}{\to} \mathbb{R}^m\]
-    Если $f \in C^r$ и $g \in C^r$, то $g \circ f \in C^r$.
-    \begin{proof}
-        Область определения $\mathrm{dom}(g \circ f) = \{x \in X | \ f(x) \in Y\} = X \cap f^{-1}(\mathrm{dom}(g))$
-        \[\begin{cases}
-            f \in C^r \implies f = \tilde{f}, \ \tilde{f}:\mathbb{R}^m \underset{op}{\supset}\tilde{X} \to \mathbb{R}^k -  C^r\text{-гладкое.} \\
-            g \in C^r \implies g = \tilde{g}, \ \tilde{g}:\mathbb{R}^k \underset{op}{\supset}\tilde{Y} \to \mathbb{R}^m -  C^r\text{-гладкое.} \\
-        \end{cases}\]
-        \[\mathrm{dom(\tilde{g}\circ \tilde{f})} = \mathrm{dom}(\tilde{f}) \cap \tilde{f}^{-1}(\mathrm{dom}(\tilde{g})) = \tilde{X} \cap \tilde{f}^{-1}(\tilde{Y})\]
-        $\tilde{X}$ - открытое, $\tilde{f}^{-1}(\tilde{Y})$ - открытое, как прообраз открытого множества $\tilde{Y}$ при непрерывном отображении.
-        \newline
-        Ясно, что $g \circ f = \tilde{g} \circ \tilde{f}$ - сужение $\mathrm{dom}(g \circ f)$.
-    \end{proof}
-\end{statement}
-
-\begin{theorem}[Лемма о классе гладкости обратного отображения]
-    Пусть $U, V \open \mathbb{R}^m$. \\
-    $U \overunderset{f}{g}{\rightleftarrows} V$, $f, g$ - непрерывны и взаимно обратны. Если $f \in C^r(U)$ и $\forall x \in U \ df(x)$ - невырожден: $\det(Df(x)) \neq 0$, то $g \in C^r(U)$.
-    \begin{proof}
-        При $r > 0$  $g$ дифференциируема в $\forall y \in V$ по правилу дифференциирования обратного отображения. В матрицах Якоби:
-        \[Dg(f(x)) = (Df(x))^{-1}, \forall x \in U \text{, причем } f(x) = y, \ x = g(y)\]
-        \[Dg(y) = (Df(g(y)))^{-1}, \quad \text{цепочка преобразований } y \to g(y) \to Df(g(y)) \to (Df(g(y)))^{-1}\]
-        \[Dg(y) = w \circ Df \circ g(y), \ w \text{ - отображение обращения матрицы.}\]
-        \[Dg(y) = w \circ Df \circ g(y), \text{ причем } w - C^{\infty}, Df - C^{r-1}, g(y) - \text{дифференциируема}\]
-        $g$ дифференциируема $\implies Dg$ тоже дифференциируема как композиция $\implies$ все производные $g$ дифференциируемы $\implies Dg \in C^1 \implies g \in C^2 \implies \hdots \implies g \in C^{r-1} \implies Dg \in C^{r-1} \implies g \in C^r$.
-    \end{proof} 
-\end{theorem}
-
-\begin{lemma*}
-    Пусть $U \open \mathbb{R}^m$, а $f:U \to \mathbb{R}^m$ такое, что отображение $f(x) - x = \lambda(x)$
-    сжимающее, то есть $\forall x_1, x_2 \in U \left| \lambda(x_1) - \lambda(x_2) \right| \leq \lambda < 1$. Тогда:
-    \begin{enumerate}
-        \item $f(U) \open \mathbb{R}^m$
-        \item Сужение $f: U \to f(U)$ обратимо и обратное отображение - липшицево с константой $\frac{1}{1- \lambda}$.        
-    \end{enumerate}
-
-    \begin{proof}
-        Докажем пункт 2:
-        \newline
-        $f$ инъективно: $x_1 \neq x_2 \implies f(x_1) \neq f(x_2)$
-        \[\begin{cases}
-            f(x_1) - x_1 = \lambda(x_1) \\
-            f(x_2) - x_2 = \lambda(x_2) 
-        \end{cases} \implies
-        \begin{cases}
-            f(x_1) = \lambda(x_1) + x_1 \\
-            f(x_2) = \lambda(x_2) + x_2
-        \end{cases}\]
-
-        Тогда
-        \[
-            \left| f(x_1) - f(x_2) \right| = \left| \lambda(x_1) - \lambda(x_2) +  (x_1 - x_2) \right|
-            \leq \left| \lambda(x_1) -\lambda(x_2) \right| + \left| x_1 - x_2 \right| 
-            \lambda \cdot \left|x_1 - x_2 \right| + \left| x_1 - x_2 \right| = (\lambda + 1) \left| x_1 - x_2\right|
-        \]
-
-        В силу неравенства треугольника:
-        \[(1 - \lambda) \left| x_1 - x_2 \right| \leq \left| f(x_1) - f(x_2) \right| \leq (1 + \lambda)\left| x_1 - x_2\right|\]
-        Инъективность есть, а сужение $f: U \to f(U)$ - биективно, значит обратимо. Поймем, что обратное отображение будет $\frac{1}{1 - \lambda}$ липшицево.
-        Пусть $\begin{cases}
-            y_1 = f(x_1) \\ \ y_2 = f(x_2) 
-        \end{cases} \in f(U) \quad \begin{cases}
-            x_1 = g(y_1) \\ 
-            x_2 = g(y_2)
-        \end{cases}$
-        \[\left| y_1 - y_2 \right| \geq (1 - \lambda)\left|g(y_1) - g(y_2) \right| \quad \implies \quad \frac{1}{1 - \lambda}\left| y_1 - y_2 \right| \geq g(y_1) - g(y_2)\] 
-        Пункт 2 доказан.
-        \newline
-        Пусть теперь $q \in f(U)$. Рассмотрим $p \in U \mid q = f(p)$. $U$ открыто, а значит $\exists \varepsilon > 0 \mid B_\varepsilon(p) \subset U$, \newline 
-        где $B_\varepsilon(p)$ - открытый шар радиуса $\varepsilon$ с центром в точке $p$. Мы покажем, что множество $f(U)$ содержит шар с центром в $q$ радиуса $(1- \lambda)\varepsilon$. \newline
-        Пусть $y \in B_{\varepsilon(1-\lambda)}(q)$, т.е. $\left| q - y \right| < (1 - \lambda)\varepsilon$. 
-        Надо показать, что $\exists x \text{ такой, что } \left| p - x \right| < \varepsilon, \ f(x) = y$.
-        Воспользуемся теоремой о неподвижной точке сжимающего отображения. Перепишем условие:
-        \[f(x) = y \implies y - f(x) = 0 \implies y-f(x) + x = x\]
-        Положим
-        \[\varphi(x) = y - f(x) + x = y - \lambda(x)\]
-        Заметим, что $\varphi(x)$ является сжимающим и покажем, что $\varphi$ переводит $B_\varepsilon(p)$ в себя. 
-        \[x \in B_\varepsilon(p) \implies \left| x - p \right| \leq \varepsilon \implies \left| \varphi(x) - \varphi(p) \right| \leq \lambda\varepsilon\]
-        \[\left| \varphi(x) - p \right| = \left| (\varphi(x) - \varphi(p)) + (\varphi(p) - p)\right| \leq \left| \varphi(x) - \varphi(p) \right| + \left|\varphi(p) - p\right|\]
-        Первое слагаемое, как мы уже доказали, не превышает $\lambda \varepsilon$. Преобразуем второе:
-        \[\left| \varphi(p) - p \right| = \left| y - f(p) + p - p \right| = \left| y - f(p) \right| = \left| y - q\right| \leq (1- \lambda)\varepsilon\]
-        Тогда:
-        \[\left| \varphi(x) - \varphi(p) \right| + \left|\varphi(p) - p\right| \leq \lambda\varepsilon + (1 - \lambda) \varepsilon = \varepsilon\]
-        Значит $\left|\varphi(x) - p\right| \leq \varepsilon$ и $\varphi(x) \in B_\varepsilon(p) \mid x \in B_\varepsilon(p).$
-    \end{proof}
-\end{lemma*}
-\newpage
-\begin{theorem}
-    \textbf{о локальной обратимости}
-    \newline
-    Пусть $U \open \mathbb{R}^m, \ f:U \to \mathbb{R}^m - C^r$-гладкое отображение, $r \geq 1$.
-    Пусть $p \in U$. Если $df(p): \mathbb{R}^m \to \mathbb{R}^m$ - невырожден, то у точки $p$ имеется окрестность $U_1$ такая, что 
-    $f(U_1) \open \mathbb{R}^m$ и сужение $f|_{U_1}: U_1 \to f(U_1)$ является $C^r$-изоморфизмом (т.е. обратное отображение тоже принадлижети классу $C^r$).
-    \begin{proof}
-        Считаем сначала, что $\forall v \ df(p)\langle v \rangle = v$, т.е. $df(p):\mathbb{R}^m \to \mathbb{R}^m$ - тождественное отображение, $Df(p) = E$.
-        Рассмотрим отображение $h(x) = f(x) - x$:
-        \[dh(x) = df(x) - dx, \text{ при x = p: } dh(p) = dx - dx = 0 (Dh(x) = E - E = 0)\]
-        Все частные производные отображения $h$ в точке $p$ равны 0. Значит, в силу их непрерывности в $p$,
-        у точки $p$ имеется некоторый шарик $U$ с центром в $p$ такой, что $\forall x \in U$ все эти производные ограничены, например, $\frac{1}{2} < 1$.
-        \[\forall x_1, x_2 \in U_1 \ \left|h(x_1) - h(x_2) \right| \leq \frac{1}{2} \]
-        По предыдущей лемме $f(U_1)$ открыто в $\mathbb{R}^m$ и $f|_{U_1} \to f(U_1)$ обратимо, обратное отображение непрерывно.
-        По теореме о классе гладкости обратного отображения оно ($f^{-1}$) имеет нужный класс. Заметим, что в той лемме необходимо, чтобы $\forall x \in U_1 \ \det(Df(x)) \neq 0$, 
-        поэтому когда мы выбираем окрестность $U_1$ надо это тоже потребовать:
-        \[Df(p) = E, \ \det(E) = 1 \neq 0 \text{ и в некоторой окрестности  точки $p$ } \det(Df(x)) = 0\]
-        \newline
-        Мы доказали теорему для $Df(p) = E$. Пусть теперь $Df(p) = A, \ \det(A) \neq 0 \implies$ значит существует обратная матрица $A^{-1}$, тоже невырожденная. Пусть $\tilde{f} = A^{-1}f(x)$ - композиция линейного отображения и отображения $f$.
-        Для $\tilde{f}$ выполнена теорема, ведь $D\tilde{f}(p) = A^{-1}Df(p) = A^{-1}A = E$.
-        Значит $\exists \tilde{U} \ni p \mid \tilde{f}:\tilde{U} \to \tilde{f}(\tilde{U})$ - $C^r$-изоморфизм и $\tilde{f}(\tilde{U}) \open \mathbb{R}^k$.
-        \newline
-        $f(x) = A \tilde{f}(x)$ - композиция двух "хороших" отображений и $f(\tilde{U}) = A\cdot\tilde{f}(\tilde{U})$ - образ открытого множества под действием линейного изоморфизма $A$ - тоже открыт в $\mathbb{R}^k$.
-    \end{proof}
-\end{theorem}
-
-
-\begin{theorem}[о неявной функции]
-    Пусть $U \open \mathbb{R}^{k+l} = \mathbb{R}^k \times \mathbb{R}^l$ и $f: U \to \mathbb{R}^l$ - $C^r$-отображение, $r \geq 1$.
-
-    Функция $f$ представляет собой набор:
-    \[f = \begin{pmatrix}{}
-        f_1(x_1, \hdots, x_k, y_1, \hdots, y_l) \\
-        \vdots \\
-        f_l(x_1, \hdots, x_k, y_1, \hdots, y_l)
-    \end{pmatrix}\]
-    Пусть некоторая точка $(\overrightarrow{x_0}, \overrightarrow{y_0}) \in U$ и $\det(\frac{\partial f}{\partial y}(\overrightarrow{x_o}, \overrightarrow{y_0})) \neq 0, \ f(\overrightarrow{x_0}, \overrightarrow{y_0}) = 0$.
-    \[\frac{\partial f}{\partial y} = \begin{pmatrix}
-        \frac{\partial f_1}{\partial y_1} & \hdots & \frac{\partial f_1}{\partial y_l} \\
-        \vdots & & \vdots \\
-        \frac{\partial f_l}{\partial y_1} & \hdots & \frac{\partial f_l}{\partial y_l}
-    \end{pmatrix}\]
-    Множество $M = \{(\overrightarrow{x},\overrightarrow{y}) \in \Omega \mid f(\overrightarrow{x}, \overrightarrow{y}) = 0\}$, где $\Omega$ - окрестность точки $(\overrightarrow{x_0}, \overrightarrow{y_0})$.
-    Точка $(\overrightarrow{x_0}, \overrightarrow{y_0}) \in M, \ \det(\frac{\partial f}{\partial y}(\overrightarrow{x_0}, \overrightarrow{y_0})) \neq 0$
-    \newline
-    Тогда у $(\overrightarrow{x_0}, \overrightarrow{y_0})$ имеется такая окрестность $\Omega$, что $\Omega \cap M$ - график некоторой $C^r$-функции $\alpha$, такой, что $\alpha: \Omega_x \to \mathbb{R}^l$ и 
-    \[D\alpha(x) = (\frac{\partial f}{\partial y}(x, \alpha(x)))^{-1} \cdot \frac{\partial f}{\partial x}(x, \alpha(x))\]
-    \newpage
-    \begin{proof}
-        Рассмотрим новое отображение 
-        \[\tilde{f}: (x, y) \to (x, y) \equiv \mathbb{R}^{k+l} \supset \Omega \to \mathbb{R}^{k+l}, \text{ $x, y$ - векторы размера $k$ и $l$ соответственно}\]
-        Определим $\tilde{f}(x, y) = (x, f(x, y))$.
-        В матричном виде:
-        \[\tilde{f}\begin{pmatrix}
-            x_1 \\ \vdots \\ x_k \\
-            y_1 \\ \vdots \\ y_l
-        \end{pmatrix} = 
-        \begin{pmatrix}
-            x_1 \\ \vdots \\ x_k \\
-            f_1(x_1, \hdots, x_k, y_1, \hdots, y_l) \\
-            \vdots \\
-            f_l(x_1, \hdots, x_k, y_1, \hdots, y_l) \\
-        \end{pmatrix}\]
-        Тогда $D\tilde{f}$ - блочная матрица вида:
-        \[D\tilde{f}(x,y) = 
-        \left(\begin{array}{c|c}
-            \frac{\partial x}{\partial x} & \frac{\partial x}{\partial y} \\
-            \hline
-            \frac{\partial f}{\partial y} & \frac{\partial f}{\partial y}
-        \end{array}\right) = 
-        \left(\begin{array}{c|c}
-            E & 0 \\
-            \hline
-            \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y}
-        \end{array}\right)\]
-        Ее определитель в этом случае $1 \cdot \left| \frac{\partial f}{\partial y}\right| \neq 0$.\\
-        По теореме о локальной обратимости у $(x_0, y_0)$ существует окрестность $\Omega \open R^k \times R^l$ такая, 
-        что отображение $\tilde{f} |_\Omega: \Omega \to \tilde{f}(U) \subset \mathbb{R}^{k+l}$ является $C^r$-изоморфизмом.
-        Пусть $g: \tilde{f}(\Omega) \to \Omega$ - обратное отображение.
-        \[\left(\begin{array}{c}
-            x \\ y
-        \end{array}\right)
-        \overset{f}{\underset{g}{\leftrightarrows}}
-        \left(\begin{array}{c}
-            x \\
-            f(x, y)
-        \end{array}
-        \right)\]
-        Функция $g$ задана как $g = \begin{cases}
-            g_1(x, y) \\
-            g_2(x, y)
-        \end{cases}$, причем $g_2(x,y) = x$. \\
-        Положим $\alpha(x) = g_2(x, 0)$. Надо проверить, что $f(x, \alpha(x)) = 0$. 
-        \begin{equation*}
-            (x, f(x, \alpha(x))) = (x, 0) \end{equation*}
-        \[\Updownarrow\]
-        \begin{equation*}
-            \tilde{f}(x, y) = (x, 0) \implies (x, y) = g(x, 0) \implies (x, y) = (x, g_2(x, 0)) \implies y = g_2(x, 0)
-        \end{equation*}
-        Поскольку $\alpha(x) = g_2(x, 0)$ - все выполнено.
-    \end{proof}
-\end{theorem}
-
-\begin{definition}
-    Регулярные точки:\\
-    Пусть $f \in D(p), \ f:U \to \mathbb{R}^k, \ U \subset \mathbb{R}^n$. Точка $p$ называется регулярной, если $df(p)$ - сюръективное отображение.
-    Это условие эквивалентно тому, что $\mathrm{rank}(Df(p)) = k$ (т.е. в $Df(p)$ есть $k$ линейно независимых строк).
-\end{definition}
-
-Матрица $Df(p)$ имеет вид 
-\[Df(p) = \left(\begin{array}{ccc}
-    \frac{\partial f_1}{\partial x_1} & \hdots & \frac{\partial f_1}{\partial x_n} \\
-    \vdots & & \vdots \\
-    \frac{\partial f_k}{\partial x_1} & \hdots & \frac{\partial f_k}{x_n}
-\end{array}\right) \text{ если $n < k$ то не существует регулярных точек}\]
-
-
-\begin{theorem}[Лемма о регулярном дополнении]
-    Пусть $f \in C^r, r > 0, f:\Omega \to \mathbb{R}^k, \Omega \open \mathbb{R}^n$ и $f$ регулярна в точке $p$.
-    \newline
-    Тогда $\exists$ функции $(g_1, \hdots, g_{n-k}) = \overline{g} - C^r$-гладкие, отображающе $\Omega \to \mathbb{R}^{n-k}$, такие, что отображение
-    $(f, g): \Omega \to \mathbb{R}^{n = n-k + k}$ регулярно в точке $p$ и, в частности, обратимо в некоторой окрестности точки $p$.
-    \begin{proof}
-        \[\frac{\partial f}{\partial x} = \begin{pmatrix}
-            \frac{\partial f_1}{\partial x_1} & \hdots & \frac{\partial f_1}{\partial x_k} & \frac{\partial f_1}{\partial x_{k+1}} & \hdots & \frac{\partial f_1}{\partial x_n} \\
-            \vdots \\
-            \frac{\partial f_k}{\partial x_1} & \hdots & \frac{\partial f_k}{\partial x_k} & \frac{\partial f_k}{\partial x_{k+1}} & \hdots & \frac{\partial f_k}{\partial x_n} \\
-        \end{pmatrix}_{k \times n}
-        \]
-        Из алгебры знаем: $\exists k$ линейно независимых столбцов (можем считать, что первые $k$ штук). Дополним нижнюю часть матрицы фрагментом
-        \[\begin{pmatrix}
-            \frac{\partial g_1}{\partial x_1} & \hdots & \frac{\partial g_1}{\partial x_k} & \frac{\partial g_1}{\partial x_{k+1}} & \hdots & \frac{\partial g_1}{\partial x_n} \\
-            \vdots \\
-            \frac{\partial g_{n-k}}{\partial x_1} & \hdots & \frac{\partial g_{n-k}}{\partial x_k} & \frac{\partial g_{n-k}}{\partial x_{k+1}} & \hdots & \frac{\partial g_{n-k}}{\partial x_n} \\
-        \end{pmatrix}_{n-k \times n}
-        \]
-        Итоговая матрица будет иметь размеры $n \times n$. \\
-        Пусть теперь $g(x_1, x_2)$ такое, что $\frac{\partial g}{\partial x_1} = 0, \ \frac{\partial g}{\partial x_2} = 0$. И положим:
-        \[\begin{cases}
-            g_1(x_1, \hdots, x_n) = x_{k+1} \\
-            \vdots \\
-            g_{n-k}(x_1, \hdots, x_n) = x_n \\
-        \end{cases}\]
-
-        Тогда матрица $n \times n$ будет иметь вид:
-        \[\left(\begin{array}{c|c}
-            k \times k, det \neq 0 & \text{ неважно что} \\
-            \hline
-            0 & \begin{pmatrix}
-                1 & \hdots & 0 \\
-                \vdots & \ddots & \vdots \\ 
-                0 & \hdots & 1
-            \end{pmatrix}
-        \end{array}\right)\]
-        Ее определитель $\det = \det(\frac{\partial f_{1 \hdots k}}{\partial x_{1 \hdots k}})\cdot \det E \neq 0$
-        А обратимость следует из невырожденности.
-    \end{proof}
-\end{theorem}
-
-\begin{theorem}[Лемма о локальном наложении]
-    Пусть $f \in C^r, r > 1, f:U \to \mathbb{R}^k, U \open \mathbb{R}^n$ - регуляна в точке $p$.\newline
-    Тогда $f(p)$ - внутренняя точка множества $f(\Omega) \subset \mathbb{R}^k$. То есть:
-    \[\exists \varepsilon > 0 \mid \varepsilon\text{-шар } \overset{o}{B_\varepsilon}(f(p)) \text{ целиком содержится в }f(\Omega)\]
-    \begin{proof}
-        По предыдущей лемме $\exists \overline{g}:\Omega \to \mbox{R}^{n-k}$ такое, что отображение $\begin{pmatrix}f \\ g\end{pmatrix}: \Omega \to \mathbb{R}^n$ регулярно (и, в частности, локально обратимо в $p$).
-        \newline
-        По теореме о локальной обратимости $\exists$ окрестность $p \in U \open \mathbb{R}^n$ такая, что $\begin{pmatrix} f \\ g \end{pmatrix} \open \mathbb{R}^n$. 
-        \newline
-        Образ множества U, т.е. множество точек вида $(f_1(\overline{x}), \hdots, f_k(\overline{x}), g_1(\overline{x}), \hdots, g_{n-k}(\overline{x})) \in \mathbb{R}^n, \overline{x} \in U$ открыт в $\mathbb{R}^n$.
-
+        Слева направо ($\implies$) доказали в предыдущем замечании.
+        Докажем справа налево ($\impliedby$).
+        Построим контрпример:
+        \[f(z) = \begin{cases*}
+            e^{-\frac{1}{z^4}} \ z \neq 0 \\
+            0 \ z = 0
+        \end{cases*}\]
+        Заметим, что если $f(0) = 0$, то $f'(0) = \lim_{z \to 0}\frac{f(z)}{z}$
+        
+        Пусть $x \to 0, y = 0$:
+        \[\lim_{x \to 0}\frac{f(x)}{x} = \lim_{x \to 0}\frac{e^{-\frac{1}{x^4}}}{x} = u_x + iv_x = 0 \implies u_x = 0, v_x = 0\]
+        Пусть $y \to 0, x = 0$:
+        \[\lim_{y \to 0}\frac{f(iy)}{iy} = \lim_{y \to 0}\frac{e^{-\frac{1}{(iy)^4}}}{iy} = v_y + iu_y = 0 \implies v_y = 0, u_y = 0\]
+        То есть $u_x = v_y = 0, v_x = -u_y = 0$. Значит условие Коши-Римана выполнено в $z = 0$,
+        но с другой стороны, $f(z)$ не то, что не дифференцируема, она разрывна в $z = 0$:
         \par
-        Тогда пользуясь тем, что при проекции образы открытых множеств открыты, получаем, что 
-        \[\text{Множество точек из проекций на первые $k$ координат монжества $\begin{pmatrix} f\\g\end{pmatrix}(U)$: }\begin{pmatrix}
-            f_1(\overline{x}) \\
-            \hdots \\
-            f_k(\overline{x})
-        \end{pmatrix} \open \mathbb{R}^k\]
-        Проверим теперь, что если $A \open X \times Y$, то $\Pi(A) \open X$, $\Pi$ - проекция. \par
-        Берем точку $x_0 \in \Pi(A)$. Существует точка $(x_0, y_0) \in A$, значит $\exists$ шарик с центром в $(x_0, y_0)$ целиком лежащий в $A$.
-        Ясно, что проекция этого шарика накрывает $\varepsilon$-шарик в $X$ с центром в $x_0$.
-    \end{proof}
-\end{theorem}
+        Пусть $z = (1+ i)x \to 0$.
+        \[\lim_{x \to 0}\frac{f((1+i)x)}{(1+i)x} = \lim_{x \to 0}\frac{e^{-\frac{1}{(1+i)^4 x^4}}}{(1+i)x} = \lim_{x \to 0}\frac{e^{\frac{1}{4x^4}}}{(1+i)x} = \infty\]
+        $\infty \neq 0 \implies$ функция $f(z)$ не непрерывна в 0 $\implies$ $\nexists f'(0)$.
 
+        
+    \end{proof}
+\end{statement}
+
+\begin{statement}
+    Если функции $u(x,y), v(x,y)$ дифференцируемы в $z$ и выполнено условие Коши-Римана, то $\exists f'(z)$.
+    \begin{proof}
+        Так как $u, v$ - дифференцируемы в $z$, то
+        \begin{equation}
+            \begin{aligned}
+            \Delta u &= \frac{\partial u}{\partial x}\Delta x + \frac{\partial u}{\partial y}\Delta y + o(\left| \Delta z \right|) \\
+            \Delta v &= \frac{\partial v}{\partial x}\Delta x + \frac{\partial v}{\partial y}\Delta y + o(\left| \Delta z \right|)
+            \end{aligned}
+            \text{ где $\left|\Delta z \right| = \sqrt{\Delta x^2 + \Delta y^2}$}
+            \label{deltauv}
+        \end{equation} 
+        Обозначим: 
+        \begin{equation}
+            \begin{aligned}
+                \frac{\partial}{\partial z} = \frac{1}{2}\left(\frac{\partial}{\partial x} - i\frac{\partial}{\partial y} \right) \\
+                \frac{\partial}{\partial \overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial y}\right)
+            \end{aligned}
+            \label{operators}
+        \end{equation}
+        Заметим, что 
+        \begin{equation}
+            \Delta x = \frac{1}{2}\left(\Delta z + \Delta \overline{z}\right), \ \Delta y = \frac{1}{2i}\left(\Delta z - \Delta \overline{z}\right)
+            \label{rewrited}
+        \end{equation}
+        Тогда перепишем $\eqref{deltauv}$:
+        \[\Delta f = \Delta u + i \Delta v = \left( \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x}\right)\Delta x + \left(\frac{\partial u}{\partial y} + i\frac{\partial v}{\partial y}\right)\Delta y + o(\Delta z) \overset{\text{по } \eqref{operators} \text{ и }\Delta x, \Delta y}{=}\frac{\partial f}{\partial z}\Delta z + \frac{\partial f}{\partial \overline{z}}\Delta \overline{z} + o(\Delta z)\]
+        \begin{equation*}
+        \begin{aligned}
+            \frac{\partial f}{\partial z} &= \frac{1}{2}\left(\frac{\partial}{\partial x} - i\frac{\partial}{\partial y}\right)(u+iv) = \frac{1}{2}\left[\left(\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y}\right) + i\left(\frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}\right)\right] \\
+            \frac{\partial f}{\partial \overline{z}} &= \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial y}\right)(u+iv) = \frac{1}{2}\left[\left(\frac{\partial u}{\partial x} - \frac{\partial v}{\partial y}\right) + i\left(\frac{\partial v}{\partial x} + \frac{\partial u}{\partial y}\right)\right]
+        \end{aligned}
+    \end{equation*}
+    Это выражение - формальная частная производная по $z$ и $\overline{z}$. Подставив эти    формулы в $\eqref{rewrited}$ получим
+    \[\Delta f = \frac{\partial f}{\partial z}\Delta z + \frac{\partial f}{\partial \overline{z}}\Delta \overline{z} + o(\left| \Delta z \right|)\]
+    Заметим, что $\frac{\partial f}{\partial \overline{z}} = 0 \iff$ выполнено условие Коши-Римана.Разделим предыдущее выражение на $\Delta z \neq 0$:
+    \[\frac{\Delta f}{\Delta z} = \frac{\partial f}{\partial z} + \frac{o(\Delta z)}{\Delta z}\]
+    Поскольку $\frac{o(\Delta z)}{\Delta z} \underset{\Delta z \to 0}{\to} 0$, то 
+    \[\exists \lim_{\Delta z \to 0} \frac{\Delta f}{\Delta z} = \frac{\partial f}{\partial z} = f'(z)\]
+\end{proof}
+\end{statement}
+
+\[\lim_{\Delta z \to 0} \frac{\Delta f}{\Delta z} = f'(z) \implies \frac{\Delta f}{\Delta z} = f'(z) + \eta, \ \lim_{\Delta z \to 0} \eta = 0\]
+Значит $\Delta w = \Delta f = f'(z)\Delta z + \eta \cdot \Delta z$, где $f'(z)\Delta z$ - линейная часть приращения функции относительная $\Delta  z$, она же главная часть приращения, она же дифференциал функции.
+
+Обозначим $dw = df(z) = f'(z)\Delta z$. В частности, если $f(z) = z$, то $df(z) = dz = \Delta z \implies df(z) = f'(z)dz$ или $f'(z) = \frac{df(z)}{dz}$.
+
+\begin{definition}
+    Функция $f(z)$ называется аналитичной в области $D$, если $\forall z \in D \ \exists f'(z)$.
+\end{definition}
+
+\begin{definition}
+    Функция $f(z)$ называется аналитичной в точке $z_0 \in D$ ($D$ - область), если $f(z)$ аналитична в некоторой открытой окрестности точки $z_0$.
+\end{definition}
+
+\begin{theorem*}
+    Сумма степенного ряда $S(z) = \sum_{k=1}^{\infty} C_k z^k$ аналитична в круге его сходимости $\left| z \right| < R$, 
+    причем $S'(z) = \sum k C_k z^{k-1}$. 
+    \begin{proof}
+        Пусть ряд
+        \begin{equation}
+            \label{series}
+            S_0(z) = \sum_{k = 1}^{\infty} kC_k z^{k-1}
+        \end{equation}
+        Заметим, что радиус сходимости ряда $S'_0(z)$ тоже равен $R$:
+        \[\overline{\lim_{k \to \infty}} \sqrt[k]{\left| kC_k\right|} = \lim_{k \to \infty} \sqrt[k]{k} \cdot \overline{\lim} \sqrt[k]{\left| C_k\right|} = R \text{ - по теореме Коши-Адамара}\]
+        \[S_0(0) = C_1; \ S_0(z) = \sum kC_k z^{k-1} = \frac{1}{z}\sum kC_k z^k\]
+        Заметим, что
+        \[k = (1+ (k^{\frac{1}{k}}-1))^k = 1 + k(k^{\frac{1}{k}} - 1) + \frac{k(k-1)}{2}(k^{\frac{1}{k}}-1)^2 + \hdots + (k^{\frac{1}{k}} - 1)^k \implies k > \frac{k(k-1)}{2}(k^{\frac{1}{k}}-1)^2\] \[\implies \left| k^2 - 1\right| < \sqrt{\frac{2}{\sqrt{k-1}}} < \varepsilon\]
+        Пусть $z$ - произвольная точка круга $\left| z \right| < R$ и $\Delta z: \left| z + \Delta z \right| < R$.
+
+        \[\left| \frac{S(z+\Delta z) - S(z)}{\Delta z} - S_0(z)\right| \overset{?}{<} \varepsilon\]
+        \begin{equation}
+            \label{module}
+            \left| \frac{S(z + \Delta z) - S(z)}{\Delta z} -S_0(z) \right| \leq \left| \sum \left[ \frac{C_k(z + \Delta z)^k - C_k z^k}{\Delta z} - kC_k z^k \right] \right| = \left| \sum C_k \left[ \frac{(z + \Delta z)^k}{\Delta z}  \right] \right|
+        \end{equation}
+
+        Заметим, что первое слагаемое можно расписать как 
+        
+        \begin{multline}
+            \label{binom}
+            \frac{(z+\Delta z)^k}{\Delta z} = \frac{(z+\Delta z)^{k-1}(z+\Delta z)}{\Delta z} = \\ = (z+\Delta z)^{k-1} + \frac{z(z+\Delta z)^{k-1}}{\Delta z} \overset{\text{так же}}{=} (z+\Delta z)^{k-1} + z(z+\Delta z)^{k-2} + \hdots + z^{k-1} + \frac{z^k}{\Delta z}
+        \end{multline}
+    
+
+        Тогда второе слагаемое из \eqref{module} сокращается с последним слагаемым \eqref{binom} и получаем
+        \begin{multline*}
+            \left| \sum C_k \left[ (z + \Delta z)^{k-1} + z(z + \Delta z)^{k-2} + \hdots + z^{k-1} - kz^{k-1} \right] \right| \overset{\text{дважды нер-во } \Delta\text{-ника}}{\leq} \\
+            \leq \left| \sum_{k = 1}^{N} C_k\left[(z+\Delta z)^{k-1} + z(z +\Delta z)^{k-2} + \hdots + z^{k-1} - kz^{k-1}\right]\right| + \\
+            \left| \sum_{k = N-1}^{\infty} C_k \left[ (z+ \Delta z)^{k-1} + z(z+ \Delta z)^{k-2} + \hdots + z^{k-1} \right]\right| + \left| \sum_{k=N-1}^{\infty} kC_k z^{k-1}\right|
+        \end{multline*}
+        Возьмем число $r: 0 < r < R$ и $\left| z + \Delta z \right| < r$. Из аболютной сходимости ряда \eqref{series} в круге $\left| z \right| < R \implies \forall \varepsilon > 0 \ \exists N = N(r, \varepsilon)$
+        Введем новый ряд 
+        \[\sum_{k=N+1}^{\infty} k\left| C_k \right| r^{k-1} < \frac{\varepsilon}{3}\]
+        При таком $N$ второй и третий модули $< \frac{\varepsilon}{3}$ по критерию Коши абсолютной сходимости ряда \eqref{series}. А в первом модуле конечная сумма, которая стремится к 0 при $\Delta z \to 0$, то есть по определению предела, первый модуль тоже $< \frac{\varepsilon}{3}$
+    \end{proof}
+\end{theorem*}
+
+
+\begin{note}
+    Сумма степенного ряда $S'(z) = \sum kC_kz^{k-1}$ тоже аналитична в круге $\left| z \right| < R$, причем 
+    \[S''(z) = \sum k(k-1)C_k z^{k-2}\]
+    \[S^{(n)} = \sum k(k-1)\hdots(k-n+1)C_k z^{k-n} \overset{\text{при } z = 0}{\implies} C_n = \frac{S^{(n)}(z)}{n!}, \ n = 1, 2, \hdots\]
+\end{note}

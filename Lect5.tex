@@ -1,107 +1,85 @@
-\section{Многообразия в $\mathbb{R}^n$}
-
+\section{Конформные отображения}
+    Рассмотрим функцию $w = f(z) = u(x,y) + iv(x,y)$, она аналитична в области $D$,
+    причем  $z_o \in D, f'(z_0) \neq 0$.
+    \[\text{Условие Коши-Римана: } \begin{cases*}
+        u_x = v_y \\ v_x = - u_y
+    \end{cases*}\]
+    Якобиан $\frac{D(u, v)}{D(x, y)} = \left| \begin{array}{cc}
+        u_x & u_y \\ v_x & v_y
+    \end{array}\right| = u_x^2 + u_y^2 = \left| f'(z)^2\right| \overset{f'(z_0)\neq 0}{\implies} \frac{D(u,v)}{D(x,y)}|_{z=z_0} \neq 0$.\\
+    Значит по теореме о неявной функции система $\begin{cases*}
+        u = u(x,y) \\ v = v(x,y)
+    \end{cases*}$ в некоторой окрестности точки $w_0 = f(z_0)$ определяет однозначные непрерывные функции $\begin{cases*}
+        x = x(u,v) \\ y = y(u, v)
+    \end{cases*}$, значения которых лежат в окрестности точки $z_0$.
+    \[(f^{-1}(w_0))' = \lim_{\Delta w \to 0}\frac{\Delta z}{\Delta w} = \lim \frac{1}{\frac{\Delta w}{\Delta z}} = \frac{1}{f'(z_0)}\]
+    Обратная функция $z = f^{-1}(w)$ непрерывна в окрестности точки $w_0 \implies (\Delta w \to 0) \iff (\Delta z \to 0)$
+    
 \begin{definition}
-    Пусть $M$ - метрическое пространство (необязательно подмножество в $\mathbb{R}^n$). $M$ является $k$-мерным мноогобразием без края,
-    если $\forall p \in M$ у точки $p \ \exists $ окрестность $U_p \open M$ гомеоморфная открытому шару в $\mathbb{R}^k$.
+    Если $f'(z) \neq 0 \ \forall z \in D$, то функция $f(z)$ называется локально однолистной в $D$ (синоним "взаимнооднозначной").
 \end{definition}
-
-\begin{definition}
-    Гомеоморфизм - непрерывное отображение, обратное к которому тоже непрерывно.
-\end{definition}
-
-\begin{theorem}[Брауэра об инвариантности области (без док-ва).]
-    \par Пусть $U \open \mathbb{R}^k$ и $f:U \to \mathbb{R}^k$ - непрерывна и инъективна. \newline
-    Тогда $f(U) \open \mathbb{R}^k$ и $f^{-1}: f(U) \to U$ - тоже непрерывна.
-\end{theorem}
-
-\begin{definition}
-    $M$ - $k$-мерное $C^r$-мноогобразие в $R^n$, если:
-    \[\forall p \in M \ \exists U \in \mathcal{N}(p), \ U \open M \text{ такая, что } U \overset{C^r}{\cong} \text{ открытому шару в } \mathbb{R}^k\]
-\end{definition}
-
-\begin{statement*}
-    Предыдущее утверждение эквивалентно требованиям:
-    \begin{enumerate}
-        \item \[ \exists U \in \mathcal{N}(p) \ U \open M \text{ такая, что } U \cong \text{ открытому подмножеству } \omega \in \mathbb{R}^k\]
-        \item \[ \exists U \in \mathcal{N}(p) \ U \open M \text{ такая, что } U \cong \mathbb{R}^k\]
-    \end{enumerate}
-\end{statement*}
-
-\begin{theorem*}[1 о регулярных решениях]
-    Пусть $\Omega \open \mathbb{R}^n, \ f_1, \hdots, f_k: \Omega \to \mathbb{R}$ - $C^r$ гладкие функции.
-    Непустое множество $M$ задано как 
-    \[M = \{\overline{x} \in \Omega \mid 
-    \begin{array}{c}
-        f_1(x) = 0 \\
-        \vdots \\
-        f_k(x) = 0
-    \end{array}\}, \text{ где $\overline{x}$ - регулярная точка}\]
-    То есть $\mathrm{rank} \frac{\partial f_{1 \hdots k}}{\partial x_{1 \hdots n}} = k$
-    Тогда $M$ - $n-k$-мерное $C^r$-мноогобразие без края.
-
-    \begin{proof}
-        Пусть $p \in M$. Можно считать, что последние $k$ столбцов линейно независимы, то есть $\left| \frac{\partial f_{1\hdots k}}{\partial x_{n-k+1 \hdots n}}\right| \neq 0$ - определитель матрицы Якоби.  
-        По теореме о неявной функции существует такая окрестность $\tilde{U}$ точки $p$, $\tilde{U} \open \mathbb{R}^n$, такая, что $\tilde{U} \cap M$ - график некоторой функции:
-        \[x_{n-k+1 \hdots n} = g(x_{1 \hdots n-k})\]
-        Осталось показать, что график функции является мноогобразием $U \subset \mathbb{R}^k$.
-        \begin{lemma*}
-            График любого $C^r$ отображения $g$, определенного на открытом подмножестве - это мноогобразие, гомеоморфное $U$.
-            \begin{proof}
-                \[X \overset{g}{\to} Y\]
-                График $\Gamma_g = \{(x, g(x)) \mid x \in X\}$
-                \[U \overset{g}{\to} \Gamma_g \ - C^r \text{ отображение}\]
-                \[x \overset{g}{\to} (x, g(x)) \overset{g^-1 - \text{проекция на X}}{\to} X\]
-            \end{proof}
-        \end{lemma*}
-        По лемме теорема доказана.
-    \end{proof}
-\end{theorem*}
 
 \begin{note}
-    Если у градиента функции в точке $p$ хотя бы одна координата не равна $0$, то $p$ - регулярная.
+    Из локальной обратимости не следует глобальная обратимость (функция $w = f(z)$ локально обратима в области $D$ $\nRightarrow$ функция $w = f(z)$ однолистна в $D$).
 \end{note}
 
+\subsection{Геометрический смысл $\left|f'(z)\right|$ и $\arg f'(z)$ аналитической функции $f(z)$}
+Пусть функция $w = f(z) = u(x,y) + iv(x,y)$ - аналитическая функция в области $D$ и $f'(z) \neq 0$. \\
+Пусть $\gamma$ - гладкая кривая Жордана, заданная уравнением $z = z(t) = x(t) + iy(t)$, где $t \in [\alpha, \beta] \subset \mathbb{R}$. Если $z_0 = z(t_0), \ t_0 \in [\alpha, \beta]$, то пусть $z'(t_0) \neq 0$. \\
+Функция $w = f(z)$ отображает кривую $\gamma$ в $\Gamma$, $w_0 = f(z_0) \in \Gamma$.\\
+Уравнение кривой $\Gamma$:
+\begin{equation}
+    \label{gamma_equation}
+    \Gamma: w = w(t) = f(z(t)) = u(x(t), y(t)) + iv(x(t), y(t)) \implies w'(t_0) = f'(z_0)\cdot z'(t_0)
+\end{equation}
+
+\begin{equation}
+    \label{diffs1}
+    \begin{cases*}
+        dz = z'(t)dt = \left[x'(t) + iy'(t)\right]dt \\
+        dw = w'(t)dt = \left[u'(t) + iv'(t)\right]dt
+    \end{cases*}
+\end{equation}
+
+\begin{equation}
+    \begin{cases*}
+        ds = \sqrt{x'(t)^2 + y'(t)^2}dt = \left|z'(t)\right|dt \\
+        d\sigma = \sqrt{u'(t)^2 + v'(t)^2}dt = \left|w'(t)\right|dt
+    \end{cases*} \text{ - элементы длины кривой $\gamma$(ds) и $\Gamma(d\sigma)$ соответственно}
+\end{equation}
+
+Из \eqref{diffs1} $\implies \frac{dw}{dz}|_{t=t_0} \overset{\eqref{gamma_equation}}{=}f'(z_0) \implies \left|f'(z_0)\right| = \frac{d\sigma_0}{ds_0}$, где $d\sigma_0$ и $ds_0$ - элементы длины кривых
+$\gamma$ и $\Gamma$ в точках $z_0 = z(t_0)$ и $w_0 = w(t_0) \implies \left| f'(z_0)\right|$ - коэффициент искажения элемента длины дуги
+в точке $z_0$ при отображении $w = f(z)$. \\
+Коэффициент искажения не зависит от направления кривой в этой точке, а лишь от $f$.\\
+Будем говорить, что при отображении $\begin{cases*}
+    w = f(z) \\ f'(z_0) \neq 0
+\end{cases*}$ в $z_0$ имеет место \textbf{постоянство искажения}.
+
+Из \eqref{gamma_equation}:
+\begin{equation}
+    \label{angle_constancy}
+    \implies \arg f'(z_0) = \arg w'(t_0) - \arg z'(t_0)
+\end{equation}
+Из \eqref{angle_constancy} $\arg f'(z_0)$ - угол поворота $\forall$ кривой в точке $z_0$ при отображении $w=f(z)$.
+
+\begin{definition}
+    Пусть функция $w=f(z)$ аналитична в $D$. Если $f'(z) \neq 0$ для $z \in D$, то в $z$ при отображении $w = f(z)$
+    имеет место \textbf{консерватизм углов}.
+\end{definition}
+
+
+\begin{definition}
+    Конформное отображение области $D$ - это топологическое (гомеоморфное: взаимнооднозначное и непрерывное) 
+    отображение этой облсти, при котором в каждой точке $z \in D$ имеет место консерватизм углов и постоянство искажения.
+\end{definition}
+
+Из геометрического смысла $\left| f'(z_0)\right|$ и $\arg f'(z_0)$ делаем вывод:
 \begin{statement*}
-    $X \overset{C^r}{\cong} Y$ - если $X$ - $C^r$-многобразие, то $Y$ - тоже.
-    \begin{proof}
-        Пусть $\psi: X \to Y$ - $C^r$-изоморфизм. Пусть $q\in Y, p = \psi^{-1}(q)$, по условию существует открытая
-        окрестность $V$ точки $p$, $C^r$-изоморфная $U \open \mathbb{R}^k$. 
-        \[U \overset{\varphi}{\cong} V \overset{\psi}{\cong} \psi(V) \open Y\]
-        $\psi(V)$ - прообраз $V$ под действием $\psi^{-1}, V = \psi^{-1}(\psi(V))$\\
-        $\psi \circ \varphi$ - $C^r$-изоморфизм $U$ на окрестность точки $q$ в $X$.
-    \end{proof}
+    Если функция $w = f(z)$ осуществляет отображение области $D$ и $\forall z \in D$ имеет место консерватизм углов и постоянство искажения, то $w = f(z)$
+    аналитична в $D$ и $f'(z) \neq 0 \ \forall z \in D$.
 \end{statement*}
-
-\begin{lemma*}[о локальном вложении]
-    Пусть $f = \begin{array}{c}
-        f_1(x_1, \hdots, x_k) \\
-        \vdots \\
-        f_n(x_1, \hdots, x_k)
-    \end{array}$, $U \open \mathbb{R}^k, f: U \to \mathbb{R}^n$.\\
-    Если точка $\overline{x_0} \in U$ такая, что $\frac{\partial f}{\partial x}(x_0) = k$, то у точки $x_0$ существует окрестность $\tilde{U}$ такая, что $f(\tilde{U})$ - $k$-мерное многобразие.
-
-    \begin{proof}
-        \[\begin{pmatrix}
-            \frac{\partial f_1}{\partial x_1} & \hdots & \frac{\partial f_1}{\partial x_k} \\
-            \vdots & & \vdots\\
-            \frac{\partial f_k}{\partial x_1} & \hdots & \frac{\partial f_k}{\partial x_k} \\
-            \vdots & & \vdots\\
-            \frac{\partial f_n}{\partial x_1} & \hdots & \frac{\partial f_n}{\partial x_k}
-        \end{pmatrix}\]
-        Переставим $f$ (если надо) и считаем первые $k$ строк невырожденными в $x_0$.
-        Рассмотрим урезанное отображение $\psi = (\begin{array}{c} f_1 \\ \vdots \\ f_k \end{array}): U \to \mathbb{R}^k$\\
-        По теореме о локальной обратимости существует окрестность $\tilde{U} \ni x_0$, такая, что 
-        $\psi(\tilde{U}) \open \mathbb{R}^k$ и $\psi|_{\tilde{U}}: \tilde{U} \to \psi(\tilde{U})$ - $C^r$-изоморфизм.
-        \[\psi(\tilde{U}) \overset{\psi^{-1}}{\to} \tilde{U}\]
-        $\tilde{U}$ в свою очередь, отображается в $f(\tilde{U})$ данным отображением:
-        \[\begin{array}{c}
-            f_1(\tilde{x_1}, \hdots, \tilde{x_k}) \\
-            \vdots \\
-            f_k(\tilde{x_1}, \hdots, \tilde{x_k}) \\
-            f_{\text{остальные индексы}}(\tilde{x_1}, \hdots, \tilde{x_k})
-        \end{array}\]
-        Причем $f_1, \hdots, f_k = (x_1, \hdots, x_k)$. 
-        \[f_{\text{остальные}}(\tilde{x_1}, \hdots, \tilde{x_k}) = f_{\text{остальные}}\circ \psi(x_1, \hdots, x_k)\]
-        $f(\tilde{U})= \{(\overline{x}, \psi(\overline{x})) \mid \overline{x} \in \tilde{U}\}$ - график отображения $\psi$, то есть по соответствующей лемме о графике это мноогобразие.
-    \end{proof}
-\end{lemma*}
+Из него сразу вытекает:
+\begin{statement*}
+    Конформное отображение области $D$ осуществляется однолистной в $D$ аналитической функцией $w = f(z), \ f'(z) \neq 0$.
+\end{statement*}  

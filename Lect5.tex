@@ -83,3 +83,55 @@ $\gamma$ и $\Gamma$ в точках $z_0 = z(t_0)$ и $w_0 = w(t_0) \implies \l
 \begin{statement*}
     Конформное отображение области $D$ осуществляется однолистной в $D$ аналитической функцией $w = f(z), \ f'(z) \neq 0$.
 \end{statement*}  
+
+\subsection{Дробно-линейное отображение}
+\begin{definition}
+    Дробно-линейным отображением (ДЛО) называется отображение $w(z) = \frac{az + b}{cz + d}$, у которого $ad-bc \neq 0$. Если $ad-bc = 0$, то такое отображение называется \textbf{вырожденным} дробно-линейным отображением.
+\end{definition}
+
+Пусть отображение $w = \frac{az + b}{cz + d}$ переводит $z_1$ в $w_1$, $z_2$ - в $w_2$:
+\[w_1 = \frac{az_1 + b}{cz_1 + d}, \ w_2 = \frac{az_2 + b}{cz_2 + d}, \ w_1-w_2 = \frac{(ad-bc)(z_1-z_2)}{(cz_1 + d)(cz_2 + d)}\]
+
+\begin{definition}
+    Линейное отображение: $w = az+b$ можно представить как композицию отображений следующих отображений:
+    \[\zeta = \left| a \right| z \text{(подобие)}, \ v = e^{i\arg a}\cdot \zeta \text{(поворот на угол $\arg a$ вокруг O)}, w = v+b \text{(сдвиг)}\]
+    Таким образом линейное отображение конформно отображает комплексную плоскость \textcircled{$z$} на комплексную плоскость \textcircled{$w$}:
+    \[w(z): \overline{\mathbb{C}} \to \overline{\mathbb{C}}\]
+\end{definition}
+\par
+Покажем, что $w = \frac{1}{z}$ обладает круговым свойством.
+Функция $w = \frac{1}{z}$ однолистна и аналитична в $\overline{\mathbb{C}}, \ w' \neq 0 \ \forall z \in \overline{\mathbb{C}}$, 
+значит $w = \frac{1}{z}$ конформно отображает комплексную плоскость \textcircled{$z$} на комплексную плоскость \textcircled{$w$}: $w(z)=\frac{1}{z}:\overline{\mathbb{C}} \overset{\text{конформно}}{\underset{\text{на}}{\to}} \overline{\mathbb{C}}$. \\
+Любая обобщенная окружность на $\overline{\Compl}$ имеет уравнение вида
+\[A(x^2+y^2) + bx + b_1y + c = 0\]
+Можем преобразовать:
+\[z = x + iy \implies Az \cdot \overline{z} + \overline{B}z \cdot B\overline{z} + c = 0, \ B = \frac{b + ib_1}{2}\]
+Подействуем на эту окружность отображением $w = \frac{1}{z}$:
+\[A \cdot \frac{1}{w \overline{w}} + \overline{B}\cdot \frac{1}{w} + B\cdot \frac{1}{\overline{w}} + c = 0\]
+Значит уравнение обобщенной окружности на плоскости \textcircled{w} имеет вид:
+\[C w \overline{w} + \overline{B} \overline{w} + Bw + A = 0\]
+То есть функция $w = \frac{1}{z}$ обладает круговым свойством.
+
+\par
+Любое невырожденное ДЛО $w = \frac{az+b}{cz+d}$ либо является линейным (при $c = 0$), либо композиция следующих отображений:
+\[\zeta = \frac{c^2}{ad-bc}z  +\frac{cd}{ad-bc}, \ v = \frac{1}{\zeta}, \ w = v + \frac{\alpha}{c}\]
+А значит любое непрерывное ДЛО обладает круговым свойством и конформно отображает комплексную плоскость \textcircled{$z$} на \textcircled{$w$}.
+
+
+\subsection{Симметрия относительно окружности $\left| z - z_0 = R \right|$}
+\begin{definition}
+    Точки $z_1, z_2$ называются симметричным относительно окружности $\left| z - z_0 = R \right|$, если они лежат на одном луче
+    с началом в $z_0$ и $\left|z_1 - z_0\right|\cdot \left| z_2 - z_0 \right| = R$. Отображение $w = z_0 + \frac{R^2}{\overline{z} - \overline{z_0}}$ меняет внутреннюю и внешнюю области окружности местами, оставляя окружность неподвижной.
+\end{definition}
+
+\subsection{Симметрия относительно прямой $z = z_0 + te^{i\varphi}, t \in \Real$}
+Две точки симметричны относительно прямой на комплексной плоскости, если перпендикуляры, опущенные из этих точек на прямую равны по длине.
+Отображение $w = z_0 + e^{2i\varphi}(z-\overline{z_0})$ отображает комплексную плоскость симметрично относительно прямой (меняет две области по ее сторонам местами).
+
+\subsection{Сдвиг плоскости на вектор}
+Сдвиг плоскости на вектор $b$ - это композиция двух симметрий:
+\begin{enumerate}
+    \item $\zeta = e^{2i\varphi}\overline{z}$
+    \item $w = \frac{b}{2} + e^{2i\varphi}(\overline{\zeta} - \frac{\overline{b}}{2}), \text{ где }\varphi = \frac{\pi}{2} - \arg b$
+\end{enumerate}
+

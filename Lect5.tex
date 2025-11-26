@@ -135,3 +135,47 @@ $\gamma$ и $\Gamma$ в точках $z_0 = z(t_0)$ и $w_0 = w(t_0) \implies \l
     \item $w = \frac{b}{2} + e^{2i\varphi}(\overline{\zeta} - \frac{\overline{b}}{2}), \text{ где }\varphi = \frac{\pi}{2} - \arg b$
 \end{enumerate}
 
+
+\subsection{Подобие}
+Отображение подобия $w = kz, \ k > 0$ - композиция двух симметрий:
+\begin{enumerate}
+    \item $\zeta = \frac{1}{z} \text{ (относительно окружности $\left| z \right| = 1$)}$
+    \item $w = \frac{k}{\zeta} \text{ (относительно окружности $\left| \zeta  \right| = \sqrt{k}$)}$
+\end{enumerate}
+
+\begin{statement*}
+    Любое невырожденное ДЛО $w = \frac{az+b}{cz + d}$ - это композиция четного числа отображений симметрии отностельно обобщенных окружностей.
+\end{statement*}
+
+\begin{note}
+    \[w = \frac{az+b}{cz+d}, \ \omega = \frac{\alpha w + \beta}{\gamma w + \delta} = \frac{Az + B}{Cz + D} \text{ - если $AD - BC = (ad-bc)(\alpha \delta - \gamma \beta)$}. \]
+    Композиция двух ДЛО является невырожденным ДЛО $\iff$ эти два ДЛО невырожденные.
+\end{note}
+
+\begin{statement*}[Следствие]
+    Композиция любого четного числа симметрий относительно обобщенных окружностей является ДЛО.
+\end{statement*}
+
+\begin{theorem*}
+    Пусть заданы 3 точки: $z_1, z_2, z_3 \in \overline{\Compl}$, и 3 точки $w_1, w_2, w_3 \in \overline{\Compl}$. Тогда существует единственное ДЛО $w = \frac{az+b}{cz+d}$ такое, что 
+    \[w_1 = w(z_1), \  w_2 = w(z_2), \ w_3 = w(z_3)\]
+    \begin{proof}
+        \[w_j - w_k = \frac{(ad-bc)(z_j - z_k)}{(cz_j + d)(cz_k + d)}\]
+        Причем 
+        \begin{equation}\label{unharmonic} \frac{w-w_1}{w-w_2} \cdot \frac{w_3 - w_2}{w_3 - w_1} = \frac{z-z_1}{z - z_2} \cdot \frac{z_3 - z_2}{z_3 - z_1}\end{equation}
+        Используя $w = \frac{az+b}{cz+d}$ что-то куда-то подставим и все будет хорошо. Соотношение \eqref{unharmonic} называются ангармоническим соотношением четверки точек.
+    \end{proof}
+\end{theorem*}
+
+\begin{statement*}[Следствие]
+    Любое невырожденное ДЛО сохраняет ангармоническое соотношение.
+\end{statement*}
+
+
+\begin{definition}
+    Положительное направление обход границы это такое направление, при котором область $D$ остается слева.
+\end{definition}
+
+\begin{statement*}
+    Любое невырожденное ДЛО сохраняет положительное направление обхода (то есть ориентацию на $\Compl$).
+\end{statement*}

@@ -1,0 +1,28 @@
+\section{Теория интеграла Коши}
+Пусть $\Gamma$ - гладкая кривая Жордана (то есть без самопересечений) с началом в точке $a$ и концом в точке $b$. Функция $f(z) = u(x, y) + iv(x,y)$ - непрерывная функция, заданная на $\Gamma$. 
+Выделим упорядоченный набор точек $z_k = x_k + iy_k$ на этой кривой, $a = z_0, \ b = z_{n+1}$.
+Выделим последовательность точек $\zeta_k$, таких, что каждая $\zeta_k$ лежит где-то в отрезке $(z_k, z_{k+1})$.
+\[\zeta_k = \xi_k + i \eta_k, \ \Delta z_k = z_{k+1} - z_k = \Delta x_k + i\Delta y_k, \ k = 0, \hdots, n\]
+Введем некоторое $\Delta = \underset{0 \le k \le n}{max} \left| \Delta z_k \right|$, которое будем называть диаметром разбиения $\{ z_k \}$ кривой $\Gamma$.\\
+$S = \sum_{k=0}^{n}f(\zeta_k)\Delta z_k$ - интегральная сумма. Представим все через действительную и мнимую части:
+\[S = S_1 + iS_2 = \sum_{k=0}^{n}\left[u(\xi_k, \eta_k)\Delta x_k - v(\xi_k, \eta_k)\Delta y_k\right] + i \sum_{k=0}^{n}\left[u(\xi_k, \eta_k)\Delta y_k + v(\xi_k, \eta_k)\Delta x_k\right]\]
+Таким образом первое слагаемое представляет $S_1$, а второе представляет $S_2$.
+
+При устремлении разбиения $\Delta \to 0$:
+\[\lim_{\Delta \to 0}S_1 = \int_{\Gamma} u \diff x - v \diff y, \ \lim_{\Delta \to 0} S_2 = \int_{\Gamma} u \diff y - v \diff y\]
+Тогда 
+\[\lim_{\Delta \to 0} S = \int_{\Gamma} f(z) \diff z = \int_{\Gamma} u\diff x - v\diff y + i\int_{\Gamma} u\diff y - v\diff x\]
+Этот предел не зависит от выбора разбиения $\{z_k\}$ кривой $\Gamma$ и от выбора точек $\zeta_k$ из соответствующих дуг кривой с концами $z_k$ и $z_{k+1}$, это доказывается в курсе матанализа для каждого из двух интегралов.
+\\
+Если кривая $\Gamma$ задана уравнением $z = z(t), \ t\in \left[\alpha, \beta\right]$, то 
+\[\int_{\Gamma} f(z) \diff z = \int_{\alpha}^{\beta} f(z(t))\cdot z'(t)\diff t\]
+
+Свойства интеграла:
+\begin{enumerate}
+    \item Ориентированность: 
+    \[\int_{\Gamma} f(z) \diff z = - \int_{\Gamma^-} f(z)\diff z, \text{ где $\Gamma^-$ - кривая $\Gamma$ с противположным направлением движения}\]
+    \item Линейность: если $f_k(z), \ k = 1, \hdots, m$ - непрерывные функции на $\Gamma, c_k$ - константы из $\Compl$, то 
+    \[\int_{\Gamma} \left[\sum_{k=1}^{m} c_k f_k (z)\right] \diff z = \sum_{k=1}^{m} c_k \int_{\Gamma} f_k(z) \diff z\]
+    \item Аддитивность: если $\Gamma = \underset{k=1}{\overset{m}{\cup}} \Gamma_k$, то 
+    \[\int_{\Gamma} f(z) \diff z = \sum_{k=1}^{m} \int_{\Gamma_k} f(z) \diff z\]
+\end{enumerate}

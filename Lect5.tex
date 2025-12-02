@@ -179,3 +179,34 @@ $\gamma$ и $\Gamma$ в точках $z_0 = z(t_0)$ и $w_0 = w(t_0) \implies \l
 \begin{statement*}
     Любое невырожденное ДЛО сохраняет положительное направление обхода (то есть ориентацию на $\Compl$).
 \end{statement*}
+
+\par
+Общий вид ДЛО: $w = \frac{az+b}{cz+d}$, оно отображает область $Im(z) > 0$ на единичную окружность $\left| z \right| < 1$.
+Прообразом $z_1$ точки $w_1 = 0$ будет точка $-\frac{b}{a}$, прообразом точки $w_2 = \infty$ будет точка $z_2 = -\frac{d}{c}$. \\
+Так как точки $w_1 = 0; \ w_2 = \infty$ симметричны относительно окружности $\left| w \right| < 1$, то их прообразы $z_1$ и $z_2$ должны быть симметрично относительно прямой $y=0$. Обозначим $z_0 = z_1 = -\frac{b}{a}$ и 
+$\overline{z_0} = z_2 = -\frac{d}{c}$. \\
+Раз $w_1 \in w(D)$, то $z_0 \in D \implies Im(z_0) > 0$.
+\[w = \frac{az+b}{cz+d} = \frac{a}{c}\cdot \frac{z + \frac{b}{a}}{z + \frac{d}{c}} = \frac{a}{c}\cdot \frac{z-z_0}{z - \overline{z_0}} \implies \left| w \right| = \left| \frac{a}{c} \right|\cdot \left| \frac{z - z_0}{z - \overline{z_0}} \right|\]
+При $y = 0$: $1 = \left| w \right| = \left| \frac{a}{c} \right| = 1$, так как $\left| \frac{a}{c} \right|$ - это константа, равная единице, то эта точка лежит на единичной окружности, 
+тогда ее представление в формуле Эйлера $\frac{a}{c} = e^{i\varphi}$ для некоторого $\varphi$. В таком случае $w = e^{i\varphi} \cdot \frac{z-z_0}{z - \overline{z_0}}$, где $\varphi$ - константа $\in [0 ; 2\pi)$, а $z_0$ - константа $\in \Compl$, но $Im(z_0) > 0$.\\
+$w = e^{i\varphi}\cdot \frac{z-z_0}{z - \overline{z_0}}$ - этой общий вид ДЛО, которое отображает верхнюю полуплоскость $Im(z) > 0$ на единичный круг.\\
+В случае, когда $Im(z_0) < 0$ - верхняя полуплоскость отображает во внешность единичной окружности $\left| z \right| > 1$.
+
+\par
+Построим ДЛО для отображения внутренности единичной окружности $\left| z  \right| < 1$ в такую же единичную окружность $\left| w \right| < 1$.
+\[\begin{cases*}
+    z_1 = -\frac{b}{a} \\ z_2 = -\frac{d}{c}
+\end{cases*} \implies 
+\begin{cases*}
+    w_1 = 0 \\ w_2 = \infty
+\end{cases*}\]
+Аналогично предыдущим рассуждениям $w_1 = 0, \ w_2 = \infty$ симметричны относительно $\left| w \right| = 1$, значит их прообразы симметричны 
+относительно $\left| z \right| = 1$. В таком случае $z_1 = \frac{1}{\overline{z_1}}$. Обозначим $z_0 = z_1 = -\frac{b}{a} \implies -\frac{d}{c} = \frac{1}{\overline{z_0}}$. При этом $\left| z_0 \right| < 1$ так как $z_0 \in \left\{ \left| z \right| < 1 \right\}$.
+\[w = \frac{az+b}{cz+d} = \frac{a}{c} \cdot \frac{z + \frac{b}{a}}{z + \frac{d}{c}} = \frac{a}{c}\cdot \frac{z - z_0}{z - \overline{z_0}} = \frac{a\overline{z_0}}{cz_0} \cdot \frac{z - z}{\overline{z_0} - \frac{1}{z}} \implies \left| w \right| = \left| \frac{a\overline{z_0}}{cz} \right| \cdot \left| \frac{z - z_0}{\overline{z_0} - \frac{1}{z}} \right| \]
+На границе окружности при $\left| z \right| = 1$:
+\[\left| z \right| = 1 \to 1 = \left| w \right| = \left| \frac{a\overline{z_0}}{c}\right| \cdot \left| \frac{z - z_0}{\overline{z_0} - \overline{z}} \right| \implies \left| \frac{a\overline{z_0}}{c} \right| - const\]
+То есть $\left| \frac{a\overline{z_0}}{c} \right| = e^{i\varphi}$ для постоянного $\varphi \in [0, 2\pi)$.\\
+Значит $w = e^{i\varphi}\cdot \frac{z - z_0}{\overline{z_0}z -1}$ - общий вид ДЛО, отображающего $\left| z \right| < 1$ в $\left| w \right|< 1$.
+Если $\left| z_0 \right| > 1$, то $\left| z \right| < 1$ перейдет в $\left| w \right| > 1$. 
+
+

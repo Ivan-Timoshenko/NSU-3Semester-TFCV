@@ -26,3 +26,16 @@ $S = \sum_{k=0}^{n}f(\zeta_k)\Delta z_k$ - интегральная сумма. 
     \item Аддитивность: если $\Gamma = \underset{k=1}{\overset{m}{\cup}} \Gamma_k$, то 
     \[\int_{\Gamma} f(z) \diff z = \sum_{k=1}^{m} \int_{\Gamma_k} f(z) \diff z\]
 \end{enumerate}
+
+\begin{statement*}
+    Пусть $D$ - $(m+1)$-связная область, $\partial D = \Gamma = \Gamma_0 \cup \hdots \Gamma_m$, где $\Gamma_1, \hdots, \Gamma_m$ лежат внутри области, ограниченной $\Gamma_0$.\\
+    Тогда $\int_{\Gamma^+} f(z)\diff z = \int_{\Gamma_0} f(z)\diff z - \sum_{k=1}^{m} \int_{\Gamma_k} f(z)\diff z$, где $\Gamma^+$ - кривая $\Gamma$ с положительным направлением обхода.
+\end{statement*}
+
+    Рассмотрим $\int_{\left| z \right| = R} z^n \diff z$. Пусть $\gamma(t) = R\cdot e^{it}, \ t\in [0, 2\pi]$. 
+    \begin{align*}
+        & \int_{\left| z \right| = R} z^n \diff z = \int_{0}^{2\pi} (R\cdot e^{it})^n \cdot i\cdot R \cdot e^{it} \diff t = \\
+        & = iR^{n+1}\cdot \int_{0}^{2\pi}e^{i(n+1)t}\diff t = \frac{iR^{n+1}}{i(n+2)}e^{i(n+2)t}\big|_{0}^{2\pi} \underset{\text{при } n \neq -2 }{=} 0
+    \end{align*}  
+
+\[\int_{\left| z \right| = R} \frac{\diff z}{z} = \int_{0}^{2\pi} \frac{iR\cdot e^{it} \diff t}{R\cdot e^{it}} = \int_{0}^{2\pi} i \diff t = i\cdot t \big|_{0}^{2\pi} = 2\pi\cdot i\]
